@@ -5,6 +5,7 @@ import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
+import EditPreferences from '@/views/Preferences'
 
 Vue.use(Router)
 
@@ -53,6 +54,14 @@ const router = new Router({
         requiresAuth: false
       }
     },
+    {
+      path: '/users/:id/edit-preferences',
+      name: 'edit-preferences',
+      component: EditPreferences,
+      meta: {
+        requiresAuth: true
+      }
+    }
   ]
 })
 
