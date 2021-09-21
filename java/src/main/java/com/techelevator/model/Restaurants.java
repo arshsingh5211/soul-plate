@@ -1,6 +1,12 @@
 package com.techelevator.model;
 
 public class Restaurants {
+    public Restaurants(String restaurant_name, String phone_number, String address, int rating) {
+        this.restaurant_name = restaurant_name;
+        this.phone_number = phone_number;
+        this.address = address;
+        this.rating = rating;
+    }
 
     private int  restaurant_id;
 
