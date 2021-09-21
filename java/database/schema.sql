@@ -27,7 +27,7 @@ CREATE TABLE restaurants (
         address varchar(200),
         city varchar(25),
         state varchar(2),
-        zip_code int(5),
+        zip_code int,
         rating int,
         CONSTRAINT PK_restaurant PRIMARY KEY (restaurant_id)
 );
