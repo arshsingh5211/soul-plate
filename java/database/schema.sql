@@ -1,6 +1,6 @@
 BEGIN TRANSACTION;
 
-DROP TABLE IF EXISTS users, restaurants, restaurant_categories, profiles, categories, profile_preferences CASCADE;
+DROP TABLE IF EXISTS users, restaurants, restaurant_categories, categories, profile_preferences CASCADE;
 DROP SEQUENCE IF EXISTS seq_user_id;
 
 CREATE SEQUENCE seq_user_id
@@ -27,8 +27,8 @@ CREATE TABLE restaurants (
         address varchar(200),
         city varchar(25),
         state varchar(2),
+        zip_code int(5),
         rating int,
-        review_id int,
         CONSTRAINT PK_restaurant PRIMARY KEY (restaurant_id)
 );
 
@@ -48,25 +48,15 @@ CREATE TABLE restaurant_categories (
         CONSTRAINT FK_restaurant_category FOREIGN KEY(restaurant_id) REFERENCES restaurants(restaurant_id)
 );
 
-CREATE TABLE profiles (
-        profile_id int,
-        user_id int,
-        last_active date,
-        CONSTRAINT PK_profile PRIMARY KEY(profile_id),
-        CONSTRAINT FK_profile FOREIGN KEY(user_id) REFERENCES users(user_id)
-);
-
-
 
 CREATE SEQUENCE preferences_serial;
 CREATE TABLE profile_preferences (
         preferences_id int NOT NULL DEFAULT nextval('preferences_serial'),
-        restaurant_id int,
-        profile_id int,
+        user_id int, 
+        preference varchar,
         home_zip int,
         CONSTRAINT PK_preferences PRIMARY KEY (preferences_id),
-        CONSTRAINT FK_preferences_restaurant FOREIGN KEY (restaurant_id) REFERENCES restaurants(restaurant_id),
-        CONSTRAINT FK_preferences_profile FOREIGN KEY (profile_id) REFERENCES profiles(profile_id)
+        CONSTRAINT FK_user_preferences FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
 
