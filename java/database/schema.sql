@@ -61,6 +61,15 @@ CREATE TABLE profile_preferences (
         
 );
 
+CREATE SEQUENCE user_category_serial;
+CREATE TABLE user_category (
+        user_category_id serial NOT NULL,
+        preferences_id int NOT NULL,
+        category_id int NOT NULL,
+        CONSTRAINT PK_user_category PRIMARY KEY (user_category_id),
+        CONSTRAINT FK_preferences_id FOREIGN KEY (preferences_id) REFERENCES profile_preferences(preferences_id),
+        CONSTRAINT FK_category_id FOREIGN KEY (category_id) REFERENCES categories(category_id)
+);
 
 
 INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
