@@ -65,4 +65,32 @@ INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULi
 INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN');
 
 
+INSERT INTO categories (category_id, category_name) VALUES (1, 'Afghan');
+INSERT INTO categories (category_id, category_name) VALUES (2, 'African');
+INSERT INTO categories (category_id, category_name) VALUES (3, 'American');
+INSERT INTO categories (category_id, category_name) VALUES (4, 'Andalusian');
+INSERT INTO categories (category_id, category_name) VALUES (5, 'Arabian');
+INSERT INTO categories (category_id, category_name) VALUES (6, 'Argentine');
+INSERT INTO categories (category_id, category_name) VALUES (7, 'Armenian');
+INSERT INTO categories (category_id, category_name) VALUES (8, 'Asian Fusion');
+INSERT INTO categories (category_id, category_name) VALUES (9, 'Asturian');
+INSERT INTO categories (category_id, category_name) VALUES (10, 'Australian');
+INSERT INTO categories (category_id, category_name) VALUES (11, 'Austrian');
+INSERT INTO categories (category_id, category_name) VALUES (12, 'Baguettes ');
+INSERT INTO categories (category_id, category_name) VALUES (13, 'Bangladeshi');
+INSERT INTO categories (category_id, category_name) VALUES (14, 'Barbeque');
+INSERT INTO categories (category_id, category_name) VALUES (15, 'Basque');
+INSERT INTO categories (category_id, category_name) VALUES (16, 'Bavarian');
+INSERT INTO categories (category_id, category_name) VALUES (17, 'Beer Garden');
+INSERT INTO categories (category_id, category_name) VALUES (18, 'Beer Hall');
+INSERT INTO categories (category_id, category_name) VALUES (19, 'Beisl');
+INSERT INTO categories (category_id, category_name) VALUES (20, 'Belgian');
+INSERT INTO categories (category_id, category_name) VALUES (21, 'Bistros');
+INSERT INTO categories (category_id, category_name) VALUES (22, 'Black Sea ');
+INSERT INTO categories (category_id, category_name) VALUES (23, 'Brazilian ');
+INSERT INTO categories (category_id, category_name) VALUES (24, 'Breakfast & Brunch ');
+INSERT INTO categories (category_id, category_name) VALUES (25, 'British');
+
+
+
 COMMIT TRANSACTION;
