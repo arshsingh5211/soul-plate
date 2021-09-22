@@ -2,20 +2,21 @@
   <form v-on:submit.prevent="savePreferences">
       <div class="form-element">
           <label for="user">Name:</label>
-          <input id="user" type="text" v-model="newUser.user" />
+          <input id="user" type="text" v-model="newPreferences.profileID" />
       </div>
       <div class="form-element">
           <label for="zip">Home Zip Code:</label>
-          <input id="zip" type="text" v-model="newUser.zip" />
+          <input id="zip" type="text" v-model="newPreferences.homeZip" />
       </div>
       <div class="form-element">
           <label for="restaurant-preference">Restaurant Preference</label>
-          <select id="preference" v-model="newUser.preference" />
-          <option value="american">American</option>
-          <option value="mexican">Mexican</option>
-          <option value="italian">Italian</option>
-          <option value="indian">Indian</option>
-          <option value="chinese">Chinese</option>
+          <select id="preference" v-model="newPreferences.preferencesID">
+            <option value="american">American</option>
+            <option value="mexican">Mexican</option>
+            <option value="italian">Italian</option>
+            <option value="indian">Indian</option>
+            <option value="chinese">Chinese</option>
+          </select>
       </div>
       <div class="actions">
           <button v-on:click.prevent="resetForm" type="cancel">Cancel</button>
@@ -39,7 +40,7 @@ export default {
     },
     methods: {
         savePreferences() {
-        const userID = this.$route.params.id;
+        const userID = this.$route.params.userID;
         this.newPreferences.userID = userID;
         //this.$store.commit("EDIT_PREFERENCES", this.newPreferences);
         },
