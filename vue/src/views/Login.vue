@@ -1,7 +1,8 @@
 <template>
   <div id="login" class="text-center">
+    <h1 class="welcome">Welcome to Restaurant Tinder</h1>
     <form class="form-signin" @submit.prevent="login">
-      <h1 class="h3 mb-3 font-weight-normal">Please Sign In</h1>
+      <h1 class="sign-in">Login</h1>
       <div
         class="alert alert-danger"
         role="alert"
@@ -12,7 +13,7 @@
         role="alert"
         v-if="this.$route.query.registration"
       >Thank you for registering, please sign in.</div>
-      <label for="username" class="sr-only">Username</label>
+      <label for="username" class="sr-only">Username:  </label>
       <input
         type="text"
         id="username"
@@ -22,7 +23,8 @@
         required
         autofocus
       />
-      <label for="password" class="sr-only">Password</label>
+      <br>
+      <label for="password" class="sr-only">Password:  </label>
       <input
         type="password"
         id="password"
@@ -31,8 +33,10 @@
         v-model="user.password"
         required
       />
-      <router-link :to="{ name: 'register' }">Need an account?</router-link>
-      <button type="submit">Sign in</button>
+      <br>
+      <button class="submit" type="submit">Sign in</button>
+      <br>
+      <router-link class="need-account" :to="{ name: 'register' }">Need an account?</router-link>
     </form>
   </div>
 </template>
@@ -74,3 +78,59 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+
+h1.welcome {
+  margin-left: auto;
+  margin-right: auto;
+  width: 35%;
+  height: auto;
+  text-align: center;
+  color: #D52929;
+  border: 2px solid black;
+  background: #FAD7A0 ;
+  margin-bottom: 80px;
+  font-family: sans-serif;
+}
+h1.sign-in {
+  color: #D52929;
+  text-align: center;
+}
+label.sr-only {
+  align-content: center;
+}
+form {
+  font-family: Liberation Sans, sans-serif;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  border: 2px solid black;
+  line-height: 50px;
+  width: 30%;
+  height: 300px;
+  background: wheat ;
+}
+.need-account{
+  float: left;
+  margin-left: 15px;
+}
+
+.submit {
+  float: right;
+  margin-top: 20px;
+  margin-right: 25px;
+  width: 80px;
+  height: 30px;
+  font-size: 15px;
+}
+.submit:hover {
+  opacity: 0.9;
+}
+.need-account:hover {
+  opacity: 0.8;
+}
+
+</style>
+<!-- #FFEDB4 -->
+<!-- ffd79c -->
