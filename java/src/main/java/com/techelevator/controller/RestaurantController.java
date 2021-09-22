@@ -11,10 +11,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -30,6 +27,11 @@ public class RestaurantController {
     public List<Restaurants> restaurantSearch(@RequestParam String foodPref, String location) {
 
         return yelpService.getSearchResults(foodPref, location);
+    }
+
+    @RequestMapping(path="/restaurants/{id}", method = RequestMethod.GET)
+    public Restaurants restaurantDetails(@PathVariable String id) {
+        return yelpService.getRestaurantDetails(id);
     }
 
 
