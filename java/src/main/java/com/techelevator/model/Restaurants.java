@@ -7,6 +7,39 @@ public class Restaurants {
         this.address = address;
         this.rating = rating;
     }
+    public Restaurants(String restaurant_name, String phone_number, String address, int rating, String imgUrl, String category, String price, String weeklyHours, String transactions) {
+        this.restaurant_name = restaurant_name;
+        this.phone_number = phone_number;
+        this.address = address;
+        this.rating = rating;
+        this.imgUrl = imgUrl;
+        this.category = category;
+        this.price = price;
+        this.weeklyHours = weeklyHours;
+        this.transactions = transactions;
+    }
+
+    private String restaurant_name;
+    private String description;
+    private String phone_number;
+    private String address;
+    private String city;
+    private String state;
+    private int zip_code;
+    private int rating;
+    private String price;
+    private String imgUrl;
+    private String category;
+    private String weeklyHours;
+    private String transactions;
+
+    public String getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(String transactions) {
+        this.transactions = transactions;
+    }
 
     private int  restaurant_id;
 
@@ -82,14 +115,38 @@ public class Restaurants {
         this.rating = rating;
     }
 
-    private String restaurant_name;
-    private String description;
-    private String phone_number;
-    private String address;
-    private String city;
-    private String state;
-    private int zip_code;
-    private int rating;
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getWeeklyHours() {
+        return weeklyHours;
+    }
+
+    public void setWeeklyHours(String weeklyHours) {
+        this.weeklyHours = weeklyHours;
+    }
+
     public Restaurants(){
 
     }
