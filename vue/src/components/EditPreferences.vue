@@ -30,10 +30,14 @@ export default {
     data() {
         return {
             newPreferences: {
+                preferenceName: "",
                 preferencesID: 0,
                 profileID: 0,
                 homeZip: ""
             }
+            
+            
+            
         };
 
     },

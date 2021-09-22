@@ -24,6 +24,7 @@ public class YelpService {
     public List<Restaurants> getSearchResults(String foodPref, String location) {
         String url = apiURL + "&term=" + foodPref + "&location=" + location;
 
+
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(key);
         HttpEntity<String> httpEntity = new HttpEntity<>("", headers);
@@ -47,7 +48,7 @@ public class YelpService {
                 String phoneNumber = root.path(i).path("phone").asText();
                 String address = root.path(i).path("location").path("display_address").asText();
 
-                Restaurants restaurants = new Restaurants(name, phoneNumber, address, Integer.valueOf(rating));
+                Restaurants restaurants = new Restaurants(name, phoneNumber, address, rating);
                 restaurantsList.add(restaurants);
             }
         } catch (JsonProcessingException e) {
@@ -84,7 +85,7 @@ public class YelpService {
             String weeklyHours = jsonNode.path("hours").path("open").asText();
             String transactions = jsonNode.path("transactions").asText();
 
-            restaurant = new Restaurants(name, phoneNumber, address, Integer.valueOf(rating), imgUrl, category, price, weeklyHours, transactions);
+            restaurant = new Restaurants(name, phoneNumber, address, rating, imgUrl, category, price, weeklyHours, transactions);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }

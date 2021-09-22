@@ -1,13 +1,15 @@
 package com.techelevator.model;
 
 public class Restaurants {
-    public Restaurants(String restaurant_name, String phone_number, String address, int rating) {
+
+    public Restaurants(String restaurant_name, String phone_number, String address, String rating) {
         this.restaurant_name = restaurant_name;
         this.phone_number = phone_number;
         this.address = address;
         this.rating = rating;
     }
-    public Restaurants(String restaurant_name, String phone_number, String address, int rating, String imgUrl, String category, String price, String weeklyHours, String transactions) {
+
+    public Restaurants(String restaurant_name, String phone_number, String address, String rating, String imgUrl, String category, String price, String weeklyHours, String transactions) {
         this.restaurant_name = restaurant_name;
         this.phone_number = phone_number;
         this.address = address;
@@ -25,8 +27,17 @@ public class Restaurants {
     private String address;
     private String city;
     private String state;
-    private int zip_code;
-    private int rating;
+    private String zip_code;
+    private String  rating;
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
     private String price;
     private String imgUrl;
     private String category;
@@ -97,22 +108,6 @@ public class Restaurants {
 
     public void setState(String state) {
         this.state = state;
-    }
-
-    public int getZip_code() {
-        return zip_code;
-    }
-
-    public void setZip_code(int zip_code) {
-        this.zip_code = zip_code;
-    }
-
-    public int getRating() {
-        return rating;
-    }
-
-    public void setRating(int rating) {
-        this.rating = rating;
     }
 
     public String getPrice() {

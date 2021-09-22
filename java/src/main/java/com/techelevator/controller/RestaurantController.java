@@ -16,7 +16,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@CrossOrigin
 @RestController
 public class RestaurantController {
 
@@ -24,7 +24,10 @@ public class RestaurantController {
     YelpService yelpService;
 
     @RequestMapping(path="/restaurants", method = RequestMethod.GET)
-    public List<Restaurants> restaurantSearch(@RequestParam String foodPref, String location) {
+    public List<Restaurants> restaurantSearch(@RequestParam String foodPref, @RequestParam String location) {
+
+        System.out.println("passed in: " + foodPref);
+        System.out.println("passed in: " + location) ;
 
         return yelpService.getSearchResults(foodPref, location);
     }

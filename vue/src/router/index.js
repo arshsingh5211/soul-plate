@@ -6,6 +6,7 @@ import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
 import EditPreferences from '@/views/Preferences'
+import RestaurantSearch from '../components/RestaurantSearch.vue'
 
 Vue.use(Router)
 
@@ -61,7 +62,15 @@ const router = new Router({
       meta: {
         requiresAuth: true
       }
-    }
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: RestaurantSearch,
+      meta: {
+        requiresAuth: true
+      }
+    },
   ]
 })
 
