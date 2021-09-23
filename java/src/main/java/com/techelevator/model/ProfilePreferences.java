@@ -3,6 +3,10 @@ package com.techelevator.model;
 public class ProfilePreferences {
 
     private int preferences_id;
+    private int user_id;
+    private String preference;
+    private  int home_zip;
+    private int category_id;
 
     public int getPreferences_id() {
         return preferences_id;
@@ -36,10 +40,19 @@ public class ProfilePreferences {
         this.home_zip = home_zip;
     }
 
-    private int user_id;
-    private String preference;
-    private  int home_zip;
+    public int getCategory_id() {
+        return category_id;
+    }
+
+    public void setCategory_id(int category_id) {
+        this.category_id = category_id;
+    }
+
     public ProfilePreferences(){
+
+
+
+
 
     }
 

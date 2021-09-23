@@ -27,7 +27,7 @@ public class Restaurants {
     private String address;
     private String city;
     private String state;
-    private String zip_code;
+    private int zip_code;
     private String  rating;
 
     public String getRating() {
@@ -140,6 +140,14 @@ public class Restaurants {
 
     public void setWeeklyHours(String weeklyHours) {
         this.weeklyHours = weeklyHours;
+    }
+
+    public int getZip_code() {
+        return zip_code;
+    }
+
+    public void setZip_code(int zip_code) {
+        this.zip_code = zip_code;
     }
 
     public Restaurants(){
