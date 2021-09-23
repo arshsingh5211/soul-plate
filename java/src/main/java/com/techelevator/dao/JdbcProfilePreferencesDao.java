@@ -24,7 +24,7 @@ public class JdbcProfilePreferencesDao implements ProfilePreferencesDao {
     public ProfilePreferences getPreferencesId(int preference_id) {
 
         ProfilePreferences profile = new ProfilePreferences();
-        String sql = "SELECT preference_id FROM  profile_preferences WHERE preference_id=?";
+        String sql = "SELECT preference_id FROM  user_preferences WHERE preference_id=?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, preference_id);
         if (results.next()) {
             profile.setPreferences_id(results.getInt("preferences_id"));
@@ -37,7 +37,7 @@ public class JdbcProfilePreferencesDao implements ProfilePreferencesDao {
     public List<ProfilePreferences> getPreferencesByUserId(int userId) {
 
         List<ProfilePreferences> preferencesList = new ArrayList<>();
-        String sql = "SELECT * FROM profile_preferences WHERE user_id = ?";
+        String sql = "SELECT * FROM user_preferences WHERE user_id = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
         while (results.next()) {
             ProfilePreferences preference = mapRowToProfilePreferences(results);
