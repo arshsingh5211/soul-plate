@@ -1,7 +1,7 @@
 <template>
   <div id="register" class="text-center">
     <form class="form-register" @submit.prevent="register">
-      <h1 class="h3 mb-3 font-weight-normal">Create Account</h1>
+      <h1 class="h3 mb-3 font-weight-normal">Register</h1>
       <div class="alert alert-danger" role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
       </div>
@@ -32,10 +32,10 @@
         v-model="user.confirmPassword"
         required
       />
-      <router-link :to="{ name: 'login' }">Have an account?</router-link>
       <button class="btn btn-lg btn-primary btn-block" type="submit">
         Create Account
-      </button>
+      </button><br>
+      <router-link class="have-account" :to="{ name: 'login' }">Already have an account?</router-link>
     </form>
   </div>
 </template>
@@ -90,4 +90,96 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Montserrat&family=Roboto:wght@300&display=swap');
+
+body {
+  width: 100%;
+  height: 100%;
+  padding: 8% 0 0;
+  margin: 0;
+  display: flex;
+}
+
+label {
+  color: #c26801;
+}
+
+ h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: bold;
+  display: block;
+  text-transform: uppercase;
+  margin-left: auto;
+  margin-right: auto;
+  width: 35%;
+  height: auto;
+  color: #cf740cf1;
+  letter-spacing: 2px;
+  max-width: 100%;
+  min-width: 0px;
+  opacity: 1;
+  word-break: keep-all;
+  padding: 10px 0px 10px 0px;
+  line-height: 27.2px;
+}
+
+label.sr-only {
+  align-content: center;
+}
+
+form {
+  margin: 0;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  font-family: 'Montserrat', serif;
+  font-size: 12px;
+  background:whitesmoke;
+  max-width: 300px;
+  padding: 10px 40px 20px 40px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  border-radius: 10px;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+form input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: rgb(243, 231, 226);
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.have-account {
+  float: center;
+}
+
+button {
+  text-transform: uppercase;
+  outline: 0;
+  background: #fc931af1;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  margin-bottom: 20px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+button:hover {
+  opacity: 0.9;
+}
+.have-account:hover {
+  opacity: 0.8;
+}
+
+</style>

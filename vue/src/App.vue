@@ -18,6 +18,7 @@ body, html {
   background-size: cover;
 }
 #nav, .nav {
+
   color: white;
 }
 </style>
