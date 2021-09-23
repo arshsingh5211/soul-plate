@@ -79,7 +79,7 @@ export default {
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Montserrat&family=Roboto:wght@300&display=swap');
 
-body {
+.login body {
   width: 100%;
   height: 100%;
   /* padding: 1% 0 0;
