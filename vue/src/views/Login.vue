@@ -1,8 +1,7 @@
 <template>
   <div id="login" class="text-center">
-    <h1 class="welcome">Welcome to Restaurant Tinder</h1>
     <form class="form-signin" @submit.prevent="login">
-      <h1 class="sign-in">Login</h1>
+      <h1 class="sign-in">Find your SoulPLATE!</h1>
       <div
         class="alert alert-danger"
         role="alert"
@@ -13,7 +12,6 @@
         role="alert"
         v-if="this.$route.query.registration"
       >Thank you for registering, please sign in.</div>
-      <label for="username" class="sr-only">Username:  </label>
       <input
         type="text"
         id="username"
@@ -24,7 +22,6 @@
         autofocus
       />
       <br>
-      <label for="password" class="sr-only">Password:  </label>
       <input
         type="password"
         id="password"
@@ -80,49 +77,70 @@ export default {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Montserrat&family=Roboto:wght@300&display=swap');
 
-h1.welcome {
-  margin-left: auto;
-  margin-right: auto;
-  width: 35%;
-  height: auto;
-  text-align: center;
-  color: #D52929;
-  border: 2px solid black;
-  background: #FAD7A0 ;
-  margin-bottom: 80px;
-  font-family: sans-serif;
+.login body {
+  width: 100%;
+  height: 100%;
+  /* padding: 1% 0 0;
+  margin: 0; */
+  display: flex;
 }
+
 h1.sign-in {
-  color: #D52929;
+  font-family: 'Montserrat', serif;
+  color: #cf740cf1;;
   text-align: center;
 }
 label.sr-only {
   align-content: center;
 }
-form {
-  font-family: Liberation Sans, sans-serif;
-  margin-left: auto;
-  margin-right: auto;
+.form-signin {
+  margin: 0;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  font-family: 'Montserrat', serif;
+  font-size: 12px;
+  background:whitesmoke;
+  max-width: 300px;
+  padding: 10px 40px 20px 40px;
   text-align: center;
-  border: 2px solid black;
-  line-height: 50px;
-  width: 30%;
-  height: 300px;
-  background: wheat ;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  border-radius: 10px;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
+
+.form-signin input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: rgb(243, 231, 226);
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
 .need-account{
-  float: left;
-  margin-left: 15px;
+  float: center;
 }
 
 .submit {
-  float: right;
-  margin-top: 20px;
-  margin-right: 25px;
-  width: 80px;
-  height: 30px;
-  font-size: 15px;
+  text-transform: uppercase;
+  outline: 0;
+  background: #fc931af1;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  margin-bottom: 20px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
 }
 .submit:hover {
   opacity: 0.9;

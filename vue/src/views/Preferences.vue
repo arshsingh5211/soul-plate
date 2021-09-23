@@ -1,6 +1,5 @@
 <template>
   <div>
-      <h1>Edit Preferences</h1>
       <edit-preferences />
   </div>
 </template>

@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link class="nav" v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
-      <router-link class="nav" v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>&nbsp;|&nbsp;
-      <router-link class="nav" v-bind:to="{ name: 'edit-preferences'}"> User Preferences</router-link>
+      <router-link class="nav" v-bind:to="{ name: 'home' }" v-show="$store.state.token != ''">Home|&nbsp;</router-link>&nbsp;
+      <router-link class="nav" v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout|&nbsp;</router-link>&nbsp;
+      <router-link class="nav" v-bind:to="{ name: 'edit-preferences'}" v-show="$store.state.token != ''"> User Preferences</router-link>
     </div>
     <router-view />
   </div>
@@ -17,7 +17,9 @@ body, html {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
 #nav, .nav {
+
   color: white;
 }
 </style>
