@@ -48,7 +48,13 @@ public class YelpService {
                 String phoneNumber = root.path(i).path("phone").asText();
                 String address = root.path(i).path("location").path("display_address").asText();
 
-                Restaurants restaurants = new Restaurants(name, phoneNumber, address, rating);
+                List<String> transactions = new ArrayList<>();
+
+                for(int j = 0; j < root.path(i).path("transactions").size(); j++) {
+                 transactions.add(root.path(i).path("transactions").path(j).asText());   ; // you can add this to a list?
+                }
+
+                Restaurants restaurants = new Restaurants(name, phoneNumber, address, rating, transactions);
                 restaurantsList.add(restaurants);
             }
         } catch (JsonProcessingException e) {
@@ -76,16 +82,46 @@ public class YelpService {
         try {
             jsonNode = objectMapper.readTree(responseEntity.getBody());
             String name = jsonNode.path("name").asText();
-            String rating = jsonNode.path("rating").asText();
-            String imgUrl = jsonNode.path("image_url").asText();
             String phoneNumber = jsonNode.path("display_phone").asText();
-            String category = jsonNode.path("categories").path("title").asText();
-            String address = jsonNode.path("location").path("display_address").asText();
-            String price = jsonNode.path("price").asText();
-            String weeklyHours = jsonNode.path("hours").path("open").asText();
-            String transactions = jsonNode.path("transactions").asText();
+            String address = jsonNode.path("location").path("address1").asText();
+            String city = jsonNode.path("location").path("city").asText();
+            String state = jsonNode.path("location").path("state").asText();
+            String zipCode = jsonNode.path("location").path("zip_code").asText();
+            String rating = jsonNode.path("rating").asText();
+            List<String> transactions = new ArrayList<>();
+            JsonNode root = jsonNode.path("");
 
-            restaurant = new Restaurants(name, phoneNumber, address, rating, imgUrl, category, price, weeklyHours, transactions);
+            for(int j = 0; j < root.path("transactions").size(); j++) {
+                transactions.add(root.path("transactions").path(j).asText());   ; // you can add this to a list?
+            }
+
+            String price = jsonNode.path("price").asText();
+            String imgUrl = jsonNode.path("image_url").asText();
+            String category = jsonNode.path("categories").path("title").asText();
+            //weekly hours
+            //String address = jsonNode.path("location").path("display_address").asText();
+            //String weeklyHours = jsonNode.path("hours").path("open").asText();
+            String yelpId = id;
+
+
+
+            //  this.restaurantName = restaurantName;
+//        this.phoneNumber = phoneNumber;
+//        this.address = address;
+//        this.city = city;
+//        this.state = state;
+//        this.zipCode = zipCode;
+//        this.rating = rating;
+//        this.transactions = transactions;
+//        this.price = price;
+//        this.imgUrl = imgUrl;
+//        this.category = category;
+//        this.weeklyHours = weeklyHours;
+//        this.restaurantId = restaurantId;
+
+            //TODO: null on transaction
+            restaurant = new Restaurants(name, phoneNumber, address, city, state, zipCode,
+                    rating, transactions, price, imgUrl, category, null, id);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }

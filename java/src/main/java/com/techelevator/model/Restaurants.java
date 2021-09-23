@@ -1,34 +1,56 @@
 package com.techelevator.model;
 
+import java.util.List;
+
 public class Restaurants {
 
-    public Restaurants(String restaurant_name, String phone_number, String address, String rating) {
-        this.restaurant_name = restaurant_name;
-        this.phone_number = phone_number;
+    public Restaurants(String restaurantName, String phoneNumber, String address, String rating, List<String> transactions) {
+        this.restaurantName = restaurantName;
+        this.phoneNumber = phoneNumber;
         this.address = address;
         this.rating = rating;
-    }
-
-    public Restaurants(String restaurant_name, String phone_number, String address, String rating, String imgUrl, String category, String price, String weeklyHours, String transactions) {
-        this.restaurant_name = restaurant_name;
-        this.phone_number = phone_number;
-        this.address = address;
-        this.rating = rating;
-        this.imgUrl = imgUrl;
-        this.category = category;
-        this.price = price;
-        this.weeklyHours = weeklyHours;
         this.transactions = transactions;
     }
 
-    private String restaurant_name;
-    private String description;
-    private String phone_number;
+    public Restaurants(String restaurantName, String phoneNumber, String address, String city, String state, String zipCode,
+                       String rating, List<String> transactions, String price, String imgUrl, String category,
+                       String weeklyHours, String yelpId) {
+        this.restaurantName = restaurantName;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.zipCode = zipCode;
+        this.rating = rating;
+        this.transactions = transactions;
+        this.price = price;
+        this.imgUrl = imgUrl;
+        this.category = category;
+        this.weeklyHours = weeklyHours;
+        this.yelpId = yelpId;
+    }
+
+    private String restaurantName;
+    private String phoneNumber;
     private String address;
     private String city;
     private String state;
-    private int zip_code;
+    private String zipCode;
     private String  rating;
+    private List<String> transactions;
+    private String price;
+    private String imgUrl;
+    private String category;
+    private String weeklyHours;
+    private String yelpId;
+
+    public void setTransactions(List<String> transactions) {
+        this.transactions = transactions;
+    }
+
+    public List<String> getTransactions() {
+        return transactions;
+    }
 
     public String getRating() {
         return rating;
@@ -38,52 +60,28 @@ public class Restaurants {
         this.rating = rating;
     }
 
-    private String price;
-    private String imgUrl;
-    private String category;
-    private String weeklyHours;
-    private String transactions;
-
-    public String getTransactions() {
-        return transactions;
+    public String getYelpId() {
+        return yelpId;
     }
 
-    public void setTransactions(String transactions) {
-        this.transactions = transactions;
+    public void setRestaurantId(int restaurantId) {
+        this.yelpId = yelpId;
     }
 
-    private int  restaurant_id;
-
-    public int getRestaurant_id() {
-        return restaurant_id;
+    public String getRestaurantName() {
+        return restaurantName;
     }
 
-    public void setRestaurant_id(int restaurant_id) {
-        this.restaurant_id = restaurant_id;
+    public void setRestaurantName(String restaurantName) {
+        this.restaurantName = restaurantName;
     }
 
-    public String getRestaurant_name() {
-        return restaurant_name;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setRestaurant_name(String restaurant_name) {
-        this.restaurant_name = restaurant_name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getPhone_number() {
-        return phone_number;
-    }
-
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getAddress() {
@@ -142,12 +140,12 @@ public class Restaurants {
         this.weeklyHours = weeklyHours;
     }
 
-    public int getZip_code() {
-        return zip_code;
+    public String getZipCode() {
+        return zipCode;
     }
 
-    public void setZip_code(int zip_code) {
-        this.zip_code = zip_code;
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
     }
 
     public Restaurants(){

@@ -1,7 +1,6 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Restaurants;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
@@ -19,18 +18,18 @@ public JdbcRestaurantsDao (JdbcTemplate jdbcTemplate){
 
 
 
-    @Override
-    public String getDescriptionByRestaurantId(int restaurant_id) {
-        Restaurants restaurant = new Restaurants();
-        String sql ="SELECT description FROM restaurants WHERE restaurant_id=?";
-        SqlRowSet results =jdbcTemplate.queryForRowSet(sql,restaurant_id);
-        if(results.next()){
-            restaurant = mapRowToRestaurants(results);
-
-        }
-
-        return restaurant.getDescription();
-    }
+//    @Override
+//    public String getDescriptionByRestaurantId(int restaurant_id) {
+//        Restaurants restaurant = new Restaurants();
+//        String sql ="SELECT description FROM restaurants WHERE restaurant_id=?";
+//        SqlRowSet results =jdbcTemplate.queryForRowSet(sql,restaurant_id);
+//        if(results.next()){
+//            restaurant = mapRowToRestaurants(results);
+//
+//        }
+//
+//        return restaurant.getDescription();
+//    }
 
     @Override
     public String getPhoneNumberByRestaurantId(int restaurant_id) {
@@ -42,7 +41,7 @@ public JdbcRestaurantsDao (JdbcTemplate jdbcTemplate){
 
 
         }
-            return restaurant.getPhone_number();
+            return restaurant.getPhoneNumber();
     }
 
     @Override
@@ -91,7 +90,7 @@ public JdbcRestaurantsDao (JdbcTemplate jdbcTemplate){
     }
 
     @Override
-    public String getRestaurantNameByRestaurantId(int restaurant_id) {
+    public String getRestaurantNameByRestaurantId(String restaurant_id) {
         Restaurants restaurant = new Restaurants();
         String sql ="SELECT restaurant_name FROM restaurants WHERE restaurant_id=?";
         SqlRowSet results =jdbcTemplate.queryForRowSet(sql,restaurant_id);
@@ -102,11 +101,11 @@ public JdbcRestaurantsDao (JdbcTemplate jdbcTemplate){
 
 
 
-        return restaurant.getRestaurant_name();
+        return restaurant.getRestaurantName();
     }
 
     @Override
-    public int getZipcodeByRestaurantId(int restaurant_id) {
+    public String getZipcodeByRestaurantId(String restaurant_id) {
         Restaurants restaurant = new Restaurants();
         String sql ="SELECT zip_code FROM restaurants WHERE restaurant_id=?";
         SqlRowSet results =jdbcTemplate.queryForRowSet(sql,restaurant_id);
@@ -115,9 +114,7 @@ public JdbcRestaurantsDao (JdbcTemplate jdbcTemplate){
 
         }
 
-
-
-        return restaurant.getZip_code();
+        return restaurant.getZipCode();
     }
 
     @Override
@@ -136,13 +133,13 @@ public JdbcRestaurantsDao (JdbcTemplate jdbcTemplate){
         private Restaurants mapRowToRestaurants(SqlRowSet results){
             Restaurants  restaurant = new Restaurants();
             restaurant.setAddress(results.getString("address"));
-            restaurant.setRestaurant_name(results.getString("restaurant_name"));
-            restaurant.setDescription(results.getString("description"));
-            restaurant.setRestaurant_id(results.getInt("restaurant_id"));
-            restaurant.setPhone_number(results.getString("phone_number"));
+            restaurant.setRestaurantName(results.getString("restaurant_name"));
+            //restaurant.setDescription(results.getString("description"));
+            restaurant.setRestaurantId(results.getInt("restaurant_id"));
+            restaurant.setPhoneNumber(results.getString("phone_number"));
             restaurant.setCity(results.getString("city"));
             restaurant.setState(results.getString("state"));
-            restaurant.setZip_code(results.getInt("zip_code"));
+            restaurant.setZipCode(results.getString("zip_code"));
             restaurant.setRating(results.getString("rating"));
 
 

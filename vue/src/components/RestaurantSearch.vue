@@ -25,7 +25,7 @@ export default {
     }},
     methods: {
         startSearch() {
-            let info = {preferenceName: this.preference, homeZip: this.location}
+            let info = {category: this.preference, zipCode: this.location}
             YelpService.getSearchResults(info)
             .then(
                 response => this.restaurants = response.data
