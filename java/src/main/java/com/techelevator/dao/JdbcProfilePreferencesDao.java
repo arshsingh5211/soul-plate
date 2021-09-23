@@ -45,15 +45,20 @@ public class JdbcProfilePreferencesDao implements ProfilePreferencesDao {
         return preferencesList;
     }
 
-    private ProfilePreferences mapRowToProfilePreferences(SqlRowSet results) {
+    @Override
+    public void setProfilePreference(String preference, int homeZip) {
+        String sql = "INSERT INTO user_preferences (user_id, home_zip, preference)" +
+                "VALUES (?,?,?)";
+        jdbcTemplate.update(sql, "currentUserID", preference, homeZip);
+    }
+
+    public ProfilePreferences mapRowToProfilePreferences(SqlRowSet results) {
 
         ProfilePreferences profile = new ProfilePreferences();
-
-        profile.setPreferencesId(results.getInt("preferences_id"));
+        profile.setPreferencesId(results.getInt("preference_id"));
         profile.setPreference(results.getString("preference"));
         profile.setHomeZip(results.getInt("home_zip"));
         profile.setUserId(results.getInt("user_id"));
-        profile.setCategoryId(results.getInt("category_id"));
 
         return profile;
     }

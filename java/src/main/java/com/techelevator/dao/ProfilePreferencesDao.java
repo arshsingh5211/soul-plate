@@ -10,4 +10,6 @@ public interface ProfilePreferencesDao {
 
      public List<ProfilePreferences> getPreferencesByUserId(int userId);
 
+     public void setProfilePreference(String preference, int homeZip);
+
 }

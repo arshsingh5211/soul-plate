@@ -3,9 +3,13 @@ package com.techelevator.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.techelevator.dao.JdbcProfilePreferencesDao;
+import com.techelevator.dao.ProfilePreferencesDao;
+import com.techelevator.model.ProfilePreferences;
 import com.techelevator.model.Restaurants;
 import com.techelevator.services.YelpService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -23,6 +27,9 @@ public class RestaurantController {
     @Autowired
     YelpService yelpService;
 
+    @Autowired
+    JdbcProfilePreferencesDao profilePreferences;
+
     @RequestMapping(path="/restaurants", method = RequestMethod.GET)
     public List<Restaurants> restaurantSearch(@RequestParam String foodPref, @RequestParam String location) {
 
@@ -37,6 +44,10 @@ public class RestaurantController {
         return yelpService.getRestaurantDetails(id);
     }
 
+    @RequestMapping(path = "/preferences", method = RequestMethod.POST)
+    public void userPreferencePost(@RequestBody ProfilePreferences userPreference) {
+        profilePreferences.setProfilePreference(userPreference.getPreference(), userPreference.getHomeZip());
+    }
 
 
 
