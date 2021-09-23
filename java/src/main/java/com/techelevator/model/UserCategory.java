@@ -3,32 +3,32 @@ package com.techelevator.model;
 public class UserCategory {
 
 
-    private int user_category;
-    private int preferences_id;
-    private int category_id;
+    private int userCategory;
+    private int preferencesId;
+    private int categoryId;
 
-    public int getUser_category() {
-        return user_category;
+    public int getUserCategory() {
+        return userCategory;
     }
 
-    public void setUser_category(int user_category) {
-        this.user_category = user_category;
+    public void setUserCategory(int userCategory) {
+        this.userCategory = userCategory;
     }
 
-    public int getPreferences_id() {
-        return preferences_id;
+    public int getPreferencesId() {
+        return preferencesId;
     }
 
-    public void setPreferences_id(int preferences_id) {
-        this.preferences_id = preferences_id;
+    public void setPreferencesId(int preferencesId) {
+        this.preferencesId = preferencesId;
     }
 
-    public int getCategory_id() {
-        return category_id;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategory_id(int category_id) {
-        this.category_id = category_id;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
     public UserCategory (){
