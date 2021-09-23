@@ -1,6 +1,5 @@
 <template>
   <div id="login" class="text-center">
-    <h1 class="welcome"></h1>
     <form class="form-signin" @submit.prevent="login">
       <h1 class="sign-in">Find your SoulPLATE!</h1>
       <div
@@ -83,7 +82,8 @@ export default {
 body {
   width: 100%;
   height: 100%;
-  padding: 8% 0 0;
+  /* padding: 1% 0 0;
+  margin: 0; */
   display: flex;
 }
 
@@ -95,7 +95,7 @@ h1.sign-in {
 label.sr-only {
   align-content: center;
 }
-form {
+.form-signin {
   margin: 0;
   position: absolute;
   top: 40%;
@@ -112,7 +112,7 @@ form {
   transform: translate(-50%, -50%);
 }
 
-form input {
+.form-signin input {
   font-family: "Roboto", sans-serif;
   outline: 0;
   background: rgb(243, 231, 226);
