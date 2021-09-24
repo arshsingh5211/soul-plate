@@ -1,6 +1,6 @@
 package com.techelevator.model;
 
-public class ProfilePreferences {
+public class UserPreferences {
 
     private int preferencesId;
     private int userId;
@@ -48,7 +48,7 @@ public class ProfilePreferences {
         this.categoryId = categoryId;
     }
 
-    public ProfilePreferences(){ }
+    public UserPreferences(){ }
 
 
 
