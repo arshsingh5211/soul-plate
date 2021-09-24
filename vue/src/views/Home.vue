@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-    <h1>Home</h1>
+    <!-- <h1>Home</h1> -->
     <restaurant-search></restaurant-search>
-    <p>You must be authenticated to see this</p>
+    <!-- <p>You must be authenticated to see this</p> -->
     <restaurant-card></restaurant-card>
   </div>
 </template>
