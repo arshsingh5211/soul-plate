@@ -3,11 +3,11 @@
       <h1>Edit Preferences</h1>
       <h4>Tell us what your taste buds like! You can always change your preferences later.</h4>
       <div class="form-element">
-          <label for="user">What's your name: </label>
+          <label for="user">Your Name:</label>
           <input id="user" type="text" v-model="newPreferences.name" />
       </div>
       <div class="form-element">
-          <label for="zip">Home Zip Code: </label>
+          <label for="zip">Home Zip Code:</label>
           <input id="zip" type="text" v-model="newPreferences.homeZip" />
       </div>
       <div class="form-element">
@@ -22,7 +22,7 @@
       </div>
       <div class="actions">
           <button v-on:click.prevent="resetForm" type="reset">reset</button>
-          <button>Submit</button>
+          <button>Save</button>
       </div>
   </form>
 </template>
@@ -63,13 +63,17 @@ export default {
 .pref-form body {
   width: 100%;
   height: 100%;
+  margin-left: auto;
+  margin-right: auto;
   padding: 8% 0 0;
   margin: 0;
   display: flex;
 }
 
-label {
+.pref-form label {
   color: #c26801;
+  display: inline-block;
+  width: 250px;
 }
 
  .pref-form h1 {
@@ -89,6 +93,23 @@ label {
   word-break: keep-all;
   padding: 10px 0px 10px 0px;
   line-height: 27.2px;
+}
+
+.pref-form h4 {
+  font-family: 'Monteserrat', serif;
+  font-weight: bold;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  height: auto;
+  color: #42403ff1;
+  letter-spacing: 1px;
+  max-width: 100%;
+  min-width: 0px;
+  opacity: 1;
+  word-break: keep-all;
+  padding: 10px 0px 10px 0px;
 }
 
 label.sr-only {
@@ -114,6 +135,7 @@ label.sr-only {
 
 .pref-form input {
   font-family: "Roboto", sans-serif;
+  display: inline-block;
   outline: 0;
   background: rgb(243, 231, 226);
   width: 50%;
@@ -122,6 +144,7 @@ label.sr-only {
   padding: 5px;
   box-sizing: border-box;
   font-size: 14px;
+  text-align: right;
 }
 
 .pref-form button {

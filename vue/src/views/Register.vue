@@ -1,7 +1,7 @@
 <template>
   <div id="register" class="text-center">
     <form class="form-register" @submit.prevent="register">
-      <h1 class="h3 mb-3 font-weight-normal">Register</h1>
+      <h2 class="h3 mb-3 font-weight-normal">Create Account</h2>
       <div class="alert alert-danger" role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
       </div>
@@ -33,7 +33,7 @@
         required
       />
       <button class="btn btn-lg btn-primary btn-block" type="submit">
-        Create Account
+        Sign up
       </button><br>
       <router-link class="have-account" :to="{ name: 'login' }">Already have an account?</router-link>
     </form>
@@ -105,17 +105,16 @@ label {
   color: #c26801;
 }
 
- h1 {
+.form-register h2 {
   font-family: 'Cormorant Garamond', serif;
-  font-weight: bold;
   display: block;
   text-transform: uppercase;
   margin-left: auto;
   margin-right: auto;
-  width: 35%;
+  width: 100%;
   height: auto;
   color: #cf740cf1;
-  letter-spacing: 2px;
+  letter-spacing: 4px;
   max-width: 100%;
   min-width: 0px;
   opacity: 1;
