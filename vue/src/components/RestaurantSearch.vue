@@ -1,8 +1,8 @@
 <template>
   <div class="search-page">
         <table class='table-container'>
-            <thead >
-                <tr class="table-headers">
+            <thead class="table-headers">
+                <tr >
                     <th class="name-header">Restaurant Name  </th>
                     <th class="number-header">Phone Number  </th>
                     <th class="rating-header">Rating</th>
@@ -110,24 +110,27 @@ export default {
 
 .table-headers {
     font-family: 'Cormorant Garamond', serif;
-    text-transform: uppercase;
-    
- 
+    text-transform: uppercase; 
+    background: rgb(243, 231, 226);
 }
 
 .restaurant-phone {
     font-family: 'Montserrat', serif;
     color: #42403ff1;
 }
-.table-container th,
+.table-container th {
+    padding: 10px 45px;
+    
+}
 .table-container td {
-    padding: 10px 30px ;
+    padding: 10px 20px ;
 }
 
 .table-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    text-align: center;
     justify-content: space-between;
     align-items: center;
     position: absolute;
