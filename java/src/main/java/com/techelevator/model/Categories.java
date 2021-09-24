@@ -5,11 +5,6 @@ public class Categories {
     private int categoryId;
     private String categoryName;
 
-    public Categories(){
-
-
-    }
-
     public int getCategoryId() {
         return categoryId;
     }

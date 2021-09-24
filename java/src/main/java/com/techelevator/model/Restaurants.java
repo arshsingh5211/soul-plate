@@ -12,21 +12,8 @@ public class Restaurants {
         this.transactions = transactions;
     }
 
-    public Restaurants(String restaurantName, String phoneNumber, String address, String city, String state, String zipCode,
-                       String rating, List<String> transactions, String price, String imgUrl, String category,
-                       String weeklyHours, String yelpId) {
+    public Restaurants(String restaurantName, String yelpId) {
         this.restaurantName = restaurantName;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
-        this.city = city;
-        this.state = state;
-        this.zipCode = zipCode;
-        this.rating = rating;
-        this.transactions = transactions;
-        this.price = price;
-        this.imgUrl = imgUrl;
-        this.category = category;
-        this.weeklyHours = weeklyHours;
         this.yelpId = yelpId;
     }
 

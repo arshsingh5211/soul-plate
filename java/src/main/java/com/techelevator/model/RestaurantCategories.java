@@ -4,13 +4,9 @@ public class RestaurantCategories {
 
     private int categoryId;
     private int restaurantId;
-    public RestaurantCategories(){
-
-    }
 
     public int getCategoryId() {
         return categoryId;
-
     }
 
     public void setCategoryId(int categoryId) {

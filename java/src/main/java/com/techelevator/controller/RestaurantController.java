@@ -19,7 +19,7 @@ public class RestaurantController {
     JdbcUserPreferencesDao profilePreferences;
 
     @RequestMapping(path="/restaurants", method = RequestMethod.GET)
-    public List<Restaurants> restaurantSearch(@RequestParam String foodPref, @RequestParam String location) {
+    public List<Restaurants> listSearchResults(@RequestParam String foodPref, @RequestParam String location) {
 
         System.out.println("passed in: " + foodPref);
         System.out.println("passed in: " + location) ;
@@ -28,13 +28,13 @@ public class RestaurantController {
     }
 
     @RequestMapping(path="/restaurants/{id}", method = RequestMethod.GET)
-    public Restaurants restaurantDetails(@PathVariable String id) {
+    public Restaurants getRestaurantDetails(@PathVariable String id) {
         return yelpService.getRestaurantDetails(id);
     }
 
     @RequestMapping(path = "/preferences", method = RequestMethod.POST)
-    public void userPreferencePost(@RequestBody UserPreferences userPreference) {
-        profilePreferences.setProfilePreference(userPreference.getPreference(), userPreference.getHomeZip());
+    public void editUserPreferences(@RequestBody UserPreferences userPreference) {
+        profilePreferences.setProfilePreferences(userPreference.getUserId(), userPreference.getHomeZip(), userPreference.getPreference());
     }
 
 

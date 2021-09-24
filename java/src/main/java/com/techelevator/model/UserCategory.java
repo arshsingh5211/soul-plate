@@ -2,7 +2,6 @@ package com.techelevator.model;
 
 public class UserCategory {
 
-
     private int userCategory;
     private int preferencesId;
     private int categoryId;
@@ -29,10 +28,6 @@ public class UserCategory {
 
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
-    }
-
-    public UserCategory (){
-
     }
 
 }

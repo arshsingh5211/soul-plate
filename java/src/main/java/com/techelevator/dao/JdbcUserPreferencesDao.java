@@ -46,11 +46,10 @@ public class JdbcUserPreferencesDao implements UserPreferencesDao {
     }
 
     @Override
-    public void setProfilePreference(String preference, int homeZip) {
-        String sql = "INSERT INTO user_preferences (user_id, home_zip, preference)" +
-                "VALUES (?,?,?)";
-        jdbcTemplate.update(sql, "currentUserID", preference, homeZip);
-
+    public void setProfilePreferences(int userId, int homeZip, String preference) {
+        String sql = "INSERT INTO user_preferences (user_id, home_zip, preference) VALUES ( " +
+                     "(SELECT user_id FROM users WHERE user_id = ?), ?, ?)";
+        jdbcTemplate.update(sql, userId, homeZip, preference);
     }
 
     @Override
@@ -70,7 +69,7 @@ public class JdbcUserPreferencesDao implements UserPreferencesDao {
 
         UserPreferences user = new UserPreferences();
         user.setPreferencesId(results.getInt("preference_id"));
-        user .setPreference(results.getString("preference"));
+        user.setPreference(results.getString("preference"));
         user.setHomeZip(results.getInt("home_zip"));
         user.setUserId(results.getInt("user_id"));
 

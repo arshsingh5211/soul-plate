@@ -120,8 +120,7 @@ public class YelpService {
 //        this.restaurantId = restaurantId;
 
             //TODO: null on transaction
-            restaurant = new Restaurants(name, phoneNumber, address, city, state, zipCode,
-                    rating, transactions, price, imgUrl, category, null, id);
+            restaurant = new Restaurants(name, id);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
