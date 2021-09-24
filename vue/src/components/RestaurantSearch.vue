@@ -1,11 +1,11 @@
 <template>
   <div class="search-page">
         <table class='table-container'>
-            <thead class="table-headers">
-                <tr>
-                    <th >Restaurant Name | </th>
-                    <th >Phone Number | </th>
-                    <th >Rating</th>
+            <thead >
+                <tr class="table-headers">
+                    <th class="name-header">Restaurant Name  </th>
+                    <th class="number-header">Phone Number  </th>
+                    <th class="rating-header">Rating</th>
                 </tr>
             </thead>
               <tbody>
@@ -90,7 +90,6 @@ export default {
 .restaurant-name {
     font-family: 'Cormorant Garamond', serif;
     font-weight: bold;
-    
     text-transform: uppercase;
     margin-left: auto;
     margin-right: auto;
@@ -106,30 +105,23 @@ export default {
     line-height: 27.2px;
     
 }
-.restaurant-phone {
-    width: 30%;
-}
-.restaurant-rating {
-    width: 15%;
-}
+
+
 
 .table-headers {
     font-family: 'Cormorant Garamond', serif;
     text-transform: uppercase;
     
-    text-align: center;
-    width: 100%;
-     display: inline-block;
-  
-  padding-right: 20px;
-  vertical-align: text-top;
-    
-    
+ 
 }
 
 .restaurant-phone {
     font-family: 'Montserrat', serif;
     color: #42403ff1;
+}
+.table-container th,
+.table-container td {
+    padding: 10px 30px ;
 }
 
 .table-container {
@@ -138,7 +130,6 @@ export default {
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    margin: 0;
     position: absolute;
     top: 50%;
     left: 25%;
