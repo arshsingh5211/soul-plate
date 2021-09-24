@@ -7,6 +7,6 @@ export default {
     },
 
     postSearchResults(newPreferences){
-        return axios.post('/restaurants', newPreferences)
+        return axios.post('/pre', newPreferences)
     }
 }

@@ -45,7 +45,7 @@ public class YelpService {
             for (int i = 0; i < root.size(); i++) {
                 String name = root.path(i).path("name").asText();
                 String rating = root.path(i).path("rating").asText();
-                String phoneNumber = root.path(i).path("phone").asText();
+                String phoneNumber = root.path(i).path("display_phone").asText();
                 String address = root.path(i).path("location").path("display_address").asText();
 
                 List<String> transactions = new ArrayList<>();

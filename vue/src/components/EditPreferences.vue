@@ -8,11 +8,11 @@
       </div>
       <div class="form-element">
           <label for="zip">Home Zip Code:</label>
-          <input id="zip" type="text" v-model="newPreferences.homeZip" />
+          <input id="zip" type="text" v-model="newPreferences.zipCode" />
       </div>
       <div class="form-element">
           <label for="restaurant-preference">What cuisines do you like? Any nutritional barriers or allergies? </label><br>
-          <select id="preference" v-model="newPreferences.preferencesID">
+          <select id="preference" v-model="newPreferences.category">
             <option value="american">American</option>
             <option value="mexican">Mexican</option>
             <option value="italian">Italian</option>
@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import yelpService from "../services/YelpService"
 export default {
     name: "add-preferences",
     data() {
@@ -36,7 +37,8 @@ export default {
                 name: "",
                 preferencesID: 0,
                 userID: 0,
-                homeZip: ""
+                zipCode: "",
+                category: ""
             }
             
             
@@ -46,8 +48,15 @@ export default {
     },
     methods: {
         savePreferences() {
+          const newUserPref = {
+            category: this.newPreferences.category,
+            zipCode: this.newPreferences.zipCode
+          }
+          yelpService.postSearchResults(newUserPref)
+          .then(this.$router.push("/"))
         const userID = this.$route.params.userID;
         this.newPreferences.userID = userID;
+      
         //this.$store.commit("EDIT_PREFERENCES", this.newPreferences);
         },
         resetForm() {
