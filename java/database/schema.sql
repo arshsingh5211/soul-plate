@@ -68,9 +68,9 @@ CREATE TABLE user_category (
 
 CREATE TABLE user_restaurants (
         user_restaurants_id serial NOT NULL PRIMARY KEY,
-        preference_id int NOT NULL , 
+        user_id int NOT NULL , 
         restaurant_id int NOT NULL ,
-        CONSTRAINT FK_preference_id FOREIGN KEY (preference_id) REFERENCES user_preferences(preferences_id),
+        CONSTRAINT FK_user_id FOREIGN KEY (user_id) REFERENCES users(user_id),
         CONSTRAINT FK_restaurant_id FOREIGN KEY (restaurant_id) REFERENCES restaurants(restaurant_id)
 
 );
