@@ -102,7 +102,7 @@ body {
 }
 
 label {
-  color: #c26801;
+  color: 42403ff1;
 }
 
 .form-register h2 {

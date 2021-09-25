@@ -147,12 +147,23 @@ export default {
 }
 
 .search-button {
-    align-items: center;
+    text-transform: uppercase;
+    outline: 0;
+    background: #fc931af1;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    margin-bottom: 20px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
 }
 .search-bar-header {
-  font-family: 'Montserrat', serif;
-  color: #cf740cf1;;
-  text-align: center;
+    font-family: 'Montserrat', serif;
+    color: #cf740cf1;;
+    text-align: center;
 }
 
 input {

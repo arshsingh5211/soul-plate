@@ -31,12 +31,12 @@
 import yelpService from "../services/YelpService"
 export default {
     name: "add-preferences",
-    props: ["userId"],
+    // props: ["userId"],
     data() {
         return {
             newPreferences: {
                 preferencesID: 0,
-                userId: this.userId,
+                userId: 0,
                 name: "",
                 homeZip: "",
                 preference: ""
@@ -49,16 +49,15 @@ export default {
           //   category: this.newPreferences.category,
           //   zipCode: this.newPreferences.zipCode
           // }
-          // const userID = this.$route.params.userID;
           // this.newPreferences.userID = userID;
-          yelpService.addPreferences(this.newPreferences).then(response => {
-            if (response.status === 201) {
-              this.$router.push('/');
-            }
-          })
-          .catch(error => {
-            this.handleErrorResponse(error, "adding");
-          });
+          yelpService.addPreferences(this.newPreferences).then( //response => {
+            // if (response.status === 201) {
+              this.$router.push('/')
+            // }
+          )
+          // }.catch(error => {
+          //   this.handleErrorResponse(error, "adding");
+          // });
         },
         
       
@@ -158,7 +157,7 @@ label.sr-only {
   padding: 5px;
   box-sizing: border-box;
   font-size: 14px;
-  text-align: right;
+  text-align: center;
 }
 
 .pref-form button {
