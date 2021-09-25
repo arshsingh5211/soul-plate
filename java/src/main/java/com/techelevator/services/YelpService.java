@@ -47,7 +47,14 @@ public class YelpService {
                 String name = root.path(i).path("name").asText();
                 String rating = root.path(i).path("rating").asText();
                 String phoneNumber = root.path(i).path("display_phone").asText();
-                String address = root.path(i).path("location").path("display_address").asText();
+                String address = root.path(i).path("location").path("address1").asText();
+                String state = root.path(i).path("location").path("state").asText();
+                String zipCode = root.path(i).path("location").path("zip_code").asText();
+                String price = root.path(i).path("price").asText();
+                String imgUrl = root.path(i).path("image_url").asText();
+                String city = root.path(i).path("location").path("city").asText();
+                String category = root.path(i).path("categories").path("title").asText();
+                String yelpId = root.path(i).path("id").asText();
 
                 List<String> transactions = new ArrayList<>();
 
@@ -55,7 +62,7 @@ public class YelpService {
                  transactions.add(root.path(i).path("transactions").path(j).asText());   ; // you can add this to a list?
                 }
 
-                Restaurants restaurants = new Restaurants(name, phoneNumber, address, rating, transactions);
+                Restaurants restaurants = new Restaurants(name, phoneNumber, address, city, state, zipCode, rating, transactions, price, imgUrl, category, yelpId);
                 restaurantsList.add(restaurants);
             }
         } catch (JsonProcessingException e) {

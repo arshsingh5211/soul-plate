@@ -3,20 +3,6 @@ package com.techelevator.model;
 import java.util.List;
 
 public class Restaurants {
-
-    public Restaurants(String restaurantName, String phoneNumber, String address, String rating, List<String> transactions) {
-        this.restaurantName = restaurantName;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
-        this.rating = rating;
-        this.transactions = transactions;
-    }
-
-    public Restaurants(String restaurantName, String yelpId) {
-        this.restaurantName = restaurantName;
-        this.yelpId = yelpId;
-    }
-
     private String restaurantName;
     private String phoneNumber;
     private String address;
@@ -30,6 +16,30 @@ public class Restaurants {
     private String category;
     private String weeklyHours;
     private String yelpId;
+
+    public Restaurants(String restaurantName, String phoneNumber, String address, String city, String state, String zipCode,
+                       String rating, List<String> transactions, String price, String imgUrl, String category,
+                       String yelpId) {
+        this.restaurantName = restaurantName;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.zipCode = zipCode;
+        this.rating = rating;
+        this.transactions = transactions;
+        this.price = price;
+        this.imgUrl = imgUrl;
+        this.category = category;
+        this.yelpId = yelpId;
+    }
+
+    public Restaurants(String restaurantName, String yelpId) {
+        this.restaurantName = restaurantName;
+        this.yelpId = yelpId;
+    }
+
+
 
     public void setTransactions(List<String> transactions) {
         this.transactions = transactions;
