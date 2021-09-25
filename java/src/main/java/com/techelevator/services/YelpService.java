@@ -13,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Component
 public class YelpService {
@@ -61,6 +62,11 @@ public class YelpService {
             e.printStackTrace();
         }
         return restaurantsList;
+    }
+
+    public Restaurants getRandomRestaurant(List<Restaurants> restaurantsList) {
+        Random random = new Random();
+        return restaurantsList.get(random.nextInt(restaurantsList.size()));
     }
 
     public Restaurants getRestaurantDetails(String id) {

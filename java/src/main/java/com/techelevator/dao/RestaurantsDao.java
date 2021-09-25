@@ -1,5 +1,10 @@
 package com.techelevator.dao;
 
+import com.techelevator.model.Restaurants;
+import com.techelevator.services.YelpService;
+
+import java.util.List;
+
 public interface RestaurantsDao {
 
     //public String getDescriptionByRestaurantId(int restaurant_id);
@@ -8,8 +13,9 @@ public interface RestaurantsDao {
     public String getStateByRestaurantId(int restaurant_id);
     public String getCityByRestaurantId(int restaurant_id);
     public String getRestaurantNameByRestaurantId(String restaurant_id);
-    public String    getZipcodeByRestaurantId(String restaurant_id);
+    public String getZipcodeByRestaurantId(String restaurant_id);
     public String getRatingByRestaurantId(int restaurant_id);
+
 
     
 }
