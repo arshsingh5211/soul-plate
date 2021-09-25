@@ -12,7 +12,7 @@
       </div>
       <div class="form-element">
           <label for="restaurant-preference">What cuisines do you like? Any nutritional barriers or allergies? </label><br>
-          <select id="preference" v-model="newPreferences.preference">
+          <select id="preference" v-model="newPreferences.foodPref">
             <option value="american">American</option>
             <option value="mexican">Mexican</option>
             <option value="italian">Italian</option>
@@ -35,20 +35,22 @@ export default {
     data() {
         return {
             newPreferences: {
-                preferencesID: 0,
-                userId: 0,
-                name: "",
-                homeZip: "",
-                preference: ""
+                // preferencesID: 0,
+                // userId: 0,
+                // name: "",
+                zipCode: "",
+                foodPref: ""
             }
         };
     },
     methods: {
         savePreferences() {
-          // const newUserPref = {
-          //   category: this.newPreferences.category,
-          //   zipCode: this.newPreferences.zipCode
-          // }
+          const newUserPref = {
+            foodPref: this.newPreferences.foodPref,
+            zipCode: this.newPreferences.zipCode
+          }
+          this.$store.commit('ADD_USER_PREF', this.newUserPref);
+          
           // this.newPreferences.userID = userID;
           yelpService.addPreferences(this.newPreferences).then( //response => {
             // if (response.status === 201) {
