@@ -19,8 +19,26 @@ if(currentToken != null) {
 export default new Vuex.Store({
   state: {
     token: currentToken || '',
-    user: currentUser || {}
+    user: currentUser || {},
+    userPreferences: [
+      {
+        foodPref: "",
+        zipCode: ""
+      },
+      {
+        foodPref: "",
+        zipCode: ""
+      },
+      {
+        foodPref: "",
+        zipCode: ""
+
+      }
+    ]
+
+    
   },
+
   mutations: {
     SET_AUTH_TOKEN(state, token) {
       state.token = token;
@@ -37,6 +55,9 @@ export default new Vuex.Store({
       state.token = '';
       state.user = {};
       axios.defaults.headers.common = {};
+    },
+    ADD_USER_PREF(state, newUserPref) {
+      state.userPreferences.push(newUserPref);
     }
   }
 })
