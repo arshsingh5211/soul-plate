@@ -1,9 +1,12 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Restaurants;
+import com.techelevator.services.YelpService;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class JdbcRestaurantsDao implements RestaurantsDao {
@@ -67,10 +70,7 @@ public JdbcRestaurantsDao (JdbcTemplate jdbcTemplate){
         SqlRowSet results =jdbcTemplate.queryForRowSet(sql,restaurant_id);
         if(results.next()) {
             restaurant = mapRowToRestaurants(results);
-
         }
-
-
             return restaurant.getState();
     }
 
@@ -81,11 +81,7 @@ public JdbcRestaurantsDao (JdbcTemplate jdbcTemplate){
         SqlRowSet results =jdbcTemplate.queryForRowSet(sql,restaurant_id);
         if(results.next()) {
             restaurant = mapRowToRestaurants(results);
-
         }
-
-
-
         return restaurant.getCity();
     }
 
@@ -96,11 +92,7 @@ public JdbcRestaurantsDao (JdbcTemplate jdbcTemplate){
         SqlRowSet results =jdbcTemplate.queryForRowSet(sql,restaurant_id);
         if(results.next()) {
             restaurant = mapRowToRestaurants(results);
-
         }
-
-
-
         return restaurant.getRestaurantName();
     }
 
@@ -111,9 +103,7 @@ public JdbcRestaurantsDao (JdbcTemplate jdbcTemplate){
         SqlRowSet results =jdbcTemplate.queryForRowSet(sql,restaurant_id);
         if(results.next()) {
             restaurant = mapRowToRestaurants(results);
-
         }
-
         return restaurant.getZipCode();
     }
 
@@ -124,13 +114,11 @@ public JdbcRestaurantsDao (JdbcTemplate jdbcTemplate){
         SqlRowSet results =jdbcTemplate.queryForRowSet(sql,restaurant_id);
         if(results.next()) {
             restaurant = mapRowToRestaurants(results);
-
         }
-
         return restaurant.getRating();
-
     }
-        private Restaurants mapRowToRestaurants(SqlRowSet results){
+
+    private Restaurants mapRowToRestaurants(SqlRowSet results){
             Restaurants  restaurant = new Restaurants();
             restaurant.setAddress(results.getString("address"));
             restaurant.setRestaurantName(results.getString("restaurant_name"));
@@ -142,12 +130,7 @@ public JdbcRestaurantsDao (JdbcTemplate jdbcTemplate){
             restaurant.setZipCode(results.getString("zip_code"));
             restaurant.setRating(results.getString("rating"));
 
-
-
-
-
-
-        return restaurant;
+            return restaurant;
     }
 
 }

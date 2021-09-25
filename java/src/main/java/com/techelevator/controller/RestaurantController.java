@@ -37,6 +37,10 @@ public class RestaurantController {
         profilePreferences.setProfilePreferences(userPreference.getUserId(), userPreference.getName(), userPreference.getHomeZip(), userPreference.getPreference());
     }
 
+    @RequestMapping(path = "/restaurant", method = RequestMethod.GET)
+    public Restaurants getRandomRestaurant(@RequestParam String foodPref, @RequestParam String location) {
+        return yelpService.getRandomRestaurant(yelpService.getSearchResults(foodPref, location));
+    }
 
 
 }
