@@ -8,11 +8,11 @@
       </div>
       <div class="form-element">
           <label for="zip">Home Zip Code:</label>
-          <input id="zip" type="text" v-model="newPreferences.zipCode" />
+          <input id="zip" type="text" v-model="newPreferences.homeZip" />
       </div>
       <div class="form-element">
           <label for="restaurant-preference">What cuisines do you like? Any nutritional barriers or allergies? </label><br>
-          <select id="preference" v-model="newPreferences.category">
+          <select id="preference" v-model="newPreferences.preference">
             <option value="american">American</option>
             <option value="mexican">Mexican</option>
             <option value="italian">Italian</option>
@@ -22,7 +22,7 @@
       </div>
       <div class="actions">
           <button v-on:click.prevent="resetForm" type="reset">reset</button>
-          <button>Save</button>
+          <button v-on:click="savePreferences">Save</button>
       </div>
   </form>
 </template>
@@ -31,34 +31,39 @@
 import yelpService from "../services/YelpService"
 export default {
     name: "add-preferences",
+    props: ["userId"],
     data() {
         return {
             newPreferences: {
-                name: "",
                 preferencesID: 0,
-                userID: 0,
-                zipCode: "",
-                category: ""
+                userId: this.userId,
+                name: "",
+                homeZip: "",
+                preference: ""
             }
-            
-            
-            
         };
-
     },
     methods: {
         savePreferences() {
-          const newUserPref = {
-            category: this.newPreferences.category,
-            zipCode: this.newPreferences.zipCode
-          }
-          yelpService.postSearchResults(newUserPref)
-          .then(this.$router.push("/"))
-        const userID = this.$route.params.userID;
-        this.newPreferences.userID = userID;
-      
-        //this.$store.commit("EDIT_PREFERENCES", this.newPreferences);
+          // const newUserPref = {
+          //   category: this.newPreferences.category,
+          //   zipCode: this.newPreferences.zipCode
+          // }
+          // const userID = this.$route.params.userID;
+          // this.newPreferences.userID = userID;
+          yelpService.addPreferences(this.newPreferences).then(response => {
+            if (response.status === 201) {
+              this.$router.push('/');
+            }
+          })
+          .catch(error => {
+            this.handleErrorResponse(error, "adding");
+          });
         },
+        
+      
+        // //this.$store.commit("EDIT_PREFERENCES", this.newPreferences);
+        // },
         resetForm() {
         this.newPreferences = {};
         }

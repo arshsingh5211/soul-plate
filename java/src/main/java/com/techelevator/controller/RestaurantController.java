@@ -34,7 +34,7 @@ public class RestaurantController {
 
     @RequestMapping(path = "/preferences", method = RequestMethod.POST)
     public void editUserPreferences(@RequestBody UserPreferences userPreference) {
-        profilePreferences.setProfilePreferences(userPreference.getUserId(), userPreference.getHomeZip(), userPreference.getPreference());
+        profilePreferences.setProfilePreferences(userPreference.getUserId(), userPreference.getName(), userPreference.getHomeZip(), userPreference.getPreference());
     }
 
 

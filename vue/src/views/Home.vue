@@ -3,16 +3,16 @@
     <!-- <h1>Home</h1> -->
     <restaurant-search></restaurant-search>
     <!-- <p>You must be authenticated to see this</p> -->
-    <restaurant-card></restaurant-card>
+    <!-- <restaurant-card></restaurant-card> -->
   </div>
 </template>
 
 <script>
-import RestaurantCard from '../components/RestaurantCard.vue';
+// import RestaurantCard from '../components/RestaurantCard.vue';
 import RestaurantSearch from '../components/RestaurantSearch.vue';
 import YelpService from '../services/YelpService';
 export default {
-  components: { RestaurantSearch, RestaurantCard},
+  components: { RestaurantSearch},
   name: "home",
   methods: {
     getRestaurants() {

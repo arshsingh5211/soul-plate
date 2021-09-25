@@ -46,7 +46,8 @@ CREATE TABLE restaurant_categories (
 CREATE SEQUENCE preferences_serial;
 CREATE TABLE user_preferences (
         preferences_id int NOT NULL DEFAULT nextval('preferences_serial'),
-        user_id int, 
+        user_id int,
+        name varchar, 
         home_zip int,
         preference varchar,
         category_id int,

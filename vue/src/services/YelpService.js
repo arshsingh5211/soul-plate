@@ -7,6 +7,10 @@ export default {
     },
 
     postSearchResults(newPreferences){
-        return axios.post('/pre', newPreferences)
+        return axios.post('/preferences', newPreferences)
+    },
+
+    addPreferences(newPreferences) {
+        return axios.post('/preferences', newPreferences)
     }
 }

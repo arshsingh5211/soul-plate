@@ -56,7 +56,7 @@ const router = new Router({
       }
     },
     {
-      path: '/users/:id/edit-preferences',
+      path: '/preferences',
       name: 'edit-preferences',
       component: EditPreferences,
       meta: {
