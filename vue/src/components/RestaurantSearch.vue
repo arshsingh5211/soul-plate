@@ -16,7 +16,16 @@
                   </tr>
               </tbody>
         </table>
-    <div class = "search-bar">
+
+        <a
+      id="show-form-button"
+      href="#"
+      v-on:click.prevent="showForm = true"
+      v-if="showForm === false"
+      >Change Preferences</a
+    >
+    <form v-if="showForm === true">
+    <div class = "search-bar" >
         <h1 class="search-bar-header"> What are you in the mood for? </h1>
       <input v-model="preference" type="text" name="test" id="" placeholder="ex: Pizza"/> 
       <br>
@@ -24,6 +33,7 @@
       <br>
       <button class="search-button" v-on:click="startSearch" >Search</button>
     </div>
+    </form>
   </div>
 </template>
 
@@ -35,7 +45,8 @@ export default {
     return{
         restaurants: [],
         preference: "",
-        location: ""
+        location: "",
+        showForm: false
     }},
     methods: {
         startSearch() {
@@ -45,6 +56,7 @@ export default {
                 response => this.restaurants = response.data
 
             )
+            this.showForm = false;
         }
     }
 
@@ -175,6 +187,15 @@ input {
     padding: 15px;
     box-sizing: border-box;
     font-size: 14px;
+}
+
+#show-form-button {
+    background: rgb(243, 231, 226);
+    align-items: center;
+    color: black;
+    text-align: center;
+    box-sizing: border-box;
+    font-size: 20px;
 }
 
 
