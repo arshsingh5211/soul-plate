@@ -1,20 +1,11 @@
 package com.techelevator.dao;
 
-import com.techelevator.model.Restaurants;
-import com.techelevator.services.YelpService;
-
-import java.util.List;
+import com.techelevator.model.Restaurant;
 
 public interface RestaurantsDao {
 
-    //public String getDescriptionByRestaurantId(int restaurant_id);
-    public String getPhoneNumberByRestaurantId(int restaurant_id);
-    public String getAddressByRestaurantId( int restaurant_id);
-    public String getStateByRestaurantId(int restaurant_id);
-    public String getCityByRestaurantId(int restaurant_id);
-    public String getRestaurantNameByRestaurantId(String restaurant_id);
-    public String getZipcodeByRestaurantId(String restaurant_id);
-    public String getRatingByRestaurantId(int restaurant_id);
+    public Restaurant getRestaurantByRestaurantId(int restaurantId);
+    public void saveLikedRestaurant (String restaurantName, String yelpId);
 
 
     

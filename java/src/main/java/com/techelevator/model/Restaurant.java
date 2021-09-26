@@ -1,52 +1,34 @@
 package com.techelevator.model;
 
-import java.util.List;
-
-public class Restaurants {
+public class Restaurant {
     private String restaurantName;
-    private String phoneNumber;
     private String address;
     private String city;
     private String state;
     private String zipCode;
-    private String  rating;
-    private List<String> transactions;
-    private String price;
+    private String rating;
     private String imgUrl;
-    private String category;
-    private String weeklyHours;
     private String yelpId;
 
-    public Restaurants(String restaurantName, String phoneNumber, String address, String city, String state, String zipCode,
-                       String rating, List<String> transactions, String price, String imgUrl, String category,
-                       String yelpId) {
+    public Restaurant(String restaurantName, String address, String city, String state, String zipCode,
+                      String rating, String imgUrl, String yelpId) {
         this.restaurantName = restaurantName;
-        this.phoneNumber = phoneNumber;
         this.address = address;
         this.city = city;
         this.state = state;
         this.zipCode = zipCode;
         this.rating = rating;
-        this.transactions = transactions;
-        this.price = price;
         this.imgUrl = imgUrl;
-        this.category = category;
         this.yelpId = yelpId;
     }
 
-    public Restaurants(String restaurantName, String yelpId) {
+    public Restaurant(String restaurantName, String yelpId) {
         this.restaurantName = restaurantName;
         this.yelpId = yelpId;
     }
 
+    public Restaurant(){
 
-
-    public void setTransactions(List<String> transactions) {
-        this.transactions = transactions;
-    }
-
-    public List<String> getTransactions() {
-        return transactions;
     }
 
     public String getRating() {
@@ -61,6 +43,10 @@ public class Restaurants {
         return yelpId;
     }
 
+    public void setYelpId(String yelpId) {
+        this.yelpId = yelpId;
+    }
+
     public void setRestaurantId(int restaurantId) {
         this.yelpId = yelpId;
     }
@@ -71,14 +57,6 @@ public class Restaurants {
 
     public void setRestaurantName(String restaurantName) {
         this.restaurantName = restaurantName;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 
     public String getAddress() {
@@ -105,36 +83,12 @@ public class Restaurants {
         this.state = state;
     }
 
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
     public String getImgUrl() {
         return imgUrl;
     }
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public String getWeeklyHours() {
-        return weeklyHours;
-    }
-
-    public void setWeeklyHours(String weeklyHours) {
-        this.weeklyHours = weeklyHours;
     }
 
     public String getZipCode() {
@@ -145,9 +99,7 @@ public class Restaurants {
         this.zipCode = zipCode;
     }
 
-    public Restaurants(){
 
-    }
 
 
 }

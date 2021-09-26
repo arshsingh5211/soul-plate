@@ -3,7 +3,8 @@ package com.techelevator.services;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.techelevator.model.Restaurants;
+import com.techelevator.model.RestaurantDetails;
+import com.techelevator.model.Restaurant;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -22,16 +23,12 @@ public class YelpService {
     private String detailsURL = "https://api.yelp.com/v3/businesses/";
     private String key = "tQwuuShqwMO3BEamfFGjLbnQPezsb1pzpP-4bKMgVTNs-2UbgL504SZzaaq-IsbfuGa2mqblP7JRmDXMtB5djryRSwCXhem46zgyEtQmBwLiAqROiEcscRycmBJGYXYx";
 
-    public List<Restaurants> getSearchResults(String foodPref, String location) {
+    public List<Restaurant> getSearchResults(String foodPref, String location) {
         String url = apiURL + "&term=" + foodPref + "&location=" + location;
-
-
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(key);
         HttpEntity<String> httpEntity = new HttpEntity<>("", headers);
-
         RestTemplate restTemplate = new RestTemplate();
-
         ObjectMapper objectMapper = new ObjectMapper();
         ResponseEntity<String> responseEntity = restTemplate.exchange(url,
                 HttpMethod.GET,
@@ -39,44 +36,42 @@ public class YelpService {
                 String.class);
 
         JsonNode jsonNode;
-        List<Restaurants> restaurantsList = new ArrayList<>();
+        List<Restaurant> restaurantList = new ArrayList<>();
         try {
             jsonNode = objectMapper.readTree(responseEntity.getBody());
             JsonNode root = jsonNode.path("businesses");
             for (int i = 0; i < root.size(); i++) {
                 String name = root.path(i).path("name").asText();
                 String rating = root.path(i).path("rating").asText();
-                String phoneNumber = root.path(i).path("display_phone").asText();
                 String address = root.path(i).path("location").path("address1").asText();
                 String state = root.path(i).path("location").path("state").asText();
                 String zipCode = root.path(i).path("location").path("zip_code").asText();
-                String price = root.path(i).path("price").asText();
                 String imgUrl = root.path(i).path("image_url").asText();
                 String city = root.path(i).path("location").path("city").asText();
-                String category = root.path(i).path("categories").path("title").asText();
                 String yelpId = root.path(i).path("id").asText();
 
-                List<String> transactions = new ArrayList<>();
-
-                for(int j = 0; j < root.path(i).path("transactions").size(); j++) {
-                 transactions.add(root.path(i).path("transactions").path(j).asText());   ; // you can add this to a list?
-                }
-
-                Restaurants restaurants = new Restaurants(name, phoneNumber, address, city, state, zipCode, rating, transactions, price, imgUrl, category, yelpId);
-                restaurantsList.add(restaurants);
+                Restaurant restaurant = new Restaurant(name, address, city, state, zipCode, rating, imgUrl, yelpId);
+                restaurantList.add(restaurant);
             }
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        return restaurantsList;
+        return restaurantList;
     }
 
-    public Restaurants getRandomRestaurant(List<Restaurants> restaurantsList) {
+    public Restaurant getRandomRestaurant(List<Restaurant> restaurantList) {
         Random random = new Random();
-        return restaurantsList.get(random.nextInt(restaurantsList.size()));
+        return restaurantList.get(random.nextInt(restaurantList.size()));
     }
 
-    public Restaurants getRestaurantDetails(String id) {
+    public RestaurantDetails getRestaurantDetails(String id) {
+        /*
+        I want to add the three pictures yelp gives us for each business here, categories,
+        actual hours instead of an openNow? boolean, and possibly display_address as well,
+        but hard to figure out how to get those
+        */
+
+
         String url = detailsURL + id;
 
         HttpHeaders headers = new HttpHeaders();
@@ -91,10 +86,10 @@ public class YelpService {
                 String.class);
 
         JsonNode jsonNode;
-        Restaurants restaurant = new Restaurants();
+        RestaurantDetails restaurantDetails = new RestaurantDetails();
         try {
             jsonNode = objectMapper.readTree(responseEntity.getBody());
-            String name = jsonNode.path("name").asText();
+            String restaurantName = jsonNode.path("name").asText();
             String phoneNumber = jsonNode.path("display_phone").asText();
             String address = jsonNode.path("location").path("address1").asText();
             String city = jsonNode.path("location").path("city").asText();
@@ -113,31 +108,15 @@ public class YelpService {
             String category = jsonNode.path("categories").path("title").asText();
             //weekly hours
             //String address = jsonNode.path("location").path("display_address").asText();
-            //String weeklyHours = jsonNode.path("hours").path("open").asText();
-            String yelpId = id;
+            boolean isOpenNow = jsonNode.path("hours").path("is_open_now").asBoolean();
+            String yelpId = jsonNode.path("id").asText();
 
-
-
-            //  this.restaurantName = restaurantName;
-//        this.phoneNumber = phoneNumber;
-//        this.address = address;
-//        this.city = city;
-//        this.state = state;
-//        this.zipCode = zipCode;
-//        this.rating = rating;
-//        this.transactions = transactions;
-//        this.price = price;
-//        this.imgUrl = imgUrl;
-//        this.category = category;
-//        this.weeklyHours = weeklyHours;
-//        this.restaurantId = restaurantId;
-
-            //TODO: null on transaction
-            restaurant = new Restaurants(name, id);
+            restaurantDetails = new RestaurantDetails(restaurantName, phoneNumber, address, city, state, zipCode, rating,
+                                transactions, price, imgUrl, category, isOpenNow, yelpId);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        return  restaurant;
+        return restaurantDetails;
     }
 
 
