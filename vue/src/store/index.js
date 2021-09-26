@@ -22,18 +22,21 @@ export default new Vuex.Store({
     user: currentUser || {},
     userPreferences: [
       {
-        foodPref: "",
+        category: "mexican",
+        zipCode: "90210"
+      },
+      {
+        category: "",
         zipCode: ""
       },
       {
-        foodPref: "",
-        zipCode: ""
-      },
-      {
-        foodPref: "",
+        category: "",
         zipCode: ""
 
       }
+    ],
+    likedRestaurants: [
+
     ]
 
     
@@ -58,6 +61,9 @@ export default new Vuex.Store({
     },
     ADD_USER_PREF(state, newUserPref) {
       state.userPreferences.push(newUserPref);
+    },
+    ADD_LIKED_RESTAURANT(state, restaurant) {
+      state.likedRestaurants.push(restaurant)
     }
   }
 })

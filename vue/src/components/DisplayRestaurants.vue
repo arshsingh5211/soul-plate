@@ -1,6 +1,7 @@
 <template>
   <div id="main">
-      <div class="RestaurantInfo">
+      <div class="restaurant-container">
+          <restaurant-card v-bind:restaurant="restaurant" v-for="restaurant in restaurants" v-bind:key="restaurant.yelpId"/>
           <!-- <div class="restaurants" v-for="restaurant in restaurants" :key="restaurant.id">
               Restaurant Name: {{restaurant.name}}
               <br />
@@ -21,15 +22,23 @@
 </template>
 
 <script>
+import RestaurantCard from "../components/RestaurantCard"
 import yelpService from "../services/YelpService"
 export default {
+    name: 'restaurants',
+  components: { RestaurantCard },
     data() {
         return { restaurants: []};
     },
 
-    created() {
+    created() { //up to 3 yelp calls if 3 preferences set
+    //? for(this.$store.state.userPreferences.size???)
+    //let pref1 = this.$store.state.userpreferences[0]
+    //let pref2 = this.$store.state.userpreferences[1]
+    //let pref3 = this.$store.state.userpreferences[2]
+    
         yelpService
-        .getSearchResults(newPreferences)
+        .getSearchResults(this.$store.state.userPreferences[0])
         .then((response) => {
             this.restaurants = response.data;
         })

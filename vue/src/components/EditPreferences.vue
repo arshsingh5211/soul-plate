@@ -49,7 +49,7 @@ export default {
             foodPref: this.newPreferences.foodPref,
             zipCode: this.newPreferences.zipCode
           }
-          this.$store.commit('ADD_USER_PREF', this.newUserPref);
+          this.$store.commit('ADD_USER_PREF', newUserPref);
           
           // this.newPreferences.userID = userID;
           yelpService.addPreferences(this.newPreferences).then( //response => {

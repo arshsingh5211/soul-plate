@@ -1,14 +1,29 @@
 <template>
+<router-link v-bind:to="{name: 'restaurant-details', params: {id: restaurant.yelpId}}">
   <div class="card">
-    <h2 class="restaurant-name">{{ restaurant.name }}</h2>
-    <h3 class="restaurant-zip">{{ restaurant.zip }}</h3>
+
+      <img v-bind:src=restaurant.imgUrl width="200" />
+    <h2 class="restaurant-name">{{ restaurant.restaurantName }}</h2>
+    <h3 class="restaurant-zip">{{ restaurant.zipCode }}</h3>
+    <h4 class="restaurant-rating">{{restaurant.rating}}</h4>
+    <h5 class="restaurant-review">{{restaurant.review}}</h5>
+    <h6 class="restaurant-transactions">{{restaurant.transactions}}</h6>
+    <button v-on:click.prevent="addToLikedRestaurants(restaurant)">Like this Restaurant</button>
   </div>
+</router-link>
 </template>
 
 <script>
 export default {
     name: 'restaurant-card',
     props: ["restaurant"],
+    restaurant: Object,
+    methods: {
+        addToLikedRestaurants(restaurant) {
+            // let addedRestaurant = Object.assign(restaurant);
+            this.$store.commit('ADD_LIKED_RESTAURANT', restaurant)
+        }
+    }
 }
 </script>
 
