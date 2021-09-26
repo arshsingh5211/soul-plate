@@ -1,6 +1,6 @@
 package com.techelevator.controller;
 
-import com.techelevator.dao.RestaurantsDao;
+import com.techelevator.dao.RestaurantDao;
 import com.techelevator.dao.UserPreferencesDao;
 import com.techelevator.model.RestaurantDetails;
 import com.techelevator.model.UserPreferences;
@@ -20,7 +20,7 @@ public class RestaurantController {
     @Autowired
     UserPreferencesDao userPreferencesDao;
     @Autowired
-    RestaurantsDao restaurantsDao;
+    RestaurantDao restaurantDAO;
 
 
     @RequestMapping(path="/restaurants", method = RequestMethod.GET)
@@ -46,7 +46,7 @@ public class RestaurantController {
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/liked", method = RequestMethod.POST)
     public void addLikedRestaurant(@RequestBody Restaurant restaurant) {
-        restaurantsDao.saveLikedRestaurant(restaurant.getRestaurantName(), restaurant.getYelpId());
+        restaurantDAO.saveLikedRestaurant(restaurant.getRestaurantName(), restaurant.getYelpId());
     }
 
 

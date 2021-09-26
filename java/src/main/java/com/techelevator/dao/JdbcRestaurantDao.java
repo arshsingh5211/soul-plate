@@ -6,10 +6,10 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 @Component
-public class JdbcRestaurantsDao implements RestaurantsDao {
+public class JdbcRestaurantDao implements RestaurantDao {
     private JdbcTemplate jdbcTemplate;
 
-    public JdbcRestaurantsDao (JdbcTemplate jdbcTemplate){
+    public JdbcRestaurantDao(JdbcTemplate jdbcTemplate){
         this.jdbcTemplate = jdbcTemplate;
     }
 
@@ -24,6 +24,8 @@ public class JdbcRestaurantsDao implements RestaurantsDao {
         }
         return restaurant;
     }
+
+    // ^ when do we use this?
 
     @Override
     public void saveLikedRestaurant (String restaurantName, String yelpId) {
