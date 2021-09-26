@@ -7,7 +7,8 @@
     <h3 class="restaurant-zip">{{ restaurant.zipCode }}</h3>
     <h4 class="restaurant-rating">{{restaurant.rating}}</h4>
     <h5 class="restaurant-review">{{restaurant.review}}</h5>
-    <h6 class="restaurant-transactions">{{restaurant.transactions}}</h6>
+    <h4 class="restaurant-price">{{restaurant.price}}</h4>
+    <h7 class="restaurant-transactions">{{restaurant.transactions}}</h7>
     <button v-on:click.prevent="addToLikedRestaurants(restaurant)">Like this Restaurant</button>
   </div>
 </router-link>

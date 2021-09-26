@@ -54,7 +54,7 @@ export default {
           // this.newPreferences.userID = userID;
           yelpService.addPreferences(this.newPreferences).then( //response => {
             // if (response.status === 201) {
-              this.$router.push('/')
+              this.$router.push('/display-restaurants')
             // }
           )
           // }.catch(error => {

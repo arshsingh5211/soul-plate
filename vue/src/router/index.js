@@ -74,7 +74,7 @@ const router = new Router({
       }
     },
     {
-      path: '/display-favorites',
+      path: '/display-restaurants',
       name: 'favorites',
       component: DisplayRestaurants,
       meta: {
