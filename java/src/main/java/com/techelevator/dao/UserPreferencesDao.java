@@ -6,10 +6,11 @@ import java.util.List;
 
 public interface UserPreferencesDao {
 
-     public UserPreferences getPreferencesId(int preference_id);
+     public UserPreferences getUserPreferences(int preferenceId);
 
      public List<UserPreferences> getPreferencesByUserId(int userId);
 
-     public void setProfilePreferences(int userId, String name, int homeZip, String preference);
+     public UserPreferences createProfilePreferences(UserPreferences newPreferences);
+     public void updateProfilePreferences(UserPreferences userPreferences);
      public List<UserPreferences> getAllPreferences();
 }

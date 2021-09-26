@@ -20,16 +20,14 @@ public class JdbcUserPreferencesDao implements UserPreferencesDao {
     }
 
     @Override
-    public UserPreferences getPreferencesId(int preference_id) {
-
-        UserPreferences profile = new UserPreferences();
-        String sql = "SELECT preference_id FROM  user_preferences WHERE preference_id=?";
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, preference_id);
+    public UserPreferences getUserPreferences(int preferencesId) {
+        UserPreferences userPreferences = null;
+        String sql = "SELECT * FROM user_preferences WHERE preferences_id = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, preferencesId);
         if (results.next()) {
-            profile.setPreferencesId(results.getInt("preferences_id"));
+            userPreferences = mapRowToUserPreferences(results);
         }
-
-        return profile;
+        return userPreferences;
     }
 
     @Override
@@ -46,34 +44,47 @@ public class JdbcUserPreferencesDao implements UserPreferencesDao {
     }
 
     @Override
-    public void setProfilePreferences(int userId, String name, int homeZip, String preference) {
-        String sql = "INSERT INTO user_preferences (user_id, name, home_zip, preference) VALUES ( " +
-                     "(SELECT user_id FROM users WHERE user_id = ?), ?, ?, ?)";
-        jdbcTemplate.update(sql, userId, name, homeZip, preference);
+    public UserPreferences createProfilePreferences(UserPreferences newPreferences) {
+        String query = "INSERT INTO user_preferences (user_id, name, home_zip, preference) VALUES ( " +
+                     "(SELECT user_id FROM users WHERE user_id = ?), ?, ?, ?) RETURNING preferences_id;";
+        Integer newId = jdbcTemplate.queryForObject(query, Integer.class, newPreferences.getUserId(),
+                newPreferences.getName(), newPreferences.getHomeZip(), newPreferences.getPreference());
+        return getUserPreferences(newId);
     }
+
+    @Override
+    public void updateProfilePreferences(UserPreferences updatedPreferences) {
+        String query = "UPDATE user_preferences " +
+                       "SET user_id = ?, name = ?, preference = ?, home_zip = ?, category_id = ? " +
+                       "WHERE preferences_id = ?;";
+        jdbcTemplate.update(query, updatedPreferences.getUserId(), updatedPreferences.getName(),
+                updatedPreferences.getPreference(), updatedPreferences.getHomeZip(), updatedPreferences.getCategoryId(),
+                updatedPreferences.getPreferencesId());
+    }
+
 
     @Override
     public List<UserPreferences> getAllPreferences() {
         List<UserPreferences> allPreferences = new ArrayList<>();
         UserPreferences preferences = new UserPreferences();
-        String sql = "SELECT * FROM user_preference";
+        String sql = "SELECT * FROM user_preferences";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
         while (results.next()) {
             preferences= mapRowToUserPreferences(results);
             allPreferences.add(preferences);
-            
         }
         return allPreferences;
     }
     public UserPreferences mapRowToUserPreferences(SqlRowSet results) {
 
-        UserPreferences user = new UserPreferences();
-        user.setPreferencesId(results.getInt("preference_id"));
-        user.setPreference(results.getString("preference"));
-        user.setHomeZip(results.getInt("home_zip"));
-        user.setUserId(results.getInt("user_id"));
+        UserPreferences userPreferences = new UserPreferences();
+        userPreferences.setPreferencesId(results.getInt("preferences_id"));
+        userPreferences.setPreference(results.getString("preference"));
+        userPreferences.setHomeZip(results.getInt("home_zip"));
+        userPreferences.setUserId(results.getInt("user_id"));
+        userPreferences.setCategoryId(results.getInt("category_id"));
 
-        return user;
+        return userPreferences;
     }
 
 

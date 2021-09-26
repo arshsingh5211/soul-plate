@@ -33,10 +33,10 @@ public class RestaurantController {
         return yelpService.getRestaurantDetails(id);
     }
 
-    @RequestMapping(path = "/preferences", method = RequestMethod.POST)
+    /*@RequestMapping(path = "/preferences", method = RequestMethod.POST)
     public void editUserPreferences(@RequestBody UserPreferences userPreference) {
-        userPreferencesDao.setProfilePreferences(userPreference.getUserId(), userPreference.getName(), userPreference.getHomeZip(), userPreference.getPreference());
-    }
+        userPreferencesDao.createProfilePreferences(userPreference.getUserId(), userPreference.getName(), userPreference.getHomeZip(), userPreference.getPreference());
+    }*/
 
     @RequestMapping(path = "/restaurant", method = RequestMethod.GET)
     public Restaurant getRandomRestaurant(@RequestParam String foodPref, @RequestParam String location) {

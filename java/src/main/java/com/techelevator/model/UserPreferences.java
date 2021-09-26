@@ -6,7 +6,7 @@ public class UserPreferences {
     private int userId;
     private String name;
     private String preference;
-    private  int homeZip;
+    private int homeZip;
     private int categoryId;
 
     public int getPreferencesId() {
