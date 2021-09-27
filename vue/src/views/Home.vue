@@ -2,6 +2,8 @@
   <div class="home">
     <!-- <h1>Home</h1> -->
     <restaurant-search></restaurant-search>
+    <restaurant-card></restaurant-card>
+    <display-restaurants></display-restaurants>
     <!-- <p>You must be authenticated to see this</p> -->
     <!-- <restaurant-card></restaurant-card> -->
   </div>
@@ -11,8 +13,11 @@
 // import RestaurantCard from '../components/RestaurantCard.vue';
 import RestaurantSearch from '../components/RestaurantSearch.vue';
 import YelpService from '../services/YelpService';
+
+import RestaurantCard from '../components/RestaurantCard.vue';
+import DisplayRestaurants from '../components/DisplayRestaurants.vue';
 export default {
-  components: { RestaurantSearch},
+  components: { RestaurantSearch, RestaurantCard, DisplayRestaurants},
   name: "home",
   methods: {
     getRestaurants() {
