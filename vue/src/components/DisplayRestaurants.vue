@@ -22,10 +22,10 @@
 </template>
 
 <script>
-import RestaurantCard from "../components/RestaurantCard"
-import yelpService from "../services/YelpService"
+import RestaurantCard from "./RestaurantCard.vue";
+import yelpService from "../services/YelpService";
 export default {
-    name: 'restaurants',
+    name: 'display-restaurants',
   components: { RestaurantCard },
     data() {
         return { restaurants: []};
@@ -53,5 +53,18 @@ export default {
 </script>
 
 <style>
-
+.restaurant-container {
+  align-items: center;
+  border-radius: 50%;
+  display: flex;
+  height: 300px;
+  justify-content: center;
+  position: relative;
+  width: 300px;
+}
+restaurant-card {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+}
 </style>

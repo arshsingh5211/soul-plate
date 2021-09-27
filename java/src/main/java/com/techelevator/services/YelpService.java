@@ -143,14 +143,12 @@ public class YelpService {
         Review review = new Review();
         try {
             jsonNode = objectMapper.readTree(responseEntity.getBody());
-            String yelpId = jsonNode.path("id").asText();
-            String reviewUrl = jsonNode.path("url").asText();
-            String text = jsonNode.path("text").asText();
-            String rating = jsonNode.path("rating").path("city").asText();
-            String timeCreated = jsonNode.path("time_created").asText();
-            String reviewUser = "Test";
+            List<String> reviews = new ArrayList<>();
+            for(int j = 0; j < jsonNode.path("reviews").size(); j++) {
+                reviews.add(jsonNode.path("rating").path(j).asText());
+            }
 
-            review = new Review(yelpId, reviewUrl, text, rating, timeCreated, reviewUser);
+            review = new Review(reviews);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
