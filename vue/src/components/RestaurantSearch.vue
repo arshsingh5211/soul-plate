@@ -1,6 +1,6 @@
 <template>
   <div class="search-page">
-        <table class='table-container'>
+        <!-- <table class='table-container'>
             <thead class="table-headers">
                 <tr >
                     <th class="name-header">Restaurant Name  </th>
@@ -15,7 +15,7 @@
                       <td class="restaurant-rating">{{restaurant.rating}}</td>
                   </tr>
               </tbody>
-        </table>
+        </table> -->
 
         <a
       id="show-form-button"
@@ -27,9 +27,9 @@
     <form v-if="showForm === true">
     <div class = "search-bar" >
         <h1 class="search-bar-header"> What are you in the mood for? </h1>
-      <input v-model="preference" type="text" name="test" id="" placeholder="ex: Pizza"/> 
+      <input v-model="newPreferences.foodPref" type="text" name="test" id="" placeholder="ex: Pizza"/> 
       <br>
-      <input v-model="location" type="text" placeholder="Enter your zipcode"/>
+      <input v-model="newPreferences.homeZip" type="text" placeholder="Enter your zipcode"/>
       <br>
       <button class="search-button" v-on:click="startSearch" >Search</button>
     </div>
@@ -44,13 +44,15 @@ export default {
 
     return{
         restaurants: [],
-        preference: "",
-        location: "",
-        showForm: false
+        newPreferences: {
+                zipCode: "",
+                foodPref: ""
+            },
+        showForm: true
     }},
     methods: {
         startSearch() {
-            let info = {category: this.preference, zipCode: this.location}
+            let info = {category: this.foodPref, zipCode: this.zipCode}
             YelpService.getSearchResults(info)
             .then(
                 response => this.restaurants = response.data
