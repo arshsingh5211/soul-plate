@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.techelevator.model.RestaurantDetails;
 import com.techelevator.model.Restaurant;
+import com.techelevator.model.Review;
+import com.techelevator.model.ReviewUser;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -120,6 +122,39 @@ public class YelpService {
             e.printStackTrace();
         }
         return restaurantDetails;
+    }
+
+
+    public Review getReview(String id) {
+        String url = detailsURL + id + "/reviews";
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(key);
+        HttpEntity<String> httpEntity = new HttpEntity<>("", headers);
+
+        RestTemplate restTemplate = new RestTemplate();
+        ObjectMapper objectMapper = new ObjectMapper();
+        ResponseEntity<String> responseEntity = restTemplate.exchange(url,
+                HttpMethod.GET,
+                httpEntity,
+                String.class);
+
+        JsonNode jsonNode;
+        Review review = new Review();
+        try {
+            jsonNode = objectMapper.readTree(responseEntity.getBody());
+            String yelpId = jsonNode.path("id").asText();
+            String reviewUrl = jsonNode.path("url").asText();
+            String text = jsonNode.path("text").asText();
+            String rating = jsonNode.path("rating").path("city").asText();
+            String timeCreated = jsonNode.path("time_created").asText();
+            String reviewUser = "Test";
+
+            review = new Review(yelpId, reviewUrl, text, rating, timeCreated, reviewUser);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return review;
     }
 
 

@@ -16,14 +16,22 @@
 </template>
 
 <script>
+import YelpService from '../services/YelpService'
 export default {
     name: 'restaurant-card',
     props: ["restaurant"],
     restaurant: Object,
     methods: {
-        addToLikedRestaurants(restaurant) {
-            // let addedRestaurant = Object.assign(restaurant);
-            this.$store.commit('ADD_LIKED_RESTAURANT', restaurant)
+        addToLikedRestaurants() {
+            YelpService.addLikedRestaurant(this.restaurant).then(response => {
+                if (response.status === 201) {
+                    this.$router.push(`/`);
+                }
+            })
+            .catch(error => {
+                this.handleErrorResponse(error, "adding");
+            });
+            //this.$store.commit('ADD_LIKED_RESTAURANT', restaurant)
         }
     }
 }
