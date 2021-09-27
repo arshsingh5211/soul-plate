@@ -97,10 +97,13 @@ public class YelpService {
             String zipCode = jsonNode.path("location").path("zip_code").asText();
             String rating = jsonNode.path("rating").asText();
             List<String> transactions = new ArrayList<>();
-            JsonNode root = jsonNode.path("");
-
-            for(int j = 0; j < root.path("transactions").size(); j++) {
-                transactions.add(root.path("transactions").path(j).asText());   ; // you can add this to a list?
+            List<String> pictureURLs = new ArrayList<>();
+            List<String> reviews = new ArrayList<>();
+            for(int j = 0; j < jsonNode.path("photos").size(); j++) {
+                pictureURLs.add(jsonNode.path("photos").path(j).asText());
+            }
+            for(int j = 0; j < jsonNode.path("transactions").size(); j++) {
+                transactions.add(jsonNode.path("transactions").path(j).asText());
             }
 
             String price = jsonNode.path("price").asText();
@@ -112,7 +115,7 @@ public class YelpService {
             String yelpId = jsonNode.path("id").asText();
 
             restaurantDetails = new RestaurantDetails(restaurantName, phoneNumber, address, city, state, zipCode, rating,
-                                transactions, price, imgUrl, category, isOpenNow, yelpId);
+                                pictureURLs, transactions, price, imgUrl, category, isOpenNow, yelpId);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }

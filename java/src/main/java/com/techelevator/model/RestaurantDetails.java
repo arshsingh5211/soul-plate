@@ -10,6 +10,7 @@ public class RestaurantDetails {
     private String state;
     private String zipCode;
     private String  rating;
+    private List<String> photos;
     private List<String> transactions;
     private String price;
     private String imgUrl;
@@ -18,7 +19,7 @@ public class RestaurantDetails {
     private String yelpId;
 
     public RestaurantDetails(String restaurantName, String phoneNumber, String address, String city, String state,
-                             String zipCode, String rating, List<String> transactions, String price, String imgUrl,
+                             String zipCode, String rating, List<String> photos, List<String> transactions, String price, String imgUrl,
                              String category, boolean isOpenNow, String yelpId) {
         this.restaurantName = restaurantName;
         this.phoneNumber = phoneNumber;
@@ -27,6 +28,7 @@ public class RestaurantDetails {
         this.state = state;
         this.zipCode = zipCode;
         this.rating = rating;
+        this.photos = photos;
         this.transactions = transactions;
         this.price = price;
         this.imgUrl = imgUrl;
@@ -91,6 +93,14 @@ public class RestaurantDetails {
 
     public void setRating(String rating) {
         this.rating = rating;
+    }
+
+    public List<String> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<String> photos) {
+        this.photos = photos;
     }
 
     public List<String> getTransactions() {
