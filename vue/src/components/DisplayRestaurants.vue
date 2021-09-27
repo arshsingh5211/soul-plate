@@ -37,10 +37,15 @@ export default {
     //let pref2 = this.$store.state.userpreferences[1]
     //let pref3 = this.$store.state.userpreferences[2]
     
+    this.$store.searchedRestaurants = [] //set array to empty everytime you search?
         yelpService
         .getSearchResults(this.$store.state.userPreferences[0])
         .then((response) => {
             this.restaurants = response.data;
+            for(this.restaurant in this.restaurants){
+                this.$store.commit('ADD_SEARCHED_RESTAURANT', this.restaurant)
+            }
+            
         })
     }
 

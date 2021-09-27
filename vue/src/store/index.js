@@ -37,6 +37,9 @@ export default new Vuex.Store({
     ],
     likedRestaurants: [
 
+    ],
+    searchedRestaurants: [
+      
     ]
 
     
@@ -64,6 +67,9 @@ export default new Vuex.Store({
     },
     ADD_LIKED_RESTAURANT(state, restaurant) {
       state.likedRestaurants.push(restaurant)
+    },
+    ADD_SEARCHED_RESTAURANT(state, restaurant) {
+      state.searchedRestaurants.push(state, restaurant)
     }
   }
 })

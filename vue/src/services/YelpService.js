@@ -6,8 +6,12 @@ export default {
         return axios.get(`/restaurants?foodPref=${newPreferences.category}&location=${newPreferences.zipCode}`)
     },
 
-    postSearchResults(newPreferences){
-        return axios.post('/preferences', newPreferences)
+    getBusinessDetails(yelpId){
+        return axios.get(`/restaurants/${yelpId}`)
+    },
+
+    getBusinessReviews(yelpId) {
+        return axios.get(`/restaurants/${yelpId}/reviews`)
     },
 
     addPreferences(newPreferences) {
