@@ -59,12 +59,14 @@ export default {
   display: flex;
   height: 300px;
   justify-content: center;
-  position: relative;
+  position: absolute;
+  top: 90%;
+  left: 35%;
   width: 300px;
 }
 restaurant-card {
-  width: 300px;
-  height: 300px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
 }
 </style>

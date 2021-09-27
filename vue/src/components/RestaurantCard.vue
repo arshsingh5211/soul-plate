@@ -9,7 +9,7 @@
     <h5 class="restaurant-review">{{restaurant.review}}</h5>
     <h4 class="restaurant-price">{{restaurant.price}}</h4>
     <h7 class="restaurant-transactions">{{restaurant.transactions}}</h7>
-    <button v-on:click.prevent="addToLikedRestaurants(restaurant)">Like this Restaurant</button> <br>
+    <button class="like" v-on:click.prevent="addToLikedRestaurants(restaurant)">Like this Restaurant</button> <br>
     <router-link v-bind:to="{name: 'restaurant-details', params: {id: restaurant.yelpId}}" tag="button">View Details</router-link>
   </div>
   </div>
@@ -38,6 +38,8 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Montserrat&family=Roboto:wght@300&display=swap');
+
 .card-orientation {
     align-items: center;
     justify-content: center;
@@ -46,20 +48,33 @@ export default {
     
 }
 .card {
-    border: 2px solid black;
+    font-family: 'Cormorant Garamond', serif;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
     border-radius: 10px;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
     width: 250px;
     height: 550px;
     margin: 20px;
     background: gray;
     text-align: center;
     position: absolute;
-   
-    
 }
 
 .card.like {
-    background-color: lightgray;
+    text-transform: uppercase;
+  outline: 0;
+  background: #fc931af1;
+  width: 30%;
+  margin: 10px;
+  border: 0;
+  padding: 5px;
+  margin-bottom: 20px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
 }
 
 .card .restaurant-name {
