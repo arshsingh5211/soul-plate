@@ -22,7 +22,7 @@ export default new Vuex.Store({
     user: currentUser || {},
     userPreferences: [
       {
-        category: "pizza",
+        category: "Chinese",
         zipCode: "60614"
       },
       {

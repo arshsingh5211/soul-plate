@@ -31,9 +31,11 @@ export default {
 
 <style>
 .card-orientation {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    display: grid;
+    
 }
 .card {
     border: 2px solid black;
@@ -43,6 +45,8 @@ export default {
     margin: 20px;
     background: gray;
     text-align: center;
+    position: absolute;
+   
     
 }
 
