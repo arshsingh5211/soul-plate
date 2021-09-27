@@ -3,6 +3,7 @@ package com.techelevator.controller;
 import com.techelevator.dao.RestaurantDao;
 import com.techelevator.dao.UserPreferencesDao;
 import com.techelevator.model.RestaurantDetails;
+import com.techelevator.model.Review;
 import com.techelevator.model.UserPreferences;
 import com.techelevator.model.Restaurant;
 import com.techelevator.services.YelpService;
@@ -46,8 +47,12 @@ public class RestaurantController {
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/liked", method = RequestMethod.POST)
     public void addLikedRestaurant(@RequestBody Restaurant restaurant) {
-        restaurantDAO.saveLikedRestaurant(restaurant.getRestaurantName(), restaurant.getYelpId());
+        restaurantDAO.saveLikedRestaurant(restaurant);
     }
 
+    @RequestMapping(path = "/restaurants/{id}/reviews", method = RequestMethod.GET)
+    public Review getReview(@PathVariable String id) {
+        return yelpService.getReview(id);
+    }
 
 }

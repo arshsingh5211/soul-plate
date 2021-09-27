@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Restaurant;
+import com.techelevator.model.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
@@ -15,7 +16,7 @@ public class JdbcRestaurantDao implements RestaurantDao {
 
 
     @Override
-    public Restaurant getRestaurantByRestaurantId(int restaurantId) {
+    public Restaurant getRestaurant(int restaurantId) {
         Restaurant restaurant = new Restaurant();
         String sql ="SELECT restaurant_id, restaurant_name, yelp_id FROM restaurants WHERE restaurant_id = ?";
         SqlRowSet results =jdbcTemplate.queryForRowSet(sql,restaurantId);
@@ -25,13 +26,12 @@ public class JdbcRestaurantDao implements RestaurantDao {
         return restaurant;
     }
 
-    // ^ when do we use this?
-
     @Override
-    public void saveLikedRestaurant (String restaurantName, String yelpId) {
-        String query = "INSERT INTO restaurants (restaurant_name, yelp_id) " +
-                       "VALUES (?, ?);";
-        jdbcTemplate.update(query, restaurantName, yelpId);
+    public Restaurant saveLikedRestaurant (Restaurant restaurant) {
+        String query = "INSERT INTO restaurants (restaurant_name, yelp_id) VALUES (?, ?) RETURNING restaurant_id;";
+        Integer newId = jdbcTemplate.queryForObject(query, Integer.class, restaurant.getRestaurantName(),
+                restaurant.getYelpId());
+        return getRestaurant(newId);
     }
 
     private Restaurant mapRowToRestaurants(SqlRowSet results){

@@ -16,5 +16,9 @@ export default {
 
     addPreferences(newPreferences) {
         return axios.post('/preferences', newPreferences)
+    },
+
+    addLikedRestaurant(restaurant) {
+        return axios.post('/liked', restaurant)
     }
 }
