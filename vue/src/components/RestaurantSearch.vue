@@ -1,6 +1,6 @@
 <template>
   <div class="search-page">
-        <table class='table-container'>
+        <!-- <table class='table-container'>
             <thead class="table-headers">
                 <tr >
                     <th class="name-header">Restaurant Name  </th>
@@ -15,7 +15,7 @@
                       <td class="restaurant-rating">{{restaurant.rating}}</td>
                   </tr>
               </tbody>
-        </table>
+        </table> -->
 
         <a
       id="show-form-button"
