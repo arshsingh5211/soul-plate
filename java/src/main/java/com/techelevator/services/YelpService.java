@@ -125,7 +125,7 @@ public class YelpService {
     }
 
 
-    public Review getReview(String id) {
+    public List<ReviewUser> getReview(String id) {
         String url = detailsURL + id + "/reviews";
 
         HttpHeaders headers = new HttpHeaders();
@@ -140,19 +140,28 @@ public class YelpService {
                 String.class);
 
         JsonNode jsonNode;
-        Review review = new Review();
+        List<ReviewUser> reviewsList = new ArrayList<>();
+
         try {
             jsonNode = objectMapper.readTree(responseEntity.getBody());
-            List<String> reviews = new ArrayList<>();
-            for(int j = 0; j < jsonNode.path("reviews").size(); j++) {
-                reviews.add(jsonNode.path("rating").path(j).asText());
+            JsonNode root = jsonNode.path("reviews");
+
+            for(int j = 0; j < root.size(); j++) {
+                String rating = root.path(j).path("rating").asText();
+                String reviewId = root.path(j).path("id").asText();
+                String text = root.path(j).path("text").asText();
+                String reviewerName = root.path(j).path("user").path("name").asText();
+                String reviewerImg = root.path(j).path("user").path("image_url").asText();
+
+                ReviewUser reviewUser = new ReviewUser(reviewId, text, rating, reviewerImg, reviewerName);
+                reviewsList.add(reviewUser);
             }
 
-            review = new Review(reviews);
+
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        return review;
+        return reviewsList;
     }
 
 

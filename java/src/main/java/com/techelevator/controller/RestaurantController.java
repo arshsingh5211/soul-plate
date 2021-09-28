@@ -2,10 +2,7 @@ package com.techelevator.controller;
 
 import com.techelevator.dao.RestaurantDao;
 import com.techelevator.dao.UserPreferencesDao;
-import com.techelevator.model.RestaurantDetails;
-import com.techelevator.model.Review;
-import com.techelevator.model.UserPreferences;
-import com.techelevator.model.Restaurant;
+import com.techelevator.model.*;
 import com.techelevator.services.YelpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -51,7 +48,7 @@ public class RestaurantController {
     }
 
     @RequestMapping(path = "/restaurants/{id}/reviews", method = RequestMethod.GET)
-    public Review getReview(@PathVariable String id) {
+    public List<ReviewUser> getReview(@PathVariable String id) {
         return yelpService.getReview(id);
     }
 

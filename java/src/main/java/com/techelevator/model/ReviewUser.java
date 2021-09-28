@@ -1,25 +1,42 @@
 package com.techelevator.model;
 
 public class ReviewUser {
-    private String reviewUserId;
-    private String profileUrl;
+    private String reviewId;
+    private String reviewText;
+    private String rating;
     private String imageUrl;
     private String name;
 
-    public String getReviewUserId() {
-        return reviewUserId;
+    public ReviewUser(String reviewId, String reviewText, String rating, String imageUrl, String name) {
+        this.reviewId = reviewId;
+        this.reviewText = reviewText;
+        this.rating = rating;
+        this.imageUrl = imageUrl;
+        this.name = name;
     }
 
-    public void setReviewUserId(String reviewUserId) {
-        this.reviewUserId = reviewUserId;
+    public String getReviewId() {
+        return reviewId;
     }
 
-    public String getProfileUrl() {
-        return profileUrl;
+    public void setReviewId(String reviewId) {
+        this.reviewId = reviewId;
     }
 
-    public void setProfileUrl(String profileUrl) {
-        this.profileUrl = profileUrl;
+    public String getReviewText() {
+        return reviewText;
+    }
+
+    public void setReviewText(String reviewText) {
+        this.reviewText = reviewText;
+    }
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
     }
 
     public String getImageUrl() {
