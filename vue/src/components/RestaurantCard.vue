@@ -10,7 +10,9 @@
     <h4 class="restaurant-price">{{restaurant.price}}</h4>
     <h7 class="restaurant-transactions">{{restaurant.transactions}}</h7>
     <button class="like" v-on:click.prevent="addToLikedRestaurants(restaurant)">Like this Restaurant</button> <br>
+    <button class ="dislike" > dislike restaurant </button>
     <router-link v-bind:to="{name: 'restaurant-details', params: {id: restaurant.yelpId}}" tag="button">View Details</router-link>
+    
   </div>
   </div>
 </template>

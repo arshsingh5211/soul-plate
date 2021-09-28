@@ -35,17 +35,12 @@ export default new Vuex.Store({
 
       }
     ],
-    likedRestaurants: [
-
-    ],
-    searchedRestaurants: [
-      
-    ]
-
-    
+    likedRestaurants: [],
+    searchedRestaurants: []
   },
 
   mutations: {
+
     SET_AUTH_TOKEN(state, token) {
       state.token = token;
       localStorage.setItem('token', token);

@@ -1,5 +1,6 @@
 <template>
   <div class="search-page">
+     
         <!-- <table class='table-container'>
             <thead class="table-headers">
                 <tr >
@@ -29,9 +30,10 @@
         <h1 class="search-bar-header"> What are you in the mood for? </h1>
       <input v-model="newPreferences.foodPref" type="text" name="test" id="" placeholder="ex: Pizza"/> 
       <br>
-      <input v-model="newPreferences.homeZip" type="text" placeholder="Enter your zipcode"/>
+      <input v-model="newPreferences.zipCode" type="text" placeholder="Enter your zipcode"/>
       <br>
-      <button class="search-button" v-on:click="startSearch" >Search</button>
+      <button class="search-button" v-on:click.prevent="addUserPref" >Add Preference</button>
+      <button class="search-button" v-on:click.prevent="startSearch" >Search</button>
     </div>
     </form>
   </div>
@@ -51,6 +53,15 @@ export default {
         showForm: true
     }},
     methods: {
+        addUserPref(){
+
+    let preferenceObject ={category:this.newPreferences.foodPref, zipCode:this.newPreferences.zipCode};
+    console.log('debug');
+    console.log(preferenceObject)
+    
+    this.$store.commit("ADD_USER_PREF",preferenceObject)
+
+},
         startSearch() {
             let info = {category: this.foodPref, zipCode: this.zipCode}
             YelpService.getSearchResults(info)
@@ -59,8 +70,8 @@ export default {
 
             )
             this.showForm = false;
-        }
-    }
+
+}}
 
 }
 </script>
