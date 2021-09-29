@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin
 @RestController
 public class PreferencesController {
@@ -17,20 +19,20 @@ public class PreferencesController {
     @Autowired
     CategoriesDao categoriesDao;
 
-    @RequestMapping(path = "/preferences/{id}", method = RequestMethod.GET)
-    public UserPreferences getUserPreference (@PathVariable int id) {
-        return userPreferencesDao.getUserPreferences(id);
+    @RequestMapping(path = "{id}/preferences", method = RequestMethod.GET)
+    public List<UserPreferences> getUserPreference (@PathVariable int id) {
+        return userPreferencesDao.getPreferencesByUserId(id);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(path = "/preferences", method = RequestMethod.POST)
-    public void createUserPreferences(@RequestBody UserPreferences newPreferences) {
-        userPreferencesDao.createProfilePreferences(newPreferences);
+    @RequestMapping(path = "/{id}/preferences", method = RequestMethod.POST)
+    public void createUserPreferences(@RequestBody UserPreferences newPreferences, @PathVariable int id) {
+        userPreferencesDao.createProfilePreferences(newPreferences, id);
     }
 
-    @RequestMapping(path = "/preferences", method = RequestMethod.PUT)
-    public void updateUserPreferences(@RequestBody UserPreferences newPreferences) {
-        userPreferencesDao.updateProfilePreferences(newPreferences);
+    @RequestMapping(path = "/{id}/preferences", method = RequestMethod.PUT)
+    public void updateUserPreferences(@RequestBody UserPreferences newPreferences, @PathVariable int id) {
+        userPreferencesDao.updateProfilePreferences(newPreferences, id);
     }
 
     // didn't want to make a separate categories controller yet so for now just put it here
