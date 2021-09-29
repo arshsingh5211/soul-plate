@@ -5,7 +5,7 @@
         <a
           id="show-form-button"
           href="#"
-          v-on:click.prevent="showForm = true"
+          v-on:click.prevent="resetSearch"
           v-if="showForm === false"
           >Change Preferences</a
         >
@@ -98,6 +98,11 @@ export default {
     };
   },
   methods: {
+    resetSearch() {
+      this.restaurants = []
+      this.showForm = true
+
+    },
     startSearch() {
       // let info = {category: this.foodPref, zipCode: this.zipCode}
       yelpService
