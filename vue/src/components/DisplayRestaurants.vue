@@ -5,7 +5,7 @@
         <a
           id="show-form-button"
           href="#"
-          v-on:click.prevent="showForm = true"
+          v-on:click.prevent="resetSearch"
           v-if="showForm === false"
           >Change Preferences</a
         >
@@ -27,9 +27,9 @@
               placeholder="Enter your zipcode"
             />
             <br />
-            <button class="search-button" v-on:click.prevent="addUserPref">
+            <!-- <button class="search-button" v-on:click.prevent="addUserPref">
               Add Preference
-            </button>
+            </button> -->
             <button class="search-button" v-on:click.prevent="startSearch">
               Search
             </button>
@@ -41,7 +41,7 @@
 
       <div
         class="card"
-        v-for="restaurant in restaurants"
+        v-for="restaurant in restaurants.slice().reverse()"
         v-bind:key="restaurant.yelpId"
       >
         <img class="restaurant-img" v-bind:src="restaurant.imgUrl" />
@@ -98,15 +98,21 @@ export default {
     };
   },
   methods: {
+    resetSearch() {
+      this.restaurants = []
+      this.showForm = true
+
+    },
     startSearch() {
       // let info = {category: this.foodPref, zipCode: this.zipCode}
       yelpService
         .getSearchResults(this.newPreferences)
         .then((response) => (this.restaurants = response.data));
+        
       this.showForm = false;
     },
     removeRestaurant() {
-      this.restaurants.pop();
+      this.restaurants.shift();
     },
 
     addUserPref() {
@@ -120,6 +126,7 @@ export default {
       this.$store.commit("ADD_USER_PREF", preferenceObject);
     },
     addToLikedRestaurants(restaurant) {
+<<<<<<< HEAD
       // this.restaurants.pop();
       yelpService
         .addLikedRestaurant(restaurant)
@@ -132,6 +139,23 @@ export default {
         .catch((error) => {
           this.handleErrorResponse(error, "adding");
         });
+=======
+      this.restaurants.shift();
+      this.$store.commit('ADD_LIKED_RESTAURANT', restaurant)
+      console.log('liked Restaurants:' + this.$store.state.likedRestaurants[2])
+      // yelpService
+      //   .addLikedRestaurant(restaurant)
+      //   .then((response) => {
+          
+      //     if (response.status === 201) {
+      //       // this.$router.push(`/`);
+            
+      //     }
+      //   })
+      //   .catch((error) => {
+      //     this.handleErrorResponse(error, "adding");
+      //   });
+>>>>>>> e70e04659d2f04933828c6eae71975df8f1e96d9
     },
   },
     //     let preferenceObject ={category:this.newPreferences.foodPref, zipCode:this.newPreferences.zipCode};

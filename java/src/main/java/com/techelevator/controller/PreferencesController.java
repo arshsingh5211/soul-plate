@@ -9,7 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+<<<<<<< HEAD
 import java.security.Principal;
+=======
+import java.util.List;
+>>>>>>> e70e04659d2f04933828c6eae71975df8f1e96d9
 
 @CrossOrigin
 @RestController
@@ -23,21 +27,27 @@ public class PreferencesController {
     JdbcUserDao userDao;
 
 
-    @RequestMapping(path = "/preferences/{id}", method = RequestMethod.GET)
-    public UserPreferences getUserPreference (@PathVariable int id) {
-        return userPreferencesDao.getUserPreferences(id);
+    @RequestMapping(path = "{id}/preferences", method = RequestMethod.GET)
+    public List<UserPreferences> getUserPreference (@PathVariable int id) {
+        return userPreferencesDao.getPreferencesByUserId(id);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
+<<<<<<< HEAD
     @RequestMapping(path = "/preferences", method = RequestMethod.POST)
     public void createUserPreferences(@RequestBody UserPreferences newPreferences) {
 
         userPreferencesDao.createProfilePreferences(newPreferences);
+=======
+    @RequestMapping(path = "/{id}/preferences", method = RequestMethod.POST)
+    public void createUserPreferences(@RequestBody UserPreferences newPreferences, @PathVariable int id) {
+        userPreferencesDao.createProfilePreferences(newPreferences, id);
+>>>>>>> e70e04659d2f04933828c6eae71975df8f1e96d9
     }
 
-    @RequestMapping(path = "/preferences", method = RequestMethod.PUT)
-    public void updateUserPreferences(@RequestBody UserPreferences newPreferences) {
-        userPreferencesDao.updateProfilePreferences(newPreferences);
+    @RequestMapping(path = "/{id}/preferences", method = RequestMethod.PUT)
+    public void updateUserPreferences(@RequestBody UserPreferences newPreferences, @PathVariable int id) {
+        userPreferencesDao.updateProfilePreferences(newPreferences, id);
     }
 
     // didn't want to make a separate categories controller yet so for now just put it here

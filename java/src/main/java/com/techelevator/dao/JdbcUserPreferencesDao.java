@@ -41,16 +41,17 @@ public class JdbcUserPreferencesDao implements UserPreferencesDao {
     }
 
     @Override
-    public UserPreferences createProfilePreferences(UserPreferences newPreferences) {
-        String query = "INSERT INTO user_preferences (user_id, name, home_zip, preference) VALUES ( " +
-                     "(SELECT user_id FROM users WHERE user_id = ?), ?, ?, ?) RETURNING preferences_id;";
-        Integer newId = jdbcTemplate.queryForObject(query, Integer.class, newPreferences.getUserId(),
-                newPreferences.getName(), newPreferences.getHomeZip(), newPreferences.getPreference());
+    public UserPreferences createProfilePreferences(UserPreferences newPreferences, int userId) {
+        String query = "INSERT INTO user_preferences (user_id, name, home_zip, preference, category_id) VALUES ( " +
+                     "(SELECT user_id FROM users WHERE user_id = ?), ?, ?, ?, ?) RETURNING preferences_id;";
+        Integer newId = jdbcTemplate.queryForObject(query, Integer.class, userId,
+                newPreferences.getName(), newPreferences.getHomeZip(), newPreferences.getPreference(),
+                newPreferences.getCategoryId());
         return getUserPreferences(newId);
     }
 
     @Override
-    public void updateProfilePreferences(UserPreferences updatedPreferences) {
+    public void updateProfilePreferences(UserPreferences updatedPreferences, int userId) {
         String query = "UPDATE user_preferences " +
                        "SET user_id = ?, name = ?, preference = ?, home_zip = ?, category_id = ? " +
                        "WHERE preferences_id = ?;";
