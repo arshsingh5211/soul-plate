@@ -1,3 +1,4 @@
+
 <template>
   <div class="search-page">
 
@@ -20,6 +21,8 @@
     </div>
     </form>
   </div>
+
+  
 </template>
 
 <script>
@@ -30,21 +33,21 @@ export default {
     return{
         restaurants: [],
         newPreferences: {
-                zipCode: "",
-                foodPref: ""
+                foodPref: "pizza",
+                zipCode: "60614",
             },
         showForm: true
     }},
     methods: {
         addUserPref(){
 
-    let preferenceObject ={category:this.newPreferences.foodPref, zipCode:this.newPreferences.zipCode};
-    console.log('debug');
-    console.log(preferenceObject)
+        let preferenceObject ={category:this.newPreferences.foodPref, zipCode:this.newPreferences.zipCode};
+        console.log('debug');
+        console.log(preferenceObject)
     
-    this.$store.commit("ADD_USER_PREF",preferenceObject)
+        this.$store.commit('ADD_USER_PREF', preferenceObject)
 
-},
+        },
         startSearch() {
             let info = {category: this.foodPref, zipCode: this.zipCode}
             YelpService.getSearchResults(info)
@@ -53,6 +56,14 @@ export default {
 
             )
             this.showForm = false;
+
+    //    yelpService.getSearchResults(this.$store.state.userPreferences)
+    //   .then((response) => {
+    //     this.restaurants = response.data;
+    //     for (this.restaurant in this.restaurants) {
+    //       this.$store.commit("ADD_SEARCHED_RESTAURANT", this.restaurant);
+    //     }
+    //   });
 
 }}
 
