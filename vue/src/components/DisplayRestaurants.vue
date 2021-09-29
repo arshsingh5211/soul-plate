@@ -27,9 +27,9 @@
               placeholder="Enter your zipcode"
             />
             <br />
-            <button class="search-button" v-on:click.prevent="addUserPref">
+            <!-- <button class="search-button" v-on:click.prevent="addUserPref">
               Add Preference
-            </button>
+            </button> -->
             <button class="search-button" v-on:click.prevent="startSearch">
               Search
             </button>
@@ -41,7 +41,7 @@
 
       <div
         class="card"
-        v-for="restaurant in restaurants"
+        v-for="restaurant in restaurants.slice().reverse()"
         v-bind:key="restaurant.yelpId"
       >
         <img class="restaurant-img" v-bind:src="restaurant.imgUrl" />
@@ -108,10 +108,11 @@ export default {
       yelpService
         .getSearchResults(this.newPreferences)
         .then((response) => (this.restaurants = response.data));
+        
       this.showForm = false;
     },
     removeRestaurant() {
-      this.restaurants.pop();
+      this.restaurants.shift();
     },
 
     addUserPref() {
@@ -125,17 +126,21 @@ export default {
       this.$store.commit("ADD_USER_PREF", preferenceObject);
     },
     addToLikedRestaurants(restaurant) {
-      this.restaurants.pop();
-      yelpService
-        .addLikedRestaurant(restaurant)
-        .then((response) => {
-          if (response.status === 201) {
-            // this.$router.push(`/`);
-          }
-        })
-        .catch((error) => {
-          this.handleErrorResponse(error, "adding");
-        });
+      this.restaurants.shift();
+      this.$store.commit('ADD_LIKED_RESTAURANT', restaurant)
+      console.log('liked Restaurants:' + this.$store.state.likedRestaurants[2])
+      // yelpService
+      //   .addLikedRestaurant(restaurant)
+      //   .then((response) => {
+          
+      //     if (response.status === 201) {
+      //       // this.$router.push(`/`);
+            
+      //     }
+      //   })
+      //   .catch((error) => {
+      //     this.handleErrorResponse(error, "adding");
+      //   });
     },
   },
     //     let preferenceObject ={category:this.newPreferences.foodPref, zipCode:this.newPreferences.zipCode};
