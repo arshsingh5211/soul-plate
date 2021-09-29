@@ -43,7 +43,9 @@ public class JdbcRestaurantDao implements RestaurantDao {
 
     @Override
     public void saveLikedRestaurant (Restaurant restaurant, int userId) {
-        String query = "INSERT INTO restaurants (restaurant_name, yelp_id) VALUES (?, ?) RETURNING restaurant_id; ";
+        String query = "INSERT INTO restaurants (restaurant_name, yelp_id) " +
+                        "VALUES (?, ?) ON CONFLICT (yelp_id) DO NOTHING " +
+                        "RETURNING restaurant_id;";
         Integer restId = jdbcTemplate.queryForObject(query, Integer.class, restaurant.getRestaurantName(),
                 restaurant.getYelpId());
         String query2 = "INSERT INTO user_restaurants (user_id, restaurant_id) " +
