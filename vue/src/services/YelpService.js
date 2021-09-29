@@ -19,6 +19,7 @@ export default {
     },
 
     addLikedRestaurant(restaurant) {
+
         return axios.post('/liked', restaurant)
     }
 }

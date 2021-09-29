@@ -1,12 +1,15 @@
 package com.techelevator.controller;
 
 import com.techelevator.dao.CategoriesDao;
+import com.techelevator.dao.JdbcUserDao;
 import com.techelevator.dao.UserPreferencesDao;
 import com.techelevator.model.Categories;
 import com.techelevator.model.UserPreferences;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
 
 @CrossOrigin
 @RestController
@@ -16,6 +19,9 @@ public class PreferencesController {
     UserPreferencesDao userPreferencesDao;
     @Autowired
     CategoriesDao categoriesDao;
+    @Autowired
+    JdbcUserDao userDao;
+
 
     @RequestMapping(path = "/preferences/{id}", method = RequestMethod.GET)
     public UserPreferences getUserPreference (@PathVariable int id) {
@@ -25,6 +31,7 @@ public class PreferencesController {
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/preferences", method = RequestMethod.POST)
     public void createUserPreferences(@RequestBody UserPreferences newPreferences) {
+
         userPreferencesDao.createProfilePreferences(newPreferences);
     }
 

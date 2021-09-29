@@ -1,7 +1,6 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Restaurant;
-import com.techelevator.model.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
@@ -42,7 +41,12 @@ public class JdbcRestaurantDao implements RestaurantDao {
     }
 
     @Override
-    public Restaurant saveLikedRestaurant (Restaurant restaurant, int userId) {
+    public Restaurant saveLikedRestaurant(Restaurant restaurant, int userId) {
+
+        System.out.println("restaurant I'm trying to insert");
+        System.out.println(restaurant.getRestaurantName());
+
+
         String query = "BEGIN; " +
                             "INSERT INTO restaurants (restaurant_name, yelp_id) VALUES (?, ?) RETURNING restaurant_id; " +
                             "INSERT INTO user_restaurants (user_id, restaurant_id) " +

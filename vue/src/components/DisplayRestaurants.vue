@@ -120,11 +120,12 @@ export default {
       this.$store.commit("ADD_USER_PREF", preferenceObject);
     },
     addToLikedRestaurants(restaurant) {
-      this.restaurants.pop();
+      // this.restaurants.pop();
       yelpService
         .addLikedRestaurant(restaurant)
         .then((response) => {
           if (response.status === 201) {
+            console.log('server received');
             // this.$router.push(`/`);
           }
         })
