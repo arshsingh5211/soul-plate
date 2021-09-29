@@ -89,6 +89,8 @@ export default {
           this.restaurants.pop()
             yelpService.addLikedRestaurant(restaurant).then(response => {
                 if (response.status === 201) {
+                  this.$store.commit('ADD_LIKED_RESTSTAURANT', this.restaurant)
+                  alert("restaurant added!");
                     // this.$router.push(`/`);
                     
                 }
@@ -101,22 +103,7 @@ export default {
     },
     
 
-    addToLikedRestaurants() {
-      yelpService
-        .addLikedRestaurant(this.restaurant)
-        .then((response) => {
-          alert("restaurant added!");
-          if (response.status === 201) {
-            this.$store.commit('ADD_LIKED_RESTSTAURANT', this.restaurant)
-            
-            
-          }
-        })
-        .catch((error) => {
-          this.handleErrorResponse(error, "adding");
-        });
-      
-    },
+
 
 
   // created() {
