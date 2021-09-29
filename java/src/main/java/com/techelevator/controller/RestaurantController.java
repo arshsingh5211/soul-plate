@@ -42,9 +42,9 @@ public class RestaurantController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(path = "/liked", method = RequestMethod.POST)
-    public void addLikedRestaurant(@RequestBody Restaurant restaurant) {
-        restaurantDAO.saveLikedRestaurant(restaurant);
+    @RequestMapping(path = "/{id}/liked", method = RequestMethod.POST)
+    public void addLikedRestaurant(@RequestBody Restaurant restaurant, @PathVariable int id) {
+        restaurantDAO.saveLikedRestaurant(restaurant, id);
     }
 
     @RequestMapping(path = "/restaurants/{id}/reviews", method = RequestMethod.GET)

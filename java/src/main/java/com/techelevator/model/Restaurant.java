@@ -1,6 +1,7 @@
 package com.techelevator.model;
 
 public class Restaurant {
+    private int restaurantId;
     private String restaurantName;
     private String address;
     private String city;
@@ -22,13 +23,18 @@ public class Restaurant {
         this.yelpId = yelpId;
     }
 
-    public Restaurant(String restaurantName, String yelpId) {
+    public Restaurant(int restaurantId, String restaurantName, String yelpId) {
+        this.restaurantId = restaurantId;
         this.restaurantName = restaurantName;
         this.yelpId = yelpId;
     }
 
     public Restaurant(){
 
+    }
+
+    public int getRestaurantId() {
+        return restaurantId;
     }
 
     public String getRating() {

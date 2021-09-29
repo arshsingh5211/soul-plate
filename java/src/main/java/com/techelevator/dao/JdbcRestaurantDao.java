@@ -6,6 +6,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class JdbcRestaurantDao implements RestaurantDao {
     private JdbcTemplate jdbcTemplate;
@@ -27,10 +29,20 @@ public class JdbcRestaurantDao implements RestaurantDao {
     }
 
     @Override
-    public Restaurant saveLikedRestaurant (Restaurant restaurant) {
-        String query = "INSERT INTO restaurants (restaurant_name, yelp_id) VALUES (?, ?) RETURNING restaurant_id;";
-        Integer newId = jdbcTemplate.queryForObject(query, Integer.class, restaurant.getRestaurantName(),
-                restaurant.getYelpId());
+    public List<Restaurant> getLikedRestaurants() {
+        return null;
+    }
+
+    @Override
+    public Restaurant saveLikedRestaurant (Restaurant restaurant, int userId) {
+        String query = "BEGIN; " +
+                            "INSERT INTO restaurants (restaurant_name, yelp_id) VALUES (?, ?); " +
+                            "INSERT INTO user_restaurants (user_id, restaurant_id) " +
+                                "VALUES ((SELECT user_id FROM users WHERE user_id = ?), " +
+                                        "(SELECT restaurant_id FROM restaurants WHERE restaurant_id = ?)); " +
+                       "COMMIT;";
+        Integer newId = jdbcTemplate.queryForObject(query, Integer.class, userId, restaurant.getRestaurantId(),
+                restaurant.getRestaurantName(), restaurant.getYelpId());
         return getRestaurant(newId);
     }
 
