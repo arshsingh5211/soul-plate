@@ -103,8 +103,9 @@ h5 {
 }
 
 .photo-container {
-  display:inline-flexbox;
- 
+  display:flex;
+ flex-wrap: wrap;
+ flex-direction: row;
 }
 .review-photo {
   
