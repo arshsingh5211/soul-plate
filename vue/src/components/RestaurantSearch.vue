@@ -1,37 +1,22 @@
 <template>
   <div class="search-page">
-        <!-- <table class='table-container'>
-            <thead class="table-headers">
-                <tr >
-                    <th class="name-header">Restaurant Name  </th>
-                    <th class="number-header">Phone Number  </th>
-                    <th class="rating-header">Rating</th>
-                </tr>
-            </thead>
-              <tbody>
-                  <tr v-for="restaurant in restaurants" v-bind:key="restaurant.id">
-                      <td class="restaurant-name">{{restaurant.restaurantName}}</td>
-                      <td class="restaurant-phone"> {{restaurant.phoneNumber}}</td>
-                      <td class="restaurant-rating">{{restaurant.rating}}</td>
-                  </tr>
-              </tbody>
-        </table> -->
 
-        <a
+    <a
       id="show-form-button"
       href="#"
       v-on:click.prevent="showForm = true"
       v-if="showForm === false"
-      >Change Preferences</a
-    >
+      >Change Preferences</a>
+
     <form v-if="showForm === true">
     <div class = "search-bar" >
         <h1 class="search-bar-header"> What are you in the mood for? </h1>
       <input v-model="newPreferences.foodPref" type="text" name="test" id="" placeholder="ex: Pizza"/> 
       <br>
-      <input v-model="newPreferences.homeZip" type="text" placeholder="Enter your zipcode"/>
+      <input v-model="newPreferences.zipCode" type="text" placeholder="Enter your zipcode"/>
       <br>
-      <button class="search-button" v-on:click="startSearch" >Search</button>
+      <button class="search-button" v-on:click.prevent="addUserPref" >Add Preference</button>
+      <button class="search-button" v-on:click.prevent="startSearch" >Search</button>
     </div>
     </form>
   </div>
@@ -51,6 +36,15 @@ export default {
         showForm: true
     }},
     methods: {
+        addUserPref(){
+
+    let preferenceObject ={category:this.newPreferences.foodPref, zipCode:this.newPreferences.zipCode};
+    console.log('debug');
+    console.log(preferenceObject)
+    
+    this.$store.commit("ADD_USER_PREF",preferenceObject)
+
+},
         startSearch() {
             let info = {category: this.foodPref, zipCode: this.zipCode}
             YelpService.getSearchResults(info)
@@ -59,8 +53,8 @@ export default {
 
             )
             this.showForm = false;
-        }
-    }
+
+}}
 
 }
 </script>
@@ -97,66 +91,6 @@ export default {
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     line-height: 30px;
-    
-}
-
-
-.restaurant-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: bold;
-    text-transform: uppercase;
-    margin-left: auto;
-    margin-right: auto;
-    width: 45%;
-    height: auto;
-    color: #cf740cf1;
-    letter-spacing: 2px;
-    max-width: 100%;
-    min-width: 0px;
-    opacity: 1;
-    word-break: keep-all;
-    padding: 10px 0px 10px 0px;
-    line-height: 27.2px;
-    
-}
-
-
-
-.table-headers {
-    font-family: 'Cormorant Garamond', serif;
-    text-transform: uppercase; 
-    background: rgb(243, 231, 226);
-}
-
-.restaurant-phone {
-    font-family: 'Montserrat', serif;
-    color: #42403ff1;
-}
-.table-container th {
-    padding: 10px 45px;
-    
-}
-.table-container td {
-    padding: 10px 20px ;
-}
-
-.table-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    text-align: center;
-    justify-content: space-between;
-    align-items: center;
-    position: absolute;
-    top: 50%;
-    left: 25%;
-    right: 25%;
-    border: 1px solid black;
-    background: whitesmoke;
-    border-radius: 10px;
-    padding: 20px;
-    max-height: 40%;
-    overflow-y: scroll;
     
 }
 
