@@ -7,8 +7,9 @@ import Register from '../views/Register.vue'
 import store from '../store/index'
 import EditPreferences from '@/views/Preferences'
 import RestaurantSearch from '../components/RestaurantSearch.vue'
-import DisplayRestaurants from '../components/DisplayRestaurants.vue'
+// import DisplayRestaurants from '../components/DisplayRestaurants.vue'
 import RestaurantDetails from '../components/RestaurantDetails.vue'
+import UserFavorites from '../components/UserFavorites.vue'
 
 Vue.use(Router)
 
@@ -74,9 +75,9 @@ const router = new Router({
       }
     },
     {
-      path: '/display-restaurants',
+      path: '/favorites',
       name: 'favorites',
-      component: DisplayRestaurants,
+      component: UserFavorites,
       meta: {
         requiresAuth: true
       }
@@ -89,6 +90,7 @@ const router = new Router({
         requiresAuth: true
       }
     },
+   
   ]
 })
 

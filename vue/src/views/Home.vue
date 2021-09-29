@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <!-- <h1>Home</h1> -->
-    <restaurant-search></restaurant-search>
+    <restaurant-search></restaurant-search> 
     
     <display-restaurants></display-restaurants>
     <!-- <p>You must be authenticated to see this</p> -->
@@ -15,7 +15,7 @@ import RestaurantSearch from '../components/RestaurantSearch.vue';
 import YelpService from '../services/YelpService';
 import DisplayRestaurants from '../components/DisplayRestaurants.vue';
 export default {
-  components: { RestaurantSearch,  DisplayRestaurants},
+  components: {RestaurantSearch, DisplayRestaurants},
   name: "home",
   methods: {
     getRestaurants() {
