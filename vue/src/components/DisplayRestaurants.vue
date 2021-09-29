@@ -25,6 +25,7 @@
         </button>
       </div>
   </div>
+  </div>
 </template>
 
 <script>
@@ -81,7 +82,7 @@ export default {
         });
       //this.$store.commit('ADD_LIKED_RESTAURANT', restaurant)
     },
-  },
+
 
   created() {
     this.$store.searchedRestaurants = []; //set array to empty everytime you search?

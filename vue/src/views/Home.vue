@@ -1,11 +1,11 @@
 <template>
   <div class="home">
-    <!-- <h1>Home</h1> -->
+    <h1>Home</h1>
     <restaurant-search></restaurant-search> 
     
     <display-restaurants></display-restaurants>
     <!-- <p>You must be authenticated to see this</p> -->
-    <!-- <restaurant-card></restaurant-card> -->
+    <restaurant-card></restaurant-card>
   </div>
 </template>
 
@@ -15,11 +15,7 @@
 import YelpService from '../services/YelpService';
 import DisplayRestaurants from '../components/DisplayRestaurants.vue';
 export default {
-<<<<<<< HEAD
   components: {DisplayRestaurants},
-=======
-  components: {RestaurantSearch, DisplayRestaurants},
->>>>>>> 32bb183b6cdb233bcaddd127e3c557f8f07639f7
   name: "home",
   methods: {
     getRestaurants() {
