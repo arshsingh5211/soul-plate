@@ -33,43 +33,45 @@
         required
       />
       <button class="btn btn-lg btn-primary btn-block" type="submit">
-        Sign up
-      </button><br>
-      <router-link class="have-account" :to="{ name: 'login' }">Already have an account?</router-link>
+        Sign up</button
+      ><br />
+      <router-link class="have-account" :to="{ name: 'login' }"
+        >Already have an account?</router-link
+      >
     </form>
   </div>
 </template>
 
 <script>
-import authService from '../services/AuthService';
+import authService from "../services/AuthService";
 
 export default {
-  name: 'register',
+  name: "register",
   data() {
     return {
       user: {
-        username: '',
-        password: '',
-        confirmPassword: '',
-        role: 'user',
+        username: "",
+        password: "",
+        confirmPassword: "",
+        role: "user",
       },
       registrationErrors: false,
-      registrationErrorMsg: 'There were problems registering this user.',
+      registrationErrorMsg: "There were problems registering this user.",
     };
   },
   methods: {
     register() {
       if (this.user.password != this.user.confirmPassword) {
         this.registrationErrors = true;
-        this.registrationErrorMsg = 'Password & Confirm Password do not match.';
+        this.registrationErrorMsg = "Password & Confirm Password do not match.";
       } else {
         authService
           .register(this.user)
           .then((response) => {
             if (response.status == 201) {
               this.$router.push({
-                path: '/login',
-                query: { registration: 'success' },
+                path: "/login",
+                query: { registration: "success" },
               });
             }
           })
@@ -77,21 +79,21 @@ export default {
             const response = error.response;
             this.registrationErrors = true;
             if (response.status === 400) {
-              this.registrationErrorMsg = 'Bad Request: Validation Errors';
+              this.registrationErrorMsg = "Bad Request: Validation Errors";
             }
           });
       }
     },
     clearErrors() {
       this.registrationErrors = false;
-      this.registrationErrorMsg = 'There were problems registering this user.';
+      this.registrationErrorMsg = "There were problems registering this user.";
     },
   },
 };
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Montserrat&family=Roboto:wght@300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Montserrat&family=Roboto:wght@300&display=swap");
 
 body {
   width: 100%;
@@ -106,7 +108,7 @@ label {
 }
 
 .form-register h2 {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: "Cormorant Garamond", serif;
   display: block;
   text-transform: uppercase;
   margin-left: auto;
@@ -132,9 +134,9 @@ form {
   position: absolute;
   top: 40%;
   left: 50%;
-  font-family: 'Montserrat', serif;
+  font-family: "Montserrat", serif;
   font-size: 12px;
-  background:whitesmoke;
+  background: whitesmoke;
   max-width: 300px;
   padding: 10px 40px 20px 40px;
   text-align: center;
@@ -168,7 +170,7 @@ button {
   border: 0;
   padding: 15px;
   margin-bottom: 20px;
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 14px;
   -webkit-transition: all 0.3 ease;
   transition: all 0.3 ease;
@@ -180,5 +182,4 @@ button:hover {
 .have-account:hover {
   opacity: 0.8;
 }
-
 </style>

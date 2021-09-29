@@ -2,16 +2,16 @@
   <div id="login" class="text-center">
     <form class="form-signin" @submit.prevent="login">
       <h1 class="sign-in">Find your SoulPLATE!</h1>
-      <div
-        class="alert alert-danger"
-        role="alert"
-        v-if="invalidCredentials"
-      >Invalid username and password!</div>
+      <div class="alert alert-danger" role="alert" v-if="invalidCredentials">
+        Invalid username and password!
+      </div>
       <div
         class="alert alert-success"
         role="alert"
         v-if="this.$route.query.registration"
-      >Thank you for registering, please sign in.</div>
+      >
+        Thank you for registering, please sign in.
+      </div>
       <input
         type="text"
         id="username"
@@ -21,7 +21,7 @@
         required
         autofocus
       />
-      <br>
+      <br />
       <input
         type="password"
         id="password"
@@ -30,10 +30,12 @@
         v-model="user.password"
         required
       />
-      <br>
+      <br />
       <button class="submit" type="submit">Sign in</button>
-      <br>
-      <router-link class="need-account" :to="{ name: 'register' }">Need an account?</router-link>
+      <br />
+      <router-link class="need-account" :to="{ name: 'register' }"
+        >Need an account?</router-link
+      >
     </form>
   </div>
 </template>
@@ -48,36 +50,36 @@ export default {
     return {
       user: {
         username: "",
-        password: ""
+        password: "",
       },
-      invalidCredentials: false
+      invalidCredentials: false,
     };
   },
   methods: {
     login() {
       authService
         .login(this.user)
-        .then(response => {
+        .then((response) => {
           if (response.status == 200) {
             this.$store.commit("SET_AUTH_TOKEN", response.data.token);
             this.$store.commit("SET_USER", response.data.user);
             this.$router.push("/");
           }
         })
-        .catch(error => {
+        .catch((error) => {
           const response = error.response;
 
           if (response.status === 401) {
             this.invalidCredentials = true;
           }
         });
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Montserrat&family=Roboto:wght@300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Montserrat&family=Roboto:wght@300&display=swap");
 
 .login body {
   width: 100%;
@@ -88,9 +90,10 @@ export default {
 }
 
 h1.sign-in {
-  font-family: 'Montserrat', serif;
-  color: #cf740cf1;;
+  font-family: "Cormorant Garamond", serif;
+  color: #cf740cf1;
   text-align: center;
+  align-content: center;
 }
 label.sr-only {
   align-content: center;
@@ -100,12 +103,11 @@ label.sr-only {
   position: absolute;
   top: 40%;
   left: 50%;
-  font-family: 'Montserrat', serif;
+  font-family: "Montserrat", serif;
   font-size: 12px;
-  background:whitesmoke;
-  max-width: 300px;
+  background: whitesmoke;
+  width: 20%;
   padding: 10px 40px 20px 40px;
-  text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   border-radius: 10px;
   -ms-transform: translate(-50%, -50%);
@@ -113,7 +115,7 @@ label.sr-only {
 }
 
 .form-signin input {
-  font-family: "Roboto", sans-serif;
+  font-family: "Cormorant Garamond", serif;
   outline: 0;
   background: rgb(243, 231, 226);
   width: 100%;
@@ -124,7 +126,7 @@ label.sr-only {
   font-size: 14px;
 }
 
-.need-account{
+.need-account {
   float: center;
 }
 
@@ -136,7 +138,7 @@ label.sr-only {
   border: 0;
   padding: 15px;
   margin-bottom: 20px;
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 14px;
   -webkit-transition: all 0.3 ease;
   transition: all 0.3 ease;
@@ -148,7 +150,6 @@ label.sr-only {
 .need-account:hover {
   opacity: 0.8;
 }
-
 </style>
 <!-- #FFEDB4 -->
 <!-- ffd79c -->

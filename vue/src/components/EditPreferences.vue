@@ -1,79 +1,84 @@
 <template>
   <form class="pref-form" v-on:submit.prevent="savePreferences">
-      <h1>Edit Preferences</h1>
-      <h4>Tell us what your taste buds like! You can always change your preferences later.</h4>
-      <div class="form-element">
-          <label for="user">Your Name:</label>
-          <input id="user" type="text" v-model="newPreferences.name" />
-      </div>
-      <div class="form-element">
-          <label for="zip">Home Zip Code:</label>
-          <input id="zip" type="text" v-model="newPreferences.homeZip" />
-      </div>
-      <div class="form-element">
-          <label for="restaurant-preference">What cuisines do you like? Any nutritional barriers or allergies? </label><br>
-          <select id="preference" v-model="newPreferences.foodPref">
-            <option value="american">American</option>
-            <option value="mexican">Mexican</option>
-            <option value="italian">Italian</option>
-            <option value="indian">Indian</option>
-            <option value="chinese">Chinese</option>
-          </select>
-      </div>
-      <div class="actions">
-          <button v-on:click.prevent="resetForm" type="reset">reset</button>
-          <button v-on:click="savePreferences">Save</button>
-      </div>
+    <h1>Edit Preferences</h1>
+    <h4>
+      Tell us what your taste buds like! You can always change your preferences
+      later.
+    </h4>
+    <div class="form-element">
+      <label for="user">Your Name:</label>
+      <input id="user" type="text" v-model="newPreferences.name" />
+    </div>
+    <div class="form-element">
+      <label for="zip">Home Zip Code:</label>
+      <input id="zip" type="text" v-model="newPreferences.homeZip" />
+    </div>
+    <div class="form-element">
+      <label for="restaurant-preference"
+        >What cuisines do you like? Any nutritional barriers or allergies? </label
+      ><br />
+      <select id="preference" v-model="newPreferences.foodPref">
+        <option value="american">American</option>
+        <option value="mexican">Mexican</option>
+        <option value="italian">Italian</option>
+        <option value="indian">Indian</option>
+        <option value="chinese">Chinese</option>
+      </select>
+    </div>
+    <div class="actions">
+      <button v-on:click.prevent="resetForm" type="reset">reset</button>
+      <button v-on:click="savePreferences">Save</button>
+    </div>
   </form>
 </template>
 
 <script>
-import yelpService from "../services/YelpService"
+import yelpService from "../services/YelpService";
 export default {
-    name: "add-preferences",
-    // props: ["userId"],
-    data() {
-        return {
-            newPreferences: {
-                // preferencesID: 0,
-                // userId: 0,
-                // name: "",
-                zipCode: "",
-                foodPref: ""
-            }
-        };
+  name: "add-preferences",
+  // props: ["userId"],
+  data() {
+    return {
+      newPreferences: {
+        // preferencesID: 0,
+        // userId: 0,
+        // name: "",
+        zipCode: "",
+        foodPref: "",
+      },
+    };
+  },
+  methods: {
+    savePreferences() {
+      const newUserPref = {
+        foodPref: this.newPreferences.foodPref,
+        zipCode: this.newPreferences.zipCode,
+      };
+      this.$store.commit("ADD_USER_PREF", newUserPref);
+
+      // this.newPreferences.userID = userID;
+      yelpService.addPreferences(this.newPreferences).then(
+        //response => {
+        // if (response.status === 201) {
+        this.$router.push("/display-restaurants")
+        // }
+      );
+      // }.catch(error => {
+      //   this.handleErrorResponse(error, "adding");
+      // });
     },
-    methods: {
-        savePreferences() {
-          const newUserPref = {
-            foodPref: this.newPreferences.foodPref,
-            zipCode: this.newPreferences.zipCode
-          }
-          this.$store.commit('ADD_USER_PREF', newUserPref);
-          
-          // this.newPreferences.userID = userID;
-          yelpService.addPreferences(this.newPreferences).then( //response => {
-            // if (response.status === 201) {
-              this.$router.push('/display-restaurants')
-            // }
-          )
-          // }.catch(error => {
-          //   this.handleErrorResponse(error, "adding");
-          // });
-        },
-        
-      
-        // //this.$store.commit("EDIT_PREFERENCES", this.newPreferences);
-        // },
-        resetForm() {
-        this.newPreferences = {};
-        }
-    }
-}
+
+    // //this.$store.commit("EDIT_PREFERENCES", this.newPreferences);
+    // },
+    resetForm() {
+      this.newPreferences = {};
+    },
+  },
+};
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Montserrat&family=Roboto:wght@300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Montserrat&family=Roboto:wght@300&display=swap");
 
 .pref-form body {
   width: 100%;
@@ -91,8 +96,8 @@ export default {
   width: 250px;
 }
 
- .pref-form h1 {
-  font-family: 'Cormorant Garamond', serif;
+.pref-form h1 {
+  font-family: "Cormorant Garamond", serif;
   font-weight: bold;
   display: block;
   text-transform: uppercase;
@@ -111,7 +116,7 @@ export default {
 }
 
 .pref-form h4 {
-  font-family: 'Monteserrat', serif;
+  font-family: "Monteserrat", serif;
   font-weight: bold;
   display: block;
   margin-left: auto;
@@ -136,9 +141,9 @@ label.sr-only {
   position: absolute;
   top: 40%;
   left: 50%;
-  font-family: 'Montserrat', serif;
+  font-family: "Montserrat", serif;
   font-size: 12px;
-  background:whitesmoke;
+  background: whitesmoke;
   max-width: 300px;
   padding: 10px 40px 20px 40px;
   text-align: center;
@@ -171,7 +176,7 @@ label.sr-only {
   border: 0;
   padding: 5px;
   margin-bottom: 20px;
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 14px;
   -webkit-transition: all 0.3 ease;
   transition: all 0.3 ease;
