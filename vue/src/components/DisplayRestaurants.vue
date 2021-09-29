@@ -24,7 +24,6 @@
           Dislike this restaurant
         </button>
       </div>
-    </div>
   </div>
 </template>
 
@@ -32,22 +31,42 @@
 // import RestaurantCard from "./RestaurantCard.vue";
 import yelpService from "../services/YelpService";
 export default {
-  name: "display-restaurants",
-  data() {
-    return {
-      restaurants: [],
-      currentRestaurantIndex: 0,
-    };
-  },
-  computed: {
-    restaurant() {
-      return this.restaurants[0];
+    name: 'display-restaurants',
+  components: { },
+    data() {
+        return { restaurants: []};
     },
-  },
   methods: {
-    removeRestaurant() {
-      this.restaurants.shift();
+        addToLikedRestaurants(restaurant) {
+          this.restaurants.pop()
+            yelpService.addLikedRestaurant(restaurant).then(response => {
+                if (response.status === 201) {
+                    // this.$router.push(`/`);
+                    
+                }
+            })
+            .catch(error => {
+                this.handleErrorResponse(error, "adding");
+            });
+            // this.$store.commit('ADD_LIKED_RESTAURANT', this.restaurant)
+        }
     },
+    // created() { //up to 3 yelp calls if 3 preferences set
+    // //let pref1 = this.$store.state.userpreferences[0]
+    // //let pref2 = this.$store.state.userpreferences[1]
+    // //let pref3 = this.$store.state.userpreferences[2]
+    
+    // this.$store.searchedRestaurants = [] //set array to empty everytime you search?
+    //     yelpService
+    //     .getSearchResults(this.$store.state.userPreferences[0])
+    //     .then((response) => {
+    //         this.restaurants = response.data;
+    //         for(this.restaurant in this.restaurants){
+    //             this.$store.commit('ADD_SEARCHED_RESTAURANT', this.restaurant)
+    //         }
+            
+    //     })
+    // }
 
     addToLikedRestaurants() {
       yelpService
