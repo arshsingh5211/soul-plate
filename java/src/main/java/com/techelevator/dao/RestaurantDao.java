@@ -3,7 +3,10 @@ package com.techelevator.dao;
 import com.techelevator.model.Restaurant;
 import com.techelevator.model.User;
 
+import java.util.List;
+
 public interface RestaurantDao {
     public Restaurant getRestaurant(int restaurantId);
-    public Restaurant saveLikedRestaurant (Restaurant restaurant);
+    public List<Restaurant> getLikedRestaurants(int userId);
+    public Restaurant saveLikedRestaurant (Restaurant restaurant, int userId);
 }
