@@ -3,7 +3,7 @@ import axios from 'axios';
 export default {
 
     getSearchResults(newPreferences) {
-        return axios.get(`/restaurants?foodPref=${newPreferences.category}&location=${newPreferences.zipCode}`)
+        return axios.get(`/restaurants?foodPref=${newPreferences.foodPref}&location=${newPreferences.zipCode}`)
     },
 
     getBusinessDetails(yelpId){

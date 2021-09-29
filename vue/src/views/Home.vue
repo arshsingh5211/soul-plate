@@ -1,27 +1,25 @@
 <template>
   <div class="home">
     <h1>Home</h1>
-    <restaurant-search></restaurant-search> 
-    
-    <display-restaurants></display-restaurants>
-    <!-- <p>You must be authenticated to see this</p> -->
-    <restaurant-card></restaurant-card>
+    <display-restaurants/>
+    <!-- <restaurant-card/> -->
+    <!-- <restaurant-search></restaurant-search>  -->
   </div>
 </template>
 
 <script>
 // import RestaurantCard from '../components/RestaurantCard.vue';
 // import RestaurantSearch from '../components/RestaurantSearch.vue';
-import YelpService from '../services/YelpService';
-import DisplayRestaurants from '../components/DisplayRestaurants.vue';
+// import YelpService from '../services/YelpService';
+import DisplayRestaurants from '../components/DisplayRestaurants'
 export default {
   components: {DisplayRestaurants},
   name: "home",
-  methods: {
-    getRestaurants() {
-      YelpService.getSearchResults
-    }
-  }
+  // methods: {
+  //   getRestaurants() {
+  //     YelpService.getSearchResults
+  //   }
+  // }
 };
 </script>
 
