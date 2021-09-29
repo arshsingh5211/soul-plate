@@ -103,7 +103,7 @@ h5 {
 }
 
 .photo-container {
-  display:inline-flexbox
+  display:inline-flexbox;
  
 }
 .review-photo {
