@@ -20,21 +20,12 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
-    userPreferences: [
+    userPreferences: 
       {
-        category: "Chinese",
+        category: "pizza",
         zipCode: "60614"
       },
-      {
-        category: "",
-        zipCode: ""
-      },
-      {
-        category: "",
-        zipCode: ""
-
-      }
-    ],
+      
     likedRestaurants: [],
     searchedRestaurants: []
   },
@@ -57,8 +48,8 @@ export default new Vuex.Store({
       state.user = {};
       axios.defaults.headers.common = {};
     },
-    ADD_USER_PREF(state, newUserPref) {
-      state.userPreferences.push(newUserPref);
+    ADD_USER_PREF(state, preferenceObject) {
+      state.userPreferences.commit(preferenceObject);
     },
     ADD_LIKED_RESTAURANT(state, restaurant) {
       state.likedRestaurants.push(restaurant)

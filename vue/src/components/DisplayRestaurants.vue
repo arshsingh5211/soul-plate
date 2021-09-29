@@ -7,14 +7,15 @@
       <div>
         <img v-bind:src="restaurant.imgUrl" width="250" />
         <h2 class="restaurant-name">{{ restaurant.restaurantName }}</h2>
-        <h3 class="restaurant-zip">{{ restaurant.zipCode }}</h3>
-        <h4 class="restaurant-rating">{{ restaurant.rating }}</h4>
+        <h3 class="restaurant-address">{{ restaurant.address }} <br> {{restaurant.city}}, {{restaurant.state}} {{restaurant.zipCode}}</h3>
+        
+        <h4 class="restaurant-rating">Rating: {{ restaurant.rating }}</h4>
         <h5 class="restaurant-review">{{ restaurant.review }}</h5>
-        <h4 class="restaurant-price">{{ restaurant.price }}</h4>
+        <h6 class="restaurant-price">{{ restaurant.price }}</h6>
         <h7 class="restaurant-transactions">{{ restaurant.transactions }}</h7>
         <button
           class="like"
-          v-on:click.prevent="addToLikedRestaurants(restaurant)"
+          v-on:click.prevent="addToLikedRestaurants(restaurant); removeRestaurant();"
         >
           Like this Restaurant
         </button>
@@ -62,10 +63,11 @@ export default {
       //this.$store.commit('ADD_LIKED_RESTAURANT', restaurant)
     },
   },
+
   created() {
     this.$store.searchedRestaurants = []; //set array to empty everytime you search?
     yelpService
-      .getSearchResults(this.$store.state.userPreferences[0])
+      .getSearchResults(this.$store.state.userPreferences)
       .then((response) => {
         this.restaurants = response.data;
         for (this.restaurant in this.restaurants) {
@@ -79,18 +81,24 @@ export default {
 <style>
 .restaurant-container {
   align-items: center;
-  border-radius: 50%;
   display: flex;
   height: 300px;
   justify-content: center;
   position: absolute;
-  top: 90%;
+  top: 60%;
   left: 35%;
   width: 300px;
+  height: 450px;
+  background: white;
 }
 restaurant-card {
   width: 150px;
   height: 150px;
   border-radius: 50%;
 }
+h3 {
+  background: lightgrey;
+  width: 200px;
+}
+
 </style>
