@@ -23,8 +23,7 @@ public class Restaurant {
         this.yelpId = yelpId;
     }
 
-    public Restaurant(int restaurantId, String restaurantName, String yelpId) {
-        this.restaurantId = restaurantId;
+    public Restaurant(String restaurantName, String yelpId) {
         this.restaurantName = restaurantName;
         this.yelpId = yelpId;
     }

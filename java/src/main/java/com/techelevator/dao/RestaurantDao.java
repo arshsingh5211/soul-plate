@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface RestaurantDao {
     public Restaurant getRestaurant(int restaurantId);
-    public List<Restaurant> getLikedRestaurants();
+    public List<Restaurant> getLikedRestaurants(int userId);
     public Restaurant saveLikedRestaurant (Restaurant restaurant, int userId);
 }
