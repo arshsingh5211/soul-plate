@@ -11,11 +11,11 @@
 
 <script>
 // import RestaurantCard from '../components/RestaurantCard.vue';
-import RestaurantSearch from '../components/RestaurantSearch.vue';
+// import RestaurantSearch from '../components/RestaurantSearch.vue';
 import YelpService from '../services/YelpService';
 import DisplayRestaurants from '../components/DisplayRestaurants.vue';
 export default {
-  components: { RestaurantSearch,  DisplayRestaurants},
+  components: {DisplayRestaurants},
   name: "home",
   methods: {
     getRestaurants() {
