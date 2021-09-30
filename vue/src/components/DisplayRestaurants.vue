@@ -51,8 +51,8 @@
           {{ restaurant.city }}, {{ restaurant.state }}
           {{ restaurant.zipCode }}
         </h3>
-        <h4 class="restaurant-rating">Rating: {{restaurant.rating}}</h4>
-        <star-rating/>
+        <div><h4 class="restaurant-rating">Rating: {{restaurant.rating}}</h4>
+        <star-rating class="star-review"/> </div>
         <h5 class="restaurant-review">{{ restaurant.review }}</h5>
         <h4 class="restaurant-price">{{ restaurant.price }}</h4>
         <h7 class="restaurant-transactions">{{ restaurant.transactions }}</h7>
@@ -84,7 +84,7 @@
 <script>
 // import restaurantCard from "../components/RestaurantCard"
 import yelpService from "../services/YelpService";
-import starRating from "../components/StarRating";
+import starRating from './StarRating.vue';
 
 export default {
   name: "display-restaurants",
@@ -339,5 +339,8 @@ h3 {
 }
 button {
   vertical-align: baseline;
+}
+.star-review{
+  
 }
 </style>
