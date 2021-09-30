@@ -51,7 +51,8 @@
           {{ restaurant.city }}, {{ restaurant.state }}
           {{ restaurant.zipCode }}
         </h3>
-        <h4 class="restaurant-rating">Rating: {{ restaurant.rating }}</h4>
+        <h4 class="restaurant-rating">Rating: {{restaurant.rating}}</h4>
+        <star-rating/>
         <h5 class="restaurant-review">{{ restaurant.review }}</h5>
         <h4 class="restaurant-price">{{ restaurant.price }}</h4>
         <h7 class="restaurant-transactions">{{ restaurant.transactions }}</h7>
@@ -83,9 +84,11 @@
 <script>
 // import restaurantCard from "../components/RestaurantCard"
 import yelpService from "../services/YelpService";
+import starRating from "../components/StarRating";
+
 export default {
   name: "display-restaurants",
-  components: {},
+  components: {starRating},
   data() {
     return {
       newPreferences: {
@@ -126,20 +129,6 @@ export default {
       this.$store.commit("ADD_USER_PREF", preferenceObject);
     },
     addToLikedRestaurants(restaurant) {
-<<<<<<< HEAD
-      // this.restaurants.pop();
-      yelpService
-        .addLikedRestaurant(restaurant)
-        .then((response) => {
-          if (response.status === 201) {
-            console.log('server received');
-            // this.$router.push(`/`);
-          }
-        })
-        .catch((error) => {
-          this.handleErrorResponse(error, "adding");
-        });
-=======
       this.restaurants.shift();
       this.$store.commit('ADD_LIKED_RESTAURANT', restaurant)
       console.log('liked Restaurants:' + this.$store.state.likedRestaurants[2])
@@ -155,7 +144,6 @@ export default {
       //   .catch((error) => {
       //     this.handleErrorResponse(error, "adding");
       //   });
->>>>>>> e70e04659d2f04933828c6eae71975df8f1e96d9
     },
   },
     //     let preferenceObject ={category:this.newPreferences.foodPref, zipCode:this.newPreferences.zipCode};
