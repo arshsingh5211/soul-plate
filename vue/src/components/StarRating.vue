@@ -29,15 +29,16 @@
 </template>
 
 <script>
-import yelpService from '../services/YelpService';
+// import yelpService from '../services/YelpService';
 export default {
 
 data() {
     return {
       max: 5,
-      rating: 0,
+      
     }
   },
+  props: ['rating'],
   methods: {
     isCurrentStar(index) {
       const diff = this.rating - index + 1;
@@ -53,14 +54,14 @@ data() {
       return classNames.join(' ');
     }
   },
-   created() {
-    let id = this.$route.params.id;
+  //  created() {
+  //   let id = this.$route.params.id;
 
-     yelpService.getBusinessDetails(id).then((response) =>{
-        this.rating = response.data.rating;
-      });
+  //    yelpService.getBusinessDetails(id).then((response) =>{
+  //       this.rating = response.data.rating;
+  //     });
      
-  }
+  // }
 }
 </script>
 

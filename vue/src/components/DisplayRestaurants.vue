@@ -49,7 +49,7 @@
           {{ restaurant.zipCode }}
         </h3>
         <div><h4 class="restaurant-rating">Rating: {{restaurant.rating}}</h4>
-        <star-rating class="star-review"/> </div>
+        <star-rating v-bind:rating="restaurant.rating" class="star-review"/> </div>
         <h5 class="restaurant-review">{{ restaurant.review }}</h5>
         <h6 class="restaurant-price">{{ restaurant.price }}</h6>
         <div class="restaurant-transactions">{{ restaurant.transactions }}</div>
@@ -74,11 +74,10 @@
 
 <script>
 import yelpService from "../services/YelpService";
-import starRating from './StarRating.vue';
 
 export default {
   name: "display-restaurants",
-  components: {starRating},
+  components: {},
   data() {
     return {
       newPreferences: {

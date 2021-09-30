@@ -6,7 +6,7 @@
       <br/>
       <h2 class="phoneNumber">Phone Number: {{ restaurant.phoneNumber }}</h2>
       
-      <star-rating class="avg-restaurant-review"/>
+      <star-rating v-bind:rating="restaurant.rating" class="avg-restaurant-review"/>
       
 
       <h4 class="price">Price: {{ restaurant.price }}</h4>
@@ -29,7 +29,7 @@
      <!-- <img v-bind:src="review.imageUrl" width="50" />  -->
       <div class="reivewer-name">{{ review.name }}</div>
         <div class="review-text">Review: {{ review.reviewText }}</div>
-        <div class="review-rating">Rating: {{restaurant.rating}} <star-rating class="individual-review"/></div>
+        <div class="review-rating">Rating: {{review.rating}} <star-rating v-bind:rating="review.rating" class="individual-review"/></div>
         
       </div>
     </div>
