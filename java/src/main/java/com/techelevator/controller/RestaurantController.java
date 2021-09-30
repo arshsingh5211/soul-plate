@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 @CrossOrigin
@@ -44,20 +43,20 @@ public class RestaurantController {
         return yelpService.getRandomRestaurant(yelpService.getSearchResults(foodPref, location));
     }
 
-
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(path = "/liked", method = RequestMethod.POST)
-    public void addLikedRestaurant(@Valid @RequestBody Restaurant restaurant, Principal principal) {
-        System.out.println(principal.toString());
+    public void addLikedRestaurant(@RequestBody Restaurant restaurant, Principal principal) {
         String user = principal.getName();
         int id = userDao.findIdByUsername(user);
         restaurantDAO.saveLikedRestaurant(restaurant, id);
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
-    @RequestMapping(path = "/{id}/liked", method = RequestMethod.GET)
-    public List<Restaurant> getLikedRestaurants(@PathVariable int id) {
+    @RequestMapping(path = "/liked", method = RequestMethod.GET)
+    public List<Restaurant> getLikedRestaurants(Principal principal) {
+        String user = principal.getName();
+        int id = userDao.findIdByUsername(user);
         return restaurantDAO.getLikedRestaurants(id);
     }
 

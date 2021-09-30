@@ -7,6 +7,7 @@ import com.techelevator.model.Categories;
 import com.techelevator.model.UserPreferences;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -24,28 +25,30 @@ public class PreferencesController {
     @Autowired
     JdbcUserDao userDao;
 
-
-    @RequestMapping(path = "{id}/preferences", method = RequestMethod.GET)
-    public List<UserPreferences> getUserPreference (@PathVariable int id) {
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @RequestMapping(path = "/preferences", method = RequestMethod.GET)
+    public List<UserPreferences> getUserPreference (Principal principal) {
+        String user = principal.getName();
+        int id = userDao.findIdByUsername(user);
         return userPreferencesDao.getPreferencesByUserId(id);
     }
 
+    @PreAuthorize("hasRole('ROLE_USER')")
     @ResponseStatus(HttpStatus.CREATED)
-    /*@RequestMapping(path = "/preferences", method = RequestMethod.POST)
-    public void createUserPreferences(@RequestBody UserPreferences newPreferences) {
-        userPreferencesDao.createProfilePreferences(newPreferences);
-    }*/
-    @RequestMapping(path = "/{id}/preferences", method = RequestMethod.POST)
-    public void createUserPreferences(@RequestBody UserPreferences newPreferences, @PathVariable int id) {
+    @RequestMapping(path = "/preferences", method = RequestMethod.POST)
+    public void createUserPreferences(@RequestBody UserPreferences newPreferences, Principal principal) {
+        String user = principal.getName();
+        int id = userDao.findIdByUsername(user);
         userPreferencesDao.createProfilePreferences(newPreferences, id);
     }
 
-    @RequestMapping(path = "/{id}/preferences", method = RequestMethod.PUT)
-    public void updateUserPreferences(@RequestBody UserPreferences newPreferences, @PathVariable int id) {
+/*    @PreAuthorize("hasRole('ROLE_USER')")
+    @RequestMapping(path = "/preferences", method = RequestMethod.PUT)
+    public void updateUserPreferences(@RequestBody UserPreferences newPreferences, Principal principal) {
+        String user = principal.getName();
+        int id = userDao.findIdByUsername(user);
         userPreferencesDao.updateProfilePreferences(newPreferences, id);
-    }
-
-    // didn't want to make a separate categories controller yet so for now just put it here
+    }*/
 
     @RequestMapping(path = "/categories/{id}", method = RequestMethod.GET)
     public Categories getCategory (@PathVariable int id) {

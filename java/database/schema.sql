@@ -22,9 +22,8 @@ CREATE SEQUENCE restaurant_serial;
 CREATE TABLE restaurants (
         restaurant_id int NOT NULL DEFAULT nextval('restaurant_serial'),
         restaurant_name varchar(50),
-        yelp_id varchar,
-        CONSTRAINT PK_restaurant PRIMARY KEY (restaurant_id),
-        UNIQUE (yelp_id)
+        yelp_id varchar UNIQUE,
+        CONSTRAINT PK_restaurant PRIMARY KEY (restaurant_id)
 );
 
 CREATE SEQUENCE category_serial;
@@ -47,7 +46,7 @@ CREATE TABLE restaurant_categories (
 CREATE SEQUENCE preferences_serial;
 CREATE TABLE user_preferences (
         preferences_id int NOT NULL DEFAULT nextval('preferences_serial'),
-        user_id int,
+        user_id int UNIQUE,
         name varchar, 
         home_zip int,
         preference varchar,
