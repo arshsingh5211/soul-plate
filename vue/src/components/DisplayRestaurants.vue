@@ -303,7 +303,7 @@ input {
   align-content: center;
 }
 h3 {
-  
+  background: lightgrey;
   width: 200px;
   align-content: center;
   text-align: center;
@@ -339,11 +339,5 @@ h3 {
 }
 button {
   vertical-align: baseline;
-}
-
-.restaurant-address {
-  display: inline;
-  align-items: center;
-  
 }
 </style>

@@ -7,7 +7,6 @@ import Register from '../views/Register.vue'
 import store from '../store/index'
 import EditPreferences from '@/views/Preferences'
 import RestaurantSearch from '../components/RestaurantSearch.vue'
-// import DisplayRestaurants from '../components/DisplayRestaurants.vue'
 import RestaurantDetails from '../components/RestaurantDetails.vue'
 import UserFavorites from '../components/UserFavorites.vue'
 

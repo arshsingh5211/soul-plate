@@ -3,11 +3,10 @@
     <h1>{{ restaurant.restaurantName }} Details</h1>
     <div class="restaurant-details" style="white-space: nowrap">
       <img v-bind:src="restaurant.imgUrl" width="200" style="float:left;" />
-      <!-- <h1 class="restaurant-name" >{{ restaurant.restaurantName }}</h1> -->
       <br/>
       <h2 class="phoneNumber">Phone Number: {{ restaurant.phoneNumber }}</h2>
       
-      <star-rating class="avg-restaurant-review"/>
+      <star-rating v-bind:rating="restaurant.rating" class="avg-restaurant-review"/>
       
 
       <h4 class="price">Price: {{ restaurant.price }}</h4>
@@ -22,7 +21,7 @@
       </h5>
     </div>
     <div class="reviews-container">
-      <review-card
+      <div
         v-bind:review="review"
         v-for="review in reviews"
         v-bind:key="review.id"
@@ -30,10 +29,9 @@
      <!-- <img v-bind:src="review.imageUrl" width="50" />  -->
       <div class="reivewer-name">{{ review.name }}</div>
         <div class="review-text">Review: {{ review.reviewText }}</div>
-        <div class="review-rating">Rating: {{restaurant.rating}} <star-rating class="individual-review"/></div>
+        <div class="review-rating">Rating: {{review.rating}} <star-rating v-bind:rating="review.rating" class="individual-review"/></div>
         
-      </review-card>
-      
+      </div>
     </div>
      
     <div
@@ -44,10 +42,8 @@
     >
       <!-- <img class="review-photo" v-bind:src="photo" /> -->
     </div>
-    <!-- 
-Phone Number
-Rating
-Reviews -->
+    <button class="back" v-on:click.prevent="goBack()">Go Back</button>
+
   </div>
 </template>
 
@@ -71,6 +67,12 @@ export default {
         this.reviews = response.data;
       });
   },
+  methods: {
+    goBack() {
+      let showForm = false;
+      this.$router.push({ name: "home", params: { showForm: showForm} })
+    }
+  }
 };
 </script>
 
