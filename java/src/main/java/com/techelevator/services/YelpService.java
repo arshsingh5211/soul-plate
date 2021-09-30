@@ -21,7 +21,7 @@ import java.util.Random;
 @Component
 public class YelpService {
 
-    private String apiURL = "https://api.yelp.com/v3/businesses/search?&limit=10";
+    private String apiURL = "https://api.yelp.com/v3/businesses/search?&limit=20";
     private String detailsURL = "https://api.yelp.com/v3/businesses/";
     private String key = "tQwuuShqwMO3BEamfFGjLbnQPezsb1pzpP-4bKMgVTNs-2UbgL504SZzaaq-IsbfuGa2mqblP7JRmDXMtB5djryRSwCXhem46zgyEtQmBwLiAqROiEcscRycmBJGYXYx";
 
