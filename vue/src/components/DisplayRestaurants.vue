@@ -1,4 +1,5 @@
 <template>
+  
   <div id="main">
     <div class="restaurant-container">
       <div class="search-page">
@@ -180,7 +181,7 @@ export default {
   display: block;
   margin-top: 5%;
   position: absolute;
-  top: 20%;
+  top: 35%;
   left: 50%;
   font-family: "Montserrat", serif;
   font-size: 12px;
