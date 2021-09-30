@@ -24,7 +24,7 @@
             <input
               v-model="newPreferences.zipCode"
               type="text"
-              placeholder="Enter your zipcode"
+              placeholder="Zip Code"
             />
             <br />
             <button class="search-button" v-on:click.prevent="startSearch">
@@ -47,7 +47,8 @@
           {{ restaurant.city }}, {{ restaurant.state }}
           {{ restaurant.zipCode }}
         </h3>
-        <h4 class="restaurant-rating">Rating: {{ restaurant.rating }}</h4>
+        <div><h4 class="restaurant-rating">Rating: {{restaurant.rating}}</h4>
+        <star-rating class="star-review"/> </div>
         <h5 class="restaurant-review">{{ restaurant.review }}</h5>
         <h6 class="restaurant-price">{{ restaurant.price }}</h6>
         <div class="restaurant-transactions">{{ restaurant.transactions }}</div>
@@ -72,9 +73,11 @@
 
 <script>
 import yelpService from "../services/YelpService";
+import starRating from './StarRating.vue';
+
 export default {
   name: "display-restaurants",
-  components: {},
+  components: {starRating},
   data() {
     return {
       newPreferences: {
@@ -191,6 +194,15 @@ export default {
   line-height: 30px;
 }
 
+h1.search-bar-header {
+  font-family: "Montserrat", serif;
+  color: #cf740cf1;
+  text-align: center;
+  width: 100%;
+  margin-left: -1%;
+  background: whitesmoke;
+}
+
 .search-button {
   text-transform: uppercase;
   outline: 0;
@@ -205,11 +217,7 @@ export default {
   transition: all 0.3 ease;
   cursor: pointer;
 }
-.search-bar-header {
-  font-family: "Montserrat", serif;
-  color: #cf740cf1;
-  text-align: center;
-}
+
 
 input {
   text-align: center;
@@ -261,7 +269,7 @@ h3 {
 
 .restaurant-img {
   width: 300px;
-  max-height: 300px;
+  max-height: 250px;
 }
 
 .card.like {
@@ -289,5 +297,8 @@ h3 {
 }
 button {
   vertical-align: baseline;
+}
+.star-review{
+  
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div id="login" class="text-center">
     <form class="form-signin" @submit.prevent="login">
-      <h1 class="sign-in">Find your SoulPLATE!</h1>
+      <h2 class="sign-in">Find your SoulPLATE!</h2>
       <div class="alert alert-danger" role="alert" v-if="invalidCredentials">
         Invalid username and password!
       </div>
@@ -89,11 +89,25 @@ export default {
   display: flex;
 }
 
-h1.sign-in {
+.sign-in {
   font-family: "Cormorant Garamond", serif;
+  display: block;
+  text-transform: uppercase;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  height: auto;
   color: #cf740cf1;
+  letter-spacing: 4px;
+  max-width: 100%;
+  min-width: 0px;
+  opacity: 1;
+  word-break: keep-all;
+  padding: 10px 0px 10px 0px;
+  line-height: 27.2px;
+  background: whitesmoke;
   text-align: center;
-  align-content: center;
+  
 }
 label.sr-only {
   align-content: center;
@@ -101,12 +115,12 @@ label.sr-only {
 .form-signin {
   margin: 0;
   position: absolute;
-  top: 40%;
+  top: 30%;
   left: 50%;
   font-family: "Montserrat", serif;
   font-size: 12px;
   background: whitesmoke;
-  width: 20%;
+  width: 25%;
   padding: 10px 40px 20px 40px;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   border-radius: 10px;
@@ -115,7 +129,7 @@ label.sr-only {
 }
 
 .form-signin input {
-  font-family: "Cormorant Garamond", serif;
+  font-family: "Roboto", sans-serif;
   outline: 0;
   background: rgb(243, 231, 226);
   width: 100%;

@@ -1,10 +1,12 @@
 <template>
   <div class="card-orientation">
+   
     <div class="card">
       <img v-bind:src="restaurant.imgUrl" width="250" />
       <h2 class="restaurant-name">{{ restaurant.restaurantName }}</h2>
       <h3 class="restaurant-zip">{{ restaurant.zipCode }}</h3>
       <h4 class="restaurant-rating">{{ restaurant.rating }}</h4>
+   
       <h5 class="restaurant-review">{{ restaurant.review }}</h5>
       <h4 class="restaurant-price">{{ restaurant.price }}</h4>
       <h7 class="restaurant-transactions">{{ restaurant.transactions }}</h7>
@@ -30,8 +32,10 @@
 
 <script>
 import YelpService from "../services/YelpService";
+
 export default {
   name: "restaurant-card",
+  
   props: ["restaurant"],
   restaurant: Object,
   methods: {
@@ -78,8 +82,8 @@ export default {
   text-transform: uppercase;
   outline: 0;
   background: #fc931af1;
-  width: 30%;
-  margin: 10px;
+  width: 50%;
+  margin: 20px;
   border: 0;
   padding: 5px;
   margin-bottom: 20px;

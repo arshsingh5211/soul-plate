@@ -132,7 +132,7 @@ label.sr-only {
 form {
   margin: 0;
   position: absolute;
-  top: 40%;
+  top: 30%;
   left: 50%;
   font-family: "Montserrat", serif;
   font-size: 12px;
