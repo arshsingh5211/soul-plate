@@ -6,8 +6,7 @@
       <!-- <h1 class="restaurant-name" >{{ restaurant.restaurantName }}</h1> -->
       <br/>
       <h2 class="phoneNumber">Phone Number: {{ restaurant.phoneNumber }}</h2>
-      <h3 class="rating">Rating: {{restaurant.rating}} 
-     </h3>
+      
       <star-rating class="avg-restaurant-review"/>
       
 
@@ -28,7 +27,7 @@
         v-for="review in reviews"
         v-bind:key="review.id"
       >
-      <!-- <img v-bind:src="review.imageUrl" width="50" /> -->
+     <!-- <img v-bind:src="review.imageUrl" width="50" />  -->
       <div class="reivewer-name">{{ review.name }}</div>
         <div class="review-text">Review: {{ review.reviewText }}</div>
         <div class="review-rating">Rating: {{restaurant.rating}} <star-rating class="individual-review"/></div>
@@ -43,7 +42,7 @@
       v-for="photo in restaurant.photos"
       v-bind:key="photo.id"
     >
-      <!-- <img class="review-photo" v-bind:src="photo" /> -->
+      <img class="review-photo" v-bind:src="photo" />
     </div>
     <!-- 
 Phone Number
@@ -96,13 +95,18 @@ export default {
   transform: translate(-50%, -50%);
   width: 700px;
   height: 300px;
-  margin-top: 15%;
-  margin-left: 30%;
+  margin-top: 10%;
+  margin-left: 40%;
   background: rgb(243, 231, 226);
   display: inline-block;
   position: absolute;
   align-items: center;
   align-content: center;
+}
+
+h1 {
+  color: #cf740cf1;
+  background: transparent;
 }
 
 h5 {
@@ -111,23 +115,28 @@ h5 {
 }
 
 .price {
-  
+  font-size: 20px;
 }
 
 .reviews-container {
-  margin-top: 30%;
-  background: lightgrey;
+  margin-top: 25%;
+  background: rgb(243, 231, 226);
   display: inline-block;
+  position: absolute;
+  margin-left: 10%;
+  margin-right: auto;
+  
 }
 
 .photo-container {
-  display:flex;
+ display:flex;
  flex-wrap: wrap;
  flex-direction: row;
+ margin-left: 80%;
 }
 .review-photo {
   
- width: 10%;
-height: 20%;
+ width: 50%;
+
 }
 </style>
