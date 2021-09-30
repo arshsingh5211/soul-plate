@@ -41,24 +41,7 @@ public class JdbcRestaurantDao implements RestaurantDao {
     }
 
     @Override
-<<<<<<< HEAD
-    public Restaurant saveLikedRestaurant(Restaurant restaurant, int userId) {
-
-        System.out.println("restaurant I'm trying to insert");
-        System.out.println(restaurant.getRestaurantName());
-
-
-        String query = "BEGIN; " +
-                            "INSERT INTO restaurants (restaurant_name, yelp_id) VALUES (?, ?) RETURNING restaurant_id; " +
-                            "INSERT INTO user_restaurants (user_id, restaurant_id) " +
-                            "VALUES ((SELECT user_id FROM users WHERE user_id = ?), " +
-                            "(SELECT restaurant_id FROM restaurants WHERE restaurant_id = ?)); " +
-                       "COMMIT;";
-        Integer newId = jdbcTemplate.queryForObject(query, Integer.class,
-                        restaurant.getRestaurantName(), restaurant.getYelpId(), userId, 3);
-        return getRestaurant(newId);
-=======
-    public void saveLikedRestaurant (Restaurant restaurant, int userId) {
+    public void saveLikedRestaurant(Restaurant restaurant, int userId) {
         String query = "INSERT INTO restaurants (restaurant_name, yelp_id) " +
                         "VALUES (?, ?) ON CONFLICT (yelp_id) DO NOTHING " +
                         "RETURNING restaurant_id;";
@@ -67,15 +50,13 @@ public class JdbcRestaurantDao implements RestaurantDao {
         String query2 = "INSERT INTO user_restaurants (user_id, restaurant_id) " +
                 "VALUES ((SELECT user_id FROM users WHERE user_id = ?), ?)";
         jdbcTemplate.update(query2, userId, restId);
->>>>>>> e70e04659d2f04933828c6eae71975df8f1e96d9
     }
 
-    private Restaurant mapRowToRestaurants(SqlRowSet results){
+    private Restaurant mapRowToRestaurants(SqlRowSet results) {
         Restaurant restaurant = new Restaurant();
         restaurant.setYelpId(results.getString("yelp_id"));
         restaurant.setRestaurantId(results.getInt("restaurant_id"));
         restaurant.setRestaurantName(results.getString("restaurant_name"));
         return restaurant;
     }
-
 }

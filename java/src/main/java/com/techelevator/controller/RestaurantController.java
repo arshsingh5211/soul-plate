@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 @CrossOrigin
@@ -21,7 +22,6 @@ public class RestaurantController {
     UserPreferencesDao userPreferencesDao;
     @Autowired
     RestaurantDao restaurantDAO;
-
     @Autowired
     UserDao userDao;
 
@@ -35,20 +35,16 @@ public class RestaurantController {
         return yelpService.getRestaurantDetails(id);
     }
 
-//    @RequestMapping(path = "/preferences", method = RequestMethod.POST)
-//    public void editUserPreferences(@RequestBody UserPreferences userPreference) {
-//        userPreferencesDao.createProfilePreferences(userPreference);
-//    }
-
     @RequestMapping(path = "/restaurant", method = RequestMethod.GET)
     public Restaurant getRandomRestaurant(@RequestParam String foodPref, @RequestParam String location) {
         return yelpService.getRandomRestaurant(yelpService.getSearchResults(foodPref, location));
     }
 
+
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/liked", method = RequestMethod.POST)
-    public void addLikedRestaurant(@RequestBody Restaurant restaurant, Principal principal) {
-
+    public void addLikedRestaurant(@Valid @RequestBody Restaurant restaurant, Principal principal) {
+        System.out.println(principal.getName());
         String user = principal.getName();
         int id = userDao.findIdByUsername(user);
         restaurantDAO.saveLikedRestaurant(restaurant, id);

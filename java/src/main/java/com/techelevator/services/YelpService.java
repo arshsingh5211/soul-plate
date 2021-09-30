@@ -67,13 +67,6 @@ public class YelpService {
     }
 
     public RestaurantDetails getRestaurantDetails(String id) {
-        /*
-        I want to add the three pictures yelp gives us for each business here, categories,
-        actual hours instead of an openNow? boolean, and possibly display_address as well,
-        but hard to figure out how to get those
-        */
-
-
         String url = detailsURL + id;
 
         HttpHeaders headers = new HttpHeaders();
