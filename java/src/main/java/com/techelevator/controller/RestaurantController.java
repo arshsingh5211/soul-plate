@@ -60,6 +60,13 @@ public class RestaurantController {
         return restaurantDAO.getLikedRestaurants(id);
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @RequestMapping(path = "/liked/{id}", method = RequestMethod.DELETE)
+    public void deleteFromLiked(@PathVariable int id) {
+        restaurantDAO.deleteLikedRestaurant(id);
+    }
+
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(path = "/restaurants/{id}/reviews", method = RequestMethod.GET)
     public List<ReviewUser> getReview(@PathVariable String id) {
