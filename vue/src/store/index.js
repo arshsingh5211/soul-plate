@@ -22,12 +22,12 @@ export default new Vuex.Store({
     user: currentUser || {},
     userPreferences:
     {
-      category: "pizza",
-      zipCode: "60614"
+      foodPref: "",
+      zipCode: ""
     },
 
     likedRestaurants: [],
-    searchedRestaurants: []
+    currentRestaurants: []
   },
 
   mutations: {
@@ -49,13 +49,15 @@ export default new Vuex.Store({
       axios.defaults.headers.common = {};
     },
     ADD_USER_PREF(state, preferenceObject) {
-      state.userPreferences.commit(preferenceObject);
+      state.userPreferences.foodPref = preferenceObject.foodPref;
+      state.userPreferences.zipCode = preferenceObject.zipCode
+      //state.userPreferences.commit(preferenceObject);
     },
     ADD_LIKED_RESTAURANT(state, restaurant) {
       state.likedRestaurants.push(restaurant)
     },
-    ADD_SEARCHED_RESTAURANT(state, restaurant) {
-      state.searchedRestaurants.push(state, restaurant)
+    ADD_CURRENT_RESTAURANTS(state, restaurants) {
+      Vue.set(state, 'currentRestaurants', restaurants)
     }
   }
 })

@@ -56,6 +56,7 @@ export default {
   },
 
   created() {
+    console.log(this.$store.state.currentRestaurants)
     let id = this.$route.params.id;
     yelpService.getBusinessDetails(id).then((response) => {
       this.restaurant = response.data;

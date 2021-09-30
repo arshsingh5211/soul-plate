@@ -1,5 +1,6 @@
 <template>
   <div id="main">
+
     <div class="restaurant-container">
       <div class="search-page">
         <a
@@ -41,6 +42,7 @@
 
       <div
         class="card"
+        
         v-for="restaurant in restaurants.slice().reverse()"
         v-bind:key="restaurant.yelpId"
       >
@@ -54,7 +56,7 @@
         <h4 class="restaurant-rating">Rating: {{ restaurant.rating }}</h4>
         <h5 class="restaurant-review">{{ restaurant.review }}</h5>
         <h4 class="restaurant-price">{{ restaurant.price }}</h4>
-        <h7 class="restaurant-transactions">{{ restaurant.transactions }}</h7>
+        <div class="restaurant-transactions">{{ restaurant.transactions }}</div>
 
         <button class="dislike" v-on:click.prevent="removeRestaurant">
           Dislike this restaurant
@@ -68,6 +70,7 @@
 
         <br />
         <router-link
+          v-on:click="saveCurrentRestaurants(this.restaurants)"
           v-bind:to="{
             name: 'restaurant-details',
             params: { id: restaurant.yelpId },
@@ -95,6 +98,7 @@ export default {
       showForm: true,
       
       restaurants: [],
+      state: this.$store.state.currentRestaurants
     };
   },
   methods: {
@@ -105,6 +109,9 @@ export default {
     },
     startSearch() {
       // let info = {category: this.foodPref, zipCode: this.zipCode}
+      this.$store.commit('ADD_USER_PREF', this.newPreferences)
+      console.log(this.$store.state.userPreferences.foodPref)
+      console.log(this.$store.state.userPreferences.zipCode)  
       yelpService
         .getSearchResults(this.newPreferences)
         .then((response) => (this.restaurants = response.data));
@@ -125,10 +132,14 @@ export default {
 
       this.$store.commit("ADD_USER_PREF", preferenceObject);
     },
-    addToLikedRestaurants(restaurant) {
+    addToLikedRestaurants() {
       this.restaurants.shift();
-      this.$store.commit('ADD_LIKED_RESTAURANT', restaurant)
-      console.log('liked Restaurants:' + this.$store.state.likedRestaurants[2])
+      this.$store.commit('ADD_LIKED_RESTAURANT', this.restaurants)
+      
+      
+      
+      
+      
       // yelpService
       //   .addLikedRestaurant(restaurant)
       //   .then((response) => {
@@ -166,35 +177,31 @@ export default {
             
     //     }
     // },
+  saveCurrentRestaurants() {
+    this.$store.commit('ADD_CURRENT_RESTAURANTS', this.restaurants)
+    console.log(this.$store.state.currentRestaurants)
     
+    
+    
+  },  
 
 
 
-  addToLikedRestaurants() {
-    yelpService
-      .addLikedRestaurant(this.restaurant)
-      .then((response) => {
-        alert("restaurant added!");
-        if (response.status === 201) {
-          this.$store.commit("ADD_LIKED_RESTSTAURANT", this.restaurant);
-        }
-      })
-      .catch((error) => {
-        this.handleErrorResponse(error, "adding");
-      });
+
+
+  created() {
+    console.log(this.$store.state.currentRestaurants)
+    
+    // this.$store.searchedRestaurants = []; //set array to empty everytime you search?
+    // yelpService
+    //   .getSearchResults(this.$store.state.userPreferences)
+    //   .then((response) => {
+    //     this.restaurants = response.data;
+    //     for (this.restaurant in this.restaurants) {
+    //       this.$store.commit("ADD_SEARCHED_RESTAURANT", this.restaurant);
+    //     }
+    //   });
   },
-
-  // created() {
-  //   this.$store.searchedRestaurants = []; //set array to empty everytime you search?
-  //   yelpService
-  //     .getSearchResults(this.$store.state.userPreferences)
-  //     .then((response) => {
-  //       this.restaurants = response.data;
-  //       for (this.restaurant in this.restaurants) {
-  //         this.$store.commit("ADD_SEARCHED_RESTAURANT", this.restaurant);
-  //       }
-  //     });
-  // },
 };
 </script>
 
