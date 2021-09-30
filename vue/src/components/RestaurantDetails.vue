@@ -3,7 +3,6 @@
     <h1>{{ restaurant.restaurantName }} details</h1>
     <div class="restaurant-details" style="white-space: nowrap">
       <img v-bind:src="restaurant.imgUrl" width="200" style="float:left;" />
-      <!-- <h1 class="restaurant-name" >{{ restaurant.restaurantName }}</h1> -->
       <br/>
       <h2 class="phoneNumber">Phone Number: {{ restaurant.phoneNumber }}</h2>
       <h3 class="rating">Rating: {{ restaurant.rating }}</h3>
@@ -19,7 +18,7 @@
       </h5>
     </div>
     <div class="reviews-container">
-      <review-card
+      <div
         v-bind:review="review"
         v-for="review in reviews"
         v-bind:key="review.id"
@@ -30,7 +29,7 @@
         <div class="review-rating">Rating: {{ review.rating }}</div>
         
         
-      </review-card>
+      </div>
     </div>
      
     <div
@@ -41,10 +40,8 @@
     >
       <img class="review-photo" v-bind:src="photo" />
     </div>
-    <!-- 
-Phone Number
-Rating
-Reviews -->
+    <button class="back" v-on:click.prevent="goBack()">Go Back</button>
+
   </div>
 </template>
 
@@ -56,7 +53,6 @@ export default {
   },
 
   created() {
-    console.log(this.$store.state.currentRestaurants)
     let id = this.$route.params.id;
     yelpService.getBusinessDetails(id).then((response) => {
       this.restaurant = response.data;
@@ -66,6 +62,12 @@ export default {
         this.reviews = response.data;
       });
   },
+  methods: {
+    goBack() {
+      let showForm = false;
+      this.$router.push({ name: "home", params: { showForm: showForm} })
+    }
+  }
 };
 </script>
 

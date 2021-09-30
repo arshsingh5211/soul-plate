@@ -56,8 +56,11 @@ export default new Vuex.Store({
     ADD_LIKED_RESTAURANT(state, restaurant) {
       state.likedRestaurants.push(restaurant)
     },
-    ADD_CURRENT_RESTAURANTS(state, restaurants) {
-      Vue.set(state, 'currentRestaurants', restaurants)
+    ADD_CURRENT_RESTAURANTS(state, payload) {
+      state.currentRestaurants = payload
+    },
+    RESET_CURRENT_RESTAURANTS(state) {
+      state.currentRestaurants = []
     }
   }
 })
