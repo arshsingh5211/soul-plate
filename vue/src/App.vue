@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link class="nav" v-bind:to="{ name: 'home' }" v-show="$store.state.token != ''">Home|&nbsp;</router-link>&nbsp;
-      <router-link class="nav" v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout|&nbsp;</router-link>&nbsp;
+      <router-link class="nav" v-bind:to="{ name: 'home' }" v-show="$store.state.token != ''">Home |&nbsp;</router-link>&nbsp;
+      <router-link class="nav" v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout |&nbsp;</router-link>&nbsp;
       <router-link class="nav" v-bind:to="{ name: 'favorites'}" v-show="$store.state.token != ''"> Favorites List</router-link>
     </div>
     <router-view />

@@ -24,7 +24,7 @@
             <input
               v-model="newPreferences.zipCode"
               type="text"
-              placeholder="Enter your zipcode"
+              placeholder="Zip Code"
             />
             <br />
             <!-- <button class="search-button" v-on:click.prevent="addUserPref">
@@ -236,6 +236,15 @@ export default {
   line-height: 30px;
 }
 
+h1.search-bar-header {
+  font-family: "Montserrat", serif;
+  color: #cf740cf1;
+  text-align: center;
+  width: 100%;
+  margin-left: -1%;
+  background: whitesmoke;
+}
+
 .search-button {
   text-transform: uppercase;
   outline: 0;
@@ -250,11 +259,7 @@ export default {
   transition: all 0.3 ease;
   cursor: pointer;
 }
-.search-bar-header {
-  font-family: "Montserrat", serif;
-  color: #cf740cf1;
-  text-align: center;
-}
+
 
 input {
   text-align: center;
@@ -306,7 +311,7 @@ h3 {
 
 .restaurant-img {
   width: 300px;
-  max-height: 300px;
+  max-height: 250px;
 }
 
 .card.like {
