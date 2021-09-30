@@ -42,7 +42,7 @@
       v-for="photo in restaurant.photos"
       v-bind:key="photo.id"
     >
-      <img class="review-photo" v-bind:src="photo" />
+      <!-- <img class="review-photo" v-bind:src="photo" /> -->
     </div>
     <!-- 
 Phone Number

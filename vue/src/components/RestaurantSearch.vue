@@ -100,7 +100,7 @@ export default {
   display: block;
   margin: 0;
   position: absolute;
-  top: 20%;
+  top: 80%;
   left: 50%;
   font-family: "Montserrat", serif;
   font-size: 12px;
