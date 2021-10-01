@@ -244,7 +244,7 @@ input {
 }
 
 #show-form-button {
-  background: rgb(243, 231, 226);
+  background: cornsilk;
   align-items: center;
   color: black;
   text-align: center;
@@ -263,9 +263,9 @@ input {
   border-radius: 10px;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  width: 300px;
-  height: 600px;
-  margin-top: 25%;
+  width: 400px;
+  height: 650px;
+  margin-top: 23%;
   margin-left: 5%;
   background: rgb(243, 231, 226);
   text-align: center;
@@ -280,8 +280,8 @@ h3 {
 }
 
 .restaurant-img {
-  width: 300px;
-  max-height: 250px;
+  max-width: 400px;
+  height: 300px;
 }
 
 .card.like {
@@ -301,7 +301,7 @@ h3 {
 }
 
 .card .restaurant-name {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
 }
 
 .card .restaurant-zip {
@@ -313,5 +313,6 @@ button {
 .restaurant-address {
   display: inline;
   align-items: center;
+  font-family: "Roboto", sans-serif;
 }
 </style>
