@@ -27,17 +27,13 @@
               placeholder="Zip Code"
             />
             <br />
-            <!-- <button class="search-button" v-on:click.prevent="addUserPref">
-              Add Preference
-            </button> -->
             <button class="search-button" v-on:click.prevent="startSearch">
               Search
             </button>
           </div>
         </form>
       </div>
-      <!-- <restaurant-card v-bind:restaurant="restaurant" v-for="restaurant in restaurants" v-bind:key="restaurant.yelpId"/> -->
-      <!-- <restaurant-card v-bind:restaurant="restaurants[currentRestaurantIndex]"></restaurant-card> -->
+  
 
       <div
         class="card"
@@ -52,10 +48,9 @@
           {{ restaurant.zipCode }}
         </h3>
         <h4 class="restaurant-rating">Rating: {{restaurant.rating}}</h4>
-        <star-rating/>
         <h5 class="restaurant-review">{{ restaurant.review }}</h5>
-        <h4 class="restaurant-price">{{ restaurant.price }}</h4>
-        <h7 class="restaurant-transactions">{{ restaurant.transactions }}</h7>
+        <h6 class="restaurant-price">{{ restaurant.price }}</h6>
+        <div class="restaurant-transactions">{{ restaurant.transactions }}</div>
 
         <button class="dislike" v-on:click.prevent="removeRestaurant">
           Dislike this restaurant
@@ -68,27 +63,22 @@
         </button>
 
         <br />
-        <router-link
-          v-bind:to="{
-            name: 'restaurant-details',
-            params: { id: restaurant.yelpId },
-          }"
-          tag="button"
-          >View Details</router-link
-        >
+                <button v-on:click.prevent="saveCurrentRestaurants(restaurant)">
+          View Details
+        </button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-// import restaurantCard from "../components/RestaurantCard"
+
 import yelpService from "../services/YelpService";
-import starRating from "../components/StarRating";
+
 
 export default {
   name: "display-restaurants",
-  components: {starRating},
+  components: {},
   data() {
     return {
       newPreferences: {
@@ -100,14 +90,31 @@ export default {
       restaurants: [],
     };
   },
+
+   created() {
+    if (this.$route.params.showForm != null) {
+      this.showForm = this.$route.params.showForm;
+    } else {
+      this.showForm = true;
+    }
+    this.restaurants = this.$store.state.currentRestaurants
+    this.$store.commit('RESET_CURRENT_RESTAURANTS')
+  },
   methods: {
+        saveCurrentRestaurants(restaurant) {
+      this.$store.commit('ADD_CURRENT_RESTAURANTS', this.restaurants);
+      this.$router.push({
+        name: "restaurant-details",
+        params: { id: `${restaurant.yelpId}` },
+      });
+    },
     resetSearch() {
       this.restaurants = []
       this.showForm = true
 
     },
     startSearch() {
-      // let info = {category: this.foodPref, zipCode: this.zipCode}
+
       yelpService
         .getSearchResults(this.newPreferences)
         .then((response) => (this.restaurants = response.data));
@@ -131,7 +138,7 @@ export default {
     addToLikedRestaurants(restaurant) {
       this.restaurants.shift();
       this.$store.commit('ADD_LIKED_RESTAURANT', restaurant)
-      console.log('liked Restaurants:' + this.$store.state.likedRestaurants[2])
+
       // yelpService
       //   .addLikedRestaurant(restaurant)
       //   .then((response) => {
@@ -146,32 +153,6 @@ export default {
       //   });
     },
   },
-    //     let preferenceObject ={category:this.newPreferences.foodPref, zipCode:this.newPreferences.zipCode};
-    //     console.log('debug');
-    //     console.log(preferenceObject)
-    
-    //     this.$store.commit('ADD_USER_PREF', preferenceObject)
-
-    //     },
-    //     addToLikedRestaurants(restaurant) {
-    //       this.restaurants.pop()
-    //         yelpService.addLikedRestaurant(restaurant).then(response => {
-    //             if (response.status === 201) {
-    //               this.$store.commit('ADD_LIKED_RESTSTAURANT', this.restaurant)
-    //               alert("restaurant added!");
-    //                 // this.$router.push(`/`);
-                    
-    //             }
-    //         })
-    //         .catch(error => {
-    //             this.handleErrorResponse(error, "adding");
-    //         });
-            
-    //     }
-    // },
-    
-
-
 
   addToLikedRestaurants() {
     yelpService
@@ -187,17 +168,7 @@ export default {
       });
   },
 
-  // created() {
-  //   this.$store.searchedRestaurants = []; //set array to empty everytime you search?
-  //   yelpService
-  //     .getSearchResults(this.$store.state.userPreferences)
-  //     .then((response) => {
-  //       this.restaurants = response.data;
-  //       for (this.restaurant in this.restaurants) {
-  //         this.$store.commit("ADD_SEARCHED_RESTAURANT", this.restaurant);
-  //       }
-  //     });
-  // },
+
 };
 </script>
 

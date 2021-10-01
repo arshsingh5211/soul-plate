@@ -40,7 +40,7 @@
       v-for="photo in restaurant.photos"
       v-bind:key="photo.id"
     >
-      <!-- <img class="review-photo" v-bind:src="photo" /> -->
+
     </div>
     <button class="back" v-on:click.prevent="goBack()">Go Back</button>
 
