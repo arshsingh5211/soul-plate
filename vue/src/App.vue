@@ -17,6 +17,7 @@ body, html {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
 }
 
 #nav, .nav {
@@ -32,7 +33,7 @@ body, html {
 }
 
 .nav:hover {
-  background-color: chartreuse;
+  background-color: #cf740cf1;
   size: 44px;
 }
 </style>
