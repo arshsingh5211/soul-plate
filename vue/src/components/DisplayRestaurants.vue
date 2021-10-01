@@ -263,7 +263,7 @@ input {
   border-radius: 10px;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  width: 400px;
+  width: 425px;
   height: 650px;
   margin-top: 23%;
   margin-left: 5%;
@@ -281,25 +281,23 @@ h3 {
 
 .restaurant-img {
   max-width: 400px;
-  height: 300px;
+  height: 275px;
 }
 
-.card.like {
+button.like {
   text-transform: uppercase;
-  outline: 0;
-  background: #fc931af1;
-  width: 30%;
-  margin: 10px;
-  border: 0;
-  padding: 5px;
-  margin-bottom: 20px;
-  color: #ffffff;
-  font-size: 14px;
-  -webkit-transition: all 0.3 ease;
-  transition: all 0.3 ease;
-  cursor: pointer;
+  margin-left: 15px;
+  margin-bottom: 10px;
 }
-
+button.like:hover {
+  background: chartreuse;
+}
+button.dislike {
+  text-transform: uppercase;
+}
+button.dislike:hover {
+  background: red;
+}
 .card .restaurant-name {
   font-size: 1.8rem;
 }
