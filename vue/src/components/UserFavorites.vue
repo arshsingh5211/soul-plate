@@ -48,21 +48,23 @@ h1 {
 }
 
 .liked-card {
-  
+  align-items: center;
+  text-align: center;
   display:flex;
   flex-wrap: wrap;
 }
 
 .item {
-  
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   margin: 10px;
- background: rgb(243, 231, 226);
- align-items: center;
+  background: rgb(243, 231, 226);
+  align-items: center;
   justify-content: center;
   position: relative;
   display: grid;
-  width: 300px;
+  width: 250px;
   height: 500px;
+  text-align: center;
 }
 
 .fav-img {

@@ -2,7 +2,7 @@
   <div>
     <h1>{{ restaurant.restaurantName }} Details</h1>
     <div class="restaurant-details" style="white-space: nowrap">
-      <img v-bind:src="restaurant.imgUrl" width="200" style="float:left;" />
+      <img class="details-img" v-bind:src="restaurant.imgUrl" width="200" style="float:left;" />
       <br/>
       <h2 class="phoneNumber">Phone Number: {{ restaurant.phoneNumber }}</h2>
       
@@ -17,7 +17,7 @@
         v-for="transaction in transactions"
         v-bind:key="transaction.id"
       >
-       &emsp; | {{ transaction }} 
+       {{ transaction }} 
       </h5>
     </div>
     <div class="reviews-container">
@@ -27,9 +27,10 @@
         v-bind:key="review.id"
       >
      <!-- <img v-bind:src="review.imageUrl" width="50" />  -->
-      <div class="reivewer-name">{{ review.name }}</div>
-        <div class="review-text">Review: {{ review.reviewText }}</div>
-        <div class="review-rating">Rating: {{review.rating}} <star-rating v-bind:rating="review.rating" class="individual-review"/></div>
+     
+      <div class="reviewer-name">{{ review.name }} <star-rating v-bind:rating="review.rating" class="individual-review"/></div>
+      <div class="review-text">Review: {{ review.reviewText }}</div>
+        
         
       </div>
     </div>
@@ -42,7 +43,7 @@
     >
 
     </div>
-    <button class="back" v-on:click.prevent="goBack()">Go Back</button>
+    <button class="back" v-on:click.prevent="goBack()">Go Back To Search</button>
 
   </div>
 </template>
@@ -79,9 +80,7 @@ export default {
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Montserrat&family=Roboto:wght@300&display=swap");
 
-.rating{
- 
-}
+
 .individual-review{
   width: 350px;
 }
@@ -105,15 +104,23 @@ export default {
   align-items: center;
   align-content: center;
 }
+.details-img {
+  margin: 10px;
+}
 
 h1 {
   color: #cf740cf1;
   background: transparent;
 }
 
-h5 {
+h5{
+  display: inline;
+  font-size: large;
+}
+.transactions {
   display: inline-block;
   font-size: medium;
+  margin: 5px;
 }
 
 .price {
@@ -129,6 +136,15 @@ h5 {
   margin-right: auto;
   
 }
+.reviewer-name {
+  font-size: large;
+  
+  display: inline-block;
+}
+.review-text {
+  margin-bottom: 8px;
+  border-bottom: dotted 1px #cf740cf1;
+}
 
 .photo-container {
  display:flex;
@@ -140,5 +156,10 @@ h5 {
   
  width: 50%;
 
+}
+button.back {
+  position: absolute;
+  margin-left: 90%;
+  margin-top: 40%;
 }
 </style>
