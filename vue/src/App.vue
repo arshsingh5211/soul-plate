@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link class="nav" v-bind:to="{ name: 'home' }" v-show="$store.state.token != ''">HOME |&nbsp;</router-link>&nbsp;
-      <router-link class="nav" v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">LOGOUT |&nbsp;</router-link>&nbsp;
+      <router-link class="nav" v-bind:to="{ name: 'home' }" v-show="$store.state.token != ''">HOME</router-link>
+      <router-link class="nav" v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">LOGOUT</router-link>
       <router-link class="nav" v-bind:to="{ name: 'favorites'}" v-show="$store.state.token != ''"> FAVORITES</router-link>
     </div>
     <router-view />
@@ -20,16 +20,17 @@ body, html {
   background-attachment: fixed;
 }
 
-#nav, .nav {
+#nav {
   display: flex;
-  gap: 13px;
+  gap: 4px;
+} 
+.nav {
+  gap: 15px;
   background-color:cornsilk;
   height: 20px;
-  width: 120px;
   font-size: 20px;
   color: black;
   font-weight: bold;
-  
 }
 
 .nav:hover {
