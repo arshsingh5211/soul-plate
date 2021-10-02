@@ -265,7 +265,7 @@ input {
   transform: translate(-50%, -50%);
   width: 425px;
   height: 650px;
-  margin-top: 23%;
+  margin-top: 25%;
   margin-left: 5%;
   background: rgb(243, 231, 226);
   text-align: center;
