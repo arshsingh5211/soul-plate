@@ -18,10 +18,10 @@ public class JdbcRestaurantDao implements RestaurantDao {
 
 
     @Override
-    public Restaurant getRestaurant(int restaurantId) {
+    public Restaurant getRestaurant(int yelpId) {
         Restaurant restaurant = new Restaurant();
-        String sql ="SELECT restaurant_id, restaurant_name, yelp_id FROM restaurants WHERE restaurant_id = ?";
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql,restaurantId);
+        String sql ="SELECT restaurant_id, restaurant_name FROM restaurants WHERE yelp_id = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, yelpId);
         if (results.next()) {
             restaurant = mapRowToRestaurants(results);
         }
@@ -31,7 +31,7 @@ public class JdbcRestaurantDao implements RestaurantDao {
     @Override
     public List<Restaurant> getLikedRestaurants(int userId) {
         List<Restaurant> restaurantList = new ArrayList<>();
-        String query = "SELECT * FROM restaurants JOIN user_restaurants USING (restaurant_id) " +
+        String query = "SELECT * FROM restaurants JOIN user_restaurants USING (yelp_id) " +
                         "JOIN users USING (user_id) WHERE user_id = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(query, userId);
         while (results.next()) {
@@ -48,7 +48,7 @@ public class JdbcRestaurantDao implements RestaurantDao {
                         "RETURNING restaurant_id;";
         Integer restId = jdbcTemplate.queryForObject(query, Integer.class, restaurant.getRestaurantName(),
                 restaurant.getYelpId());
-        String query2 = "INSERT INTO user_restaurants (user_id, restaurant_id) " +
+        String query2 = "INSERT INTO user_restaurants (user_id, yelp_id) " +
                         "VALUES ((SELECT user_id FROM users WHERE user_id = ?), ?) " +
                         "ON CONFLICT (user_restaurants_id) DO NOTHING";
         jdbcTemplate.update(query2, userId, restId);
@@ -57,10 +57,17 @@ public class JdbcRestaurantDao implements RestaurantDao {
 			            "RETURNING category_id;";
         Integer categoryId = jdbcTemplate.queryForObject(query3, Integer.class, restaurant.getCategoryName());        
         String query4 = "INSERT INTO restaurant_categories (category_id, restaurant_id) " +
-                        "VALUES ((SELECT category_id FROM categories WHERE category_name = " +
-                                    "(SELECT preference from user_preferences WHERE user_id = ?)), ?)";
-        jdbcTemplate.update(query4, userId, restId);
+                        "VALUES (?, ?)";
+        jdbcTemplate.update(query4, categoryId, restId);
     }
+    
+//    @Override
+//    public void saveLikedRestaurant(Restaurant restaurant, int userId) {
+//    	String query = "INSERT INTO restaurants (restaurant_name, yelp_id) " +
+//    					"VALUES (?, ?) ON CONFLICT (yelp_id) DO UPDATE " +
+//    						"SET restaurant_name = excluded.restaurant_name " +
+//    					"RETURNING restaurant_id;";
+//    }
 
     @Override
     public void deleteLikedRestaurant(int userId) {
@@ -73,6 +80,7 @@ public class JdbcRestaurantDao implements RestaurantDao {
         restaurant.setYelpId(results.getString("yelp_id"));
         restaurant.setRestaurantId(results.getInt("restaurant_id"));
         restaurant.setRestaurantName(results.getString("restaurant_name"));
+        restaurant.setState(results.getString("state"));
         return restaurant;
     }
 }
