@@ -52,10 +52,14 @@ public class JdbcRestaurantDao implements RestaurantDao {
                         "VALUES ((SELECT user_id FROM users WHERE user_id = ?), ?) " +
                         "ON CONFLICT (user_restaurants_id) DO NOTHING";
         jdbcTemplate.update(query2, userId, restId);
-        String query3 = "INSERT INTO restaurant_categories (category_id, restaurant_id) " +
+        String query3 = "INSERT INTO categories(category_name) " +
+			        	"VALUES (?) ON CONFLICT (category_name) DO NOTHING " +
+			            "RETURNING category_id;";
+        Integer categoryId = jdbcTemplate.queryForObject(query3, Integer.class, restaurant.getCategoryName());        
+        String query4 = "INSERT INTO restaurant_categories (category_id, restaurant_id) " +
                         "VALUES ((SELECT category_id FROM categories WHERE category_name = " +
                                     "(SELECT preference from user_preferences WHERE user_id = ?)), ?)";
-        jdbcTemplate.update(query3, userId, restId);
+        jdbcTemplate.update(query4, userId, restId);
     }
 
     @Override

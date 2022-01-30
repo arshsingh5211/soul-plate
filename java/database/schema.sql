@@ -29,7 +29,7 @@ CREATE TABLE restaurants (
 CREATE SEQUENCE category_serial;
 CREATE TABLE categories (
         category_id int NOT NULL DEFAULT nextval('category_serial'),
-        category_name varchar(50),
+        category_name varchar(50) UNIQUE,
         CONSTRAINT PK_category PRIMARY KEY (category_id)
 );
 
@@ -138,7 +138,7 @@ INSERT INTO categories (category_id, category_name) VALUES (56, 'Eritrean');
 INSERT INTO categories (category_id, category_name) VALUES (57, 'Ethiopian');
 INSERT INTO categories (category_id, category_name) VALUES (58, 'Fast Food');
 INSERT INTO categories (category_id, category_name) VALUES (59, 'Filipino');
-INSERT INTO categories (category_id, category_name) VALUES (60, 'Filipino');
+INSERT INTO categories (category_id, category_name) VALUES (60, 'Filipino Food');
 INSERT INTO categories (category_id, category_name) VALUES (61, 'Flatbread');
 INSERT INTO categories (category_id, category_name) VALUES (62, 'Fondue');
 INSERT INTO categories (category_id, category_name) VALUES (63, 'Food Court');

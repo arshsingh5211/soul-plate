@@ -10,9 +10,10 @@ public class Restaurant {
     private String rating;
     private String imgUrl;
     private String yelpId;
+    private String categoryName;
 
     public Restaurant(String restaurantName, String address, String city, String state, String zipCode,
-                      String rating, String imgUrl, String yelpId) {
+                      String rating, String imgUrl, String yelpId, String categoryName) {
         this.restaurantName = restaurantName;
         this.address = address;
         this.city = city;
@@ -21,6 +22,7 @@ public class Restaurant {
         this.rating = rating;
         this.imgUrl = imgUrl;
         this.yelpId = yelpId;
+        this.categoryName = categoryName;
     }
 
     public Restaurant(int restaurantId, String restaurantName, String yelpId) {
@@ -104,6 +106,14 @@ public class Restaurant {
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
 
 
 

@@ -51,8 +51,9 @@ public class YelpService {
                 String imgUrl = root.path(i).path("image_url").asText();
                 String city = root.path(i).path("location").path("city").asText();
                 String yelpId = root.path(i).path("id").asText();
+                String categoryName = root.path(i).path("categories").path("title").asText();
 
-                Restaurant restaurant = new Restaurant(name, address, city, state, zipCode, rating, imgUrl, yelpId);
+                Restaurant restaurant = new Restaurant(name, address, city, state, zipCode, rating, imgUrl, yelpId, categoryName);
                 restaurantList.add(restaurant);
             }
         } catch (JsonProcessingException e) {
