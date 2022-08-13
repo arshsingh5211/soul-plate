@@ -1,7 +1,7 @@
 BEGIN TRANSACTION;
 
-DROP TABLE IF EXISTS users, restaurants, restaurant_categories, categories, user_preferences, user_restaurants, user_category CASCADE;
-DROP SEQUENCE IF EXISTS seq_user_id, restaurant_serial, category_serial, restaurant_category_serial, preferences_serial, user_category_serial;
+DROP TABLE IF EXISTS users, restaurants, user_preferences, user_restaurants CASCADE;
+DROP SEQUENCE IF EXISTS seq_user_id, restaurant_serial, preferences_serial;
 
 CREATE SEQUENCE seq_user_id
   INCREMENT BY 1
@@ -27,23 +27,6 @@ CREATE TABLE restaurants (
         CONSTRAINT PK_restaurant PRIMARY KEY (yelp_id)
 );
 
-CREATE SEQUENCE category_serial;
-CREATE TABLE categories (
-        category_id int NOT NULL DEFAULT nextval('category_serial'),
-        category_name varchar(50) UNIQUE,
-        CONSTRAINT PK_category PRIMARY KEY (category_id)
-);
-
-CREATE SEQUENCE restaurant_category_serial;
-CREATE TABLE restaurant_categories (
-        category_id int NOT NULL DEFAULT nextval('restaurant_category_serial'),
-        yelp_id varchar NOT NULL,
-        CONSTRAINT PK_restaurant_categories PRIMARY KEY(category_id, yelp_id),
-        CONSTRAINT FK_restaurant_categories_categories FOREIGN KEY(category_id) REFERENCES categories(category_id),
-        CONSTRAINT FK_restaurant_category FOREIGN KEY(yelp_id) REFERENCES restaurants(yelp_id)
-);
-
-
 CREATE SEQUENCE preferences_serial;
 CREATE TABLE user_preferences (
         preferences_id int NOT NULL DEFAULT nextval('preferences_serial'),
@@ -55,16 +38,6 @@ CREATE TABLE user_preferences (
         CONSTRAINT PK_preferences PRIMARY KEY (preferences_id),
         CONSTRAINT FK_user_preferences FOREIGN KEY (user_id) REFERENCES users(user_id)
         
-);
-
-CREATE SEQUENCE user_category_serial;
-CREATE TABLE user_category (
-        user_category_id serial NOT NULL,
-        preferences_id int NOT NULL,
-        category_id int NOT NULL,
-        CONSTRAINT PK_user_category PRIMARY KEY (user_category_id),
-        CONSTRAINT FK_preferences_id FOREIGN KEY (preferences_id) REFERENCES user_preferences(preferences_id),
-        CONSTRAINT FK_category_id FOREIGN KEY (category_id) REFERENCES categories(category_id)
 );
 
 CREATE TABLE user_restaurants (
