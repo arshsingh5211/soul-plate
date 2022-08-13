@@ -51,7 +51,7 @@ public class YelpService {
                 String imgUrl = root.path(i).path("image_url").asText();
                 String city = root.path(i).path("location").path("city").asText();
                 String yelpId = root.path(i).path("id").asText();
-                String categoryName = root.path(i).path("categories").path("title").asText();
+                String categoryName = root.path(i).path("categories").path("title").asText().toLowerCase();
 
                 Restaurant restaurant = new Restaurant(name, address, city, state, zipCode, rating, imgUrl, yelpId, categoryName);
                 restaurantList.add(restaurant);

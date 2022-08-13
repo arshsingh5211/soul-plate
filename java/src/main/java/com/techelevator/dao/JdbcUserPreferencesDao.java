@@ -42,19 +42,15 @@ public class JdbcUserPreferencesDao implements UserPreferencesDao {
 
     @Override
     public UserPreferences createProfilePreferences(UserPreferences newPreferences, int userId) {
-        String query = "INSERT INTO user_preferences (user_id, name, home_zip, preference, category_id) VALUES (" +
-                     "(SELECT user_id FROM users WHERE user_id = ?), ?, ?, ?, " +
-                     "(SELECT category_id FROM categories WHERE category_name = ?)) " +
+        String query = "INSERT INTO user_preferences (user_id, name, home_zip, preference) VALUES (" +
+                     "(SELECT user_id FROM users WHERE user_id = ?), ?, ?, ?) " +
                      "ON CONFLICT (user_id) DO UPDATE " +
-                        "SET preference = excluded.preference, name = excluded.name, home_zip = excluded.home_zip, " +
-                            "category_id = excluded.category_id " +
+                        "SET preference = excluded.preference, name = excluded.name, home_zip = excluded.home_zip " +
                      "RETURNING preferences_id;";
         Integer newId = jdbcTemplate.queryForObject(query, Integer.class, userId,
-                newPreferences.getName(), newPreferences.getHomeZip(), newPreferences.getPreference(),
-                newPreferences.getPreference());
+                newPreferences.getName(), newPreferences.getHomeZip(), newPreferences.getPreference());
         return getUserPreferences(newId);
     }
-
 
     @Override
     public List<UserPreferences> getAllPreferences() {
@@ -76,8 +72,6 @@ public class JdbcUserPreferencesDao implements UserPreferencesDao {
         userPreferences.setName(results.getString("name"));
         userPreferences.setHomeZip(results.getInt("home_zip"));
         userPreferences.setUserId(results.getInt("user_id"));
-        userPreferences.setCategoryId(results.getInt("category_id"));
-
         return userPreferences;
     }
 
