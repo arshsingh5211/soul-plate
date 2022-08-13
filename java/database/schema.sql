@@ -32,9 +32,8 @@ CREATE TABLE user_preferences (
         preferences_id int NOT NULL DEFAULT nextval('preferences_serial'),
         user_id int UNIQUE,
         name varchar, 
-        home_zip int,
+        home_zip VARCHAR(5),
         preference varchar,
-        category_id int,
         CONSTRAINT PK_preferences PRIMARY KEY (preferences_id),
         CONSTRAINT FK_user_preferences FOREIGN KEY (user_id) REFERENCES users(user_id)
         

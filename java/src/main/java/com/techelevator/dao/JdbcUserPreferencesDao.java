@@ -72,8 +72,6 @@ public class JdbcUserPreferencesDao implements UserPreferencesDao {
         userPreferences.setName(results.getString("name"));
         userPreferences.setHomeZip(results.getInt("home_zip"));
         userPreferences.setUserId(results.getInt("user_id"));
-        userPreferences.setCategoryId(results.getInt("category_id"));
-
         return userPreferences;
     }
 
