@@ -49,7 +49,7 @@ public class JdbcUserPreferencesDao implements UserPreferencesDao {
                      "RETURNING preferences_id;";
         Integer newId = jdbcTemplate.queryForObject(query, Integer.class, userId,
                 newPreferences.getName(), newPreferences.getHomeZip(), newPreferences.getPreference());
-        return getUserPreferences(newId); //random comment to test something
+        return getUserPreferences(newId);
     }
 
     @Override
