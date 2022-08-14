@@ -52,6 +52,8 @@ public class JdbcUserPreferencesDao implements UserPreferencesDao {
         return getUserPreferences(newId);
     }
 
+    // allow users to add more preferences not just replace when you choose new pref
+
     @Override
     public List<UserPreferences> getAllPreferences() {
         List<UserPreferences> allPreferences = new ArrayList<>();

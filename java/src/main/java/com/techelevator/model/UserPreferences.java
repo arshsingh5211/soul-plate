@@ -7,7 +7,6 @@ public class UserPreferences {
     private String name;
     private String preference;
     private int homeZip;
-    private int categoryId;
 
     public int getPreferencesId() {
         return preferencesId;
@@ -47,14 +46,6 @@ public class UserPreferences {
 
     public void setHomeZip(int homeZip) {
         this.homeZip = homeZip;
-    }
-
-    public int getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
     }
 
     public UserPreferences(){ }
