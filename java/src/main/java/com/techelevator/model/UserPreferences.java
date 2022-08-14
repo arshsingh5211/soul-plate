@@ -2,18 +2,19 @@ package com.techelevator.model;
 
 public class UserPreferences {
 
-    private int preferencesId;
+    private int userPreferencesId;
     private int userId;
+    private int preferencesId;
     private String name;
     private String preference;
     private int homeZip;
 
-    public int getPreferencesId() {
-        return preferencesId;
+    public int getUserPreferencesId() {
+        return userPreferencesId;
     }
 
-    public void setPreferencesId(int preferencesId) {
-        this.preferencesId = preferencesId;
+    public void setUserPreferencesId(int userPreferencesId) {
+        this.userPreferencesId = userPreferencesId;
     }
 
     public int getUserId() {
@@ -22,6 +23,14 @@ public class UserPreferences {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public int getPreferencesId() {
+        return preferencesId;
+    }
+
+    public void setPreferencesId(int preferencesId) {
+        this.preferencesId = preferencesId;
     }
 
     public String getName() {

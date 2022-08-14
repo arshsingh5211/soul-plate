@@ -30,22 +30,18 @@ CREATE TABLE restaurants (
 CREATE SEQUENCE preferences_serial;
 CREATE TABLE preferences (
         preferences_id int NOT NULL DEFAULT nextval('preferences_serial'),
-        user_id int UNIQUE,
-        name varchar, 
-        home_zip VARCHAR(5),
         preference varchar,
-        CONSTRAINT PK_preferences PRIMARY KEY (preferences_id),
-        CONSTRAINT FK_user_preferences FOREIGN KEY (user_id) REFERENCES users(user_id)
-        
+        CONSTRAINT PK_preferences PRIMARY KEY (preferences_id)
 );
 
 CREATE TABLE user_preferences (
         user_preferences_id serial NOT NULL PRIMARY KEY,
         user_id int NOT NULL ,
-        preferences_id int UNIQUE NOT NULL,
+        preferences_id int NOT NULL,
+        name varchar,
+        home_zip VARCHAR(5),
         CONSTRAINT FK_user_id FOREIGN KEY (user_id) REFERENCES users(user_id),
         CONSTRAINT FK_preferences_id FOREIGN KEY (preferences_id) REFERENCES preferences(preferences_id)
-
 );
 
 CREATE TABLE user_restaurants (
@@ -54,7 +50,6 @@ CREATE TABLE user_restaurants (
         yelp_id varchar NOT NULL ,
         CONSTRAINT FK_user_id FOREIGN KEY (user_id) REFERENCES users(user_id),
         CONSTRAINT FK_yelp_id FOREIGN KEY (yelp_id) REFERENCES restaurants(yelp_id)
-
 );
 
 

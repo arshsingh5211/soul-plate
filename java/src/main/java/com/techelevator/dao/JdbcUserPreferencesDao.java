@@ -42,14 +42,11 @@ public class JdbcUserPreferencesDao implements UserPreferencesDao {
 
     @Override
     public UserPreferences createProfilePreferences(UserPreferences newPreferences, int userId) {
-        String query = "INSERT INTO user_preferences (user_id, name, home_zip, preference) VALUES (" +
-                     "(SELECT user_id FROM users WHERE user_id = ?), ?, ?, ?) " +
-                     "ON CONFLICT (user_id) DO UPDATE " +
-                        "SET preference = excluded.preference, name = excluded.name, home_zip = excluded.home_zip " +
-                     "RETURNING preferences_id;";
-        Integer newId = jdbcTemplate.queryForObject(query, Integer.class, userId,
+        String query = "INSERT INTO user_preferences (user_id, preferences_id, name, home_zip) VALUES (" +
+                     "(SELECT user_id FROM users WHERE user_id = ?), (SELECT preferences_id FROM preferences WHERE preference_id = ?), ?, ?) ";
+        Integer newPreferenceId = jdbcTemplate.queryForObject(query, Integer.class, userId,
                 newPreferences.getName(), newPreferences.getHomeZip(), newPreferences.getPreference());
-        return getUserPreferences(newId);
+        return getUserPreferences(newPreferenceId);
     }
 
     // allow users to add more preferences not just replace when you choose new pref

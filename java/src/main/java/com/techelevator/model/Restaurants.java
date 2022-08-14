@@ -1,6 +1,6 @@
 package com.techelevator.model;
 
-public class Restaurant {
+public class Restaurants {
     private int restaurantId;
     private String restaurantName;
     private String address;
@@ -12,8 +12,8 @@ public class Restaurant {
     private String yelpId;
     private String categoryName;
 
-    public Restaurant(String restaurantName, String address, String city, String state, String zipCode,
-                      String rating, String imgUrl, String yelpId, String categoryName) {
+    public Restaurants(String restaurantName, String address, String city, String state, String zipCode,
+                       String rating, String imgUrl, String yelpId, String categoryName) {
         this.restaurantName = restaurantName;
         this.address = address;
         this.city = city;
@@ -25,13 +25,13 @@ public class Restaurant {
         this.categoryName = categoryName;
     }
 
-    public Restaurant(int restaurantId, String restaurantName, String yelpId) {
+    public Restaurants(int restaurantId, String restaurantName, String yelpId) {
         this.restaurantId = restaurantId;
         this.restaurantName = restaurantName;
         this.yelpId = yelpId;
     }
 
-    public Restaurant(){
+    public Restaurants(){
 
     }
 

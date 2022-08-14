@@ -4,8 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.techelevator.model.RestaurantDetails;
-import com.techelevator.model.Restaurant;
-import com.techelevator.model.Review;
+import com.techelevator.model.Restaurants;
 import com.techelevator.model.ReviewUser;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -26,7 +25,7 @@ public class YelpService {
     private String detailsURL = "https://api.yelp.com/v3/businesses/";
     private String key = "tQwuuShqwMO3BEamfFGjLbnQPezsb1pzpP-4bKMgVTNs-2UbgL504SZzaaq-IsbfuGa2mqblP7JRmDXMtB5djryRSwCXhem46zgyEtQmBwLiAqROiEcscRycmBJGYXYx";
 
-    public List<Restaurant> getSearchResults(String foodPref, String location) {
+    public List<Restaurants> getSearchResults(String foodPref, String location) {
         String url = apiURL + "&term=" + foodPref + "&location=" + location;
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(key);
@@ -39,7 +38,7 @@ public class YelpService {
                 String.class);
 
         JsonNode jsonNode;
-        List<Restaurant> restaurantList = new ArrayList<>();
+        List<Restaurants> restaurantsList = new ArrayList<>();
         try {
             jsonNode = objectMapper.readTree(responseEntity.getBody());
             JsonNode root = jsonNode.path("businesses");
@@ -58,18 +57,18 @@ public class YelpService {
                 }
                 String categoryName = Arrays.toString(catArr).replace("[","").replace("]", "");
 
-                Restaurant restaurant = new Restaurant(name, address, city, state, zipCode, rating, imgUrl, yelpId, categoryName);
-                restaurantList.add(restaurant);
+                Restaurants restaurants = new Restaurants(name, address, city, state, zipCode, rating, imgUrl, yelpId, categoryName);
+                restaurantsList.add(restaurants);
             }
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        return restaurantList;
+        return restaurantsList;
     }
 
-    public Restaurant getRandomRestaurant(List<Restaurant> restaurantList) {
+    public Restaurants getRandomRestaurant(List<Restaurants> restaurantsList) {
         Random random = new Random();
-        return restaurantList.get(random.nextInt(restaurantList.size()));
+        return restaurantsList.get(random.nextInt(restaurantsList.size()));
     }
 
     public RestaurantDetails getRestaurantDetails(String id) {

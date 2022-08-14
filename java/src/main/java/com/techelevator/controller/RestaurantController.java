@@ -27,7 +27,7 @@ public class RestaurantController {
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(path="/restaurants", method = RequestMethod.GET)
-    public List<Restaurant> listSearchResults(@RequestParam String foodPref, @RequestParam String location) {
+    public List<Restaurants> listSearchResults(@RequestParam String foodPref, @RequestParam String location) {
         return yelpService.getSearchResults(foodPref, location);
     }
 
@@ -41,22 +41,22 @@ public class RestaurantController {
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(path = "/restaurant", method = RequestMethod.GET)
-    public Restaurant getRandomRestaurant(@RequestParam String foodPref, @RequestParam String location) {
+    public Restaurants getRandomRestaurant(@RequestParam String foodPref, @RequestParam String location) {
         return yelpService.getRandomRestaurant(yelpService.getSearchResults(foodPref, location));
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(path = "/liked", method = RequestMethod.POST)
-    public void addLikedRestaurant(@RequestBody Restaurant restaurant, Principal principal) {
+    public void addLikedRestaurant(@RequestBody Restaurants restaurants, Principal principal) {
         String user = principal.getName();
         int id = userDao.findIdByUsername(user);
-        restaurantDAO.saveLikedRestaurant(restaurant, id);
+        restaurantDAO.saveLikedRestaurant(restaurants, id);
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(path = "/liked", method = RequestMethod.GET)
-    public List<Restaurant> getLikedRestaurants(Principal principal) {
+    public List<Restaurants> getLikedRestaurants(Principal principal) {
         String user = principal.getName();
         int id = userDao.findIdByUsername(user);
         return restaurantDAO.getLikedRestaurants(id);
