@@ -1,6 +1,6 @@
 package com.techelevator.model;
 
-public class UserPreferences {
+public class Preferences {
 
     private int userPreferencesId;
     private int userId;
@@ -57,7 +57,7 @@ public class UserPreferences {
         this.homeZip = homeZip;
     }
 
-    public UserPreferences(){ }
+    public Preferences(){ }
 
 
 

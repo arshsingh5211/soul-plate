@@ -2,7 +2,7 @@ package com.techelevator.controller;
 
 import com.techelevator.dao.RestaurantDao;
 import com.techelevator.dao.UserDao;
-import com.techelevator.dao.UserPreferencesDao;
+import com.techelevator.dao.PreferenceDAO;
 import com.techelevator.model.*;
 import com.techelevator.services.YelpService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class RestaurantController {
     @Autowired
     YelpService yelpService;
     @Autowired
-    UserPreferencesDao userPreferencesDao;
+    PreferenceDAO preferenceDAO;
     @Autowired
     RestaurantDao restaurantDAO;
     @Autowired
@@ -27,7 +27,7 @@ public class RestaurantController {
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(path="/restaurants", method = RequestMethod.GET)
-    public List<Restaurants> listSearchResults(@RequestParam String foodPref, @RequestParam String location) {
+    public List<Restaurant> listSearchResults(@RequestParam String foodPref, @RequestParam String location) {
         return yelpService.getSearchResults(foodPref, location);
     }
 
@@ -41,22 +41,22 @@ public class RestaurantController {
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(path = "/restaurant", method = RequestMethod.GET)
-    public Restaurants getRandomRestaurant(@RequestParam String foodPref, @RequestParam String location) {
+    public Restaurant getRandomRestaurant(@RequestParam String foodPref, @RequestParam String location) {
         return yelpService.getRandomRestaurant(yelpService.getSearchResults(foodPref, location));
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(path = "/liked", method = RequestMethod.POST)
-    public void addLikedRestaurant(@RequestBody Restaurants restaurants, Principal principal) {
+    public void addLikedRestaurant(@RequestBody Restaurant restaurant, Principal principal) {
         String user = principal.getName();
         int id = userDao.findIdByUsername(user);
-        restaurantDAO.saveLikedRestaurant(restaurants, id);
+        restaurantDAO.saveLikedRestaurant(restaurant, id);
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(path = "/liked", method = RequestMethod.GET)
-    public List<Restaurants> getLikedRestaurants(Principal principal) {
+    public List<Restaurant> getLikedRestaurants(Principal principal) {
         String user = principal.getName();
         int id = userDao.findIdByUsername(user);
         return restaurantDAO.getLikedRestaurants(id);
