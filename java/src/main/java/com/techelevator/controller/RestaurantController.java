@@ -1,7 +1,7 @@
 package com.techelevator.controller;
 
-import com.techelevator.dao.RestaurantDao;
-import com.techelevator.dao.UserDao;
+import com.techelevator.dao.RestaurantDAO;
+import com.techelevator.dao.UserDAO;
 import com.techelevator.dao.PreferenceDAO;
 import com.techelevator.model.*;
 import com.techelevator.services.YelpService;
@@ -21,9 +21,9 @@ public class RestaurantController {
     @Autowired
     PreferenceDAO preferenceDAO;
     @Autowired
-    RestaurantDao restaurantDAO;
+    RestaurantDAO restaurantDAO;
     @Autowired
-    UserDao userDao;
+    UserDAO userDao;
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(path="/restaurants", method = RequestMethod.GET)

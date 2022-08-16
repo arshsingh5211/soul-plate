@@ -14,11 +14,11 @@ import org.springframework.stereotype.Service;
 import com.techelevator.model.User;
 
 @Service
-public class JdbcUserDao implements UserDao {
+public class JDBCUserDAO implements UserDAO {
 
     private JdbcTemplate jdbcTemplate;
 
-    public JdbcUserDao(JdbcTemplate jdbcTemplate) {
+    public JDBCUserDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

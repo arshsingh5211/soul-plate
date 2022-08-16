@@ -4,7 +4,7 @@ import com.techelevator.model.Restaurant;
 
 import java.util.List;
 
-public interface RestaurantDao {
+public interface RestaurantDAO {
     public Restaurant getRestaurant(int restaurantId);
     public List<Restaurant> getLikedRestaurants(int userId);
     public void saveLikedRestaurant (Restaurant restaurant, int userId);

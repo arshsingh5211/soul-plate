@@ -1,7 +1,7 @@
 package com.techelevator.security;
 
 
-import com.techelevator.dao.UserDao;
+import com.techelevator.dao.UserDAO;
 import com.techelevator.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,9 +22,9 @@ public class UserModelDetailsService implements UserDetailsService {
 
     private final Logger log = LoggerFactory.getLogger(UserModelDetailsService.class);
 
-    private final UserDao userDao;
+    private final UserDAO userDao;
 
-    public UserModelDetailsService(UserDao userDao) {
+    public UserModelDetailsService(UserDAO userDao) {
         this.userDao = userDao;
     }
 

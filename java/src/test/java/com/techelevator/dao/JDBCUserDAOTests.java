@@ -8,15 +8,15 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 
-public class JdbcUserDaoTests extends FinalCapstoneDaoTests {
+public class JDBCUserDAOTests extends FinalCapstoneDaoTests {
 
-    private JdbcUserDao sut;
+    private JDBCUserDAO sut;
 
     @Before
     public void setup() {
         DataSource dataSource = this.getDataSource();
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        sut = new JdbcUserDao(jdbcTemplate);
+        sut = new JDBCUserDAO(jdbcTemplate);
     }
 
     @Test

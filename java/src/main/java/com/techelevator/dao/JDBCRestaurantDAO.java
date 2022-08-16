@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class JdbcRestaurantDao implements RestaurantDao {
+public class JDBCRestaurantDAO implements RestaurantDAO {
     private JdbcTemplate jdbcTemplate;
 
-    public JdbcRestaurantDao(JdbcTemplate jdbcTemplate){
+    public JDBCRestaurantDAO(JdbcTemplate jdbcTemplate){
         this.jdbcTemplate = jdbcTemplate;
     }
 

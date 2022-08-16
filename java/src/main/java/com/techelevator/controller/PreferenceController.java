@@ -1,8 +1,8 @@
 package com.techelevator.controller;
 
-import com.techelevator.dao.JdbcUserDao;
+import com.techelevator.dao.JDBCUserDAO;
 import com.techelevator.dao.PreferenceDAO;
-import com.techelevator.model.Preferences;
+import com.techelevator.model.Preference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,11 +19,11 @@ public class PreferenceController {
     @Autowired
     PreferenceDAO preferenceDAO;
     @Autowired
-    JdbcUserDao userDao;
+    JDBCUserDAO userDao;
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(path = "/preferences", method = RequestMethod.GET)
-    public List<Preferences> getUserPreference (Principal principal) {
+    public List<Preference> getUserPreference (Principal principal) {
         String user = principal.getName();
         int id = userDao.findIdByUsername(user);
         return preferenceDAO.getPreferencesByUserId(id);
@@ -32,15 +32,15 @@ public class PreferenceController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/preferences", method = RequestMethod.POST)
-    public void createUserPreferences(@RequestBody Preferences newPreferences, Principal principal) {
+    public void createUserPreferences(@RequestBody Preference newPreference, Principal principal) {
         String user = principal.getName();
         int id = userDao.findIdByUsername(user);
-        preferenceDAO.createProfilePreferences(newPreferences, id);
+        preferenceDAO.createProfilePreferences(newPreference, id);
     }
 
 /*    @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(path = "/preferences", method = RequestMethod.PUT)
-    public void updateUserPreferences(@RequestBody Preferences newPreferences, Principal principal) {
+    public void updateUserPreferences(@RequestBody Preference newPreferences, Principal principal) {
         String user = principal.getName();
         int id = userDao.findIdByUsername(user);
         preferenceDAO.updateProfilePreferences(newPreferences, id);

@@ -1,15 +1,15 @@
 package com.techelevator.dao;
 
-import com.techelevator.model.Preferences;
+import com.techelevator.model.Preference;
 
 import java.util.List;
 
 public interface PreferenceDAO {
 
-     public Preferences getUserPreferences(int preferenceId);
+     public Preference getUserPreferences(int preferenceId);
 
-     public List<Preferences> getPreferencesByUserId(int userId);
+     public List<Preference> getPreferencesByUserId(int userId);
 
-     public Preferences createProfilePreferences(Preferences newPreferences, int userId);
-     public List<Preferences> getAllPreferences();
+     public Preference createProfilePreferences(Preference newPreference, int userId);
+     public List<Preference> getAllPreferences();
 }
