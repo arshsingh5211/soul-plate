@@ -35,7 +35,7 @@ public class PreferenceController {
     public void createUserPreferences(@RequestBody Preference newPreference, Principal principal) {
         String user = principal.getName();
         int id = userDao.findIdByUsername(user);
-        preferenceDAO.createProfilePreferences(newPreference, id);
+        preferenceDAO.createPreferences(newPreference, id);
     }
 
 /*    @PreAuthorize("hasRole('ROLE_USER')")

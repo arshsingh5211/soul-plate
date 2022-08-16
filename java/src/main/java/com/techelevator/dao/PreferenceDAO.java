@@ -10,6 +10,6 @@ public interface PreferenceDAO {
 
      public List<Preference> getPreferencesByUserId(int userId);
 
-     public Preference createProfilePreferences(Preference newPreference, int userId);
+     public void createPreferences(Preference newPreference, int userId);
      public List<Preference> getAllPreferences();
 }
