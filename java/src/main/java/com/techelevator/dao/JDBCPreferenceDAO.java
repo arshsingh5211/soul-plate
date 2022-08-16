@@ -48,8 +48,8 @@ public class JDBCPreferenceDAO implements PreferenceDAO {
         Integer prefId = jdbcTemplate.queryForObject(query, Integer.class, newPreference.getPreference(),
                 newPreference.getPreferencesId());
         String query2 = "INSERT INTO user_preferences (user_id, preferences_id, name, home_zip) VALUES (" +
-                "(SELECT user_id FROM users WHERE user_id = ?), (SELECT preferences_id FROM preferences WHERE preferences_id = ?), ?, ?)) " +
-                "ON CONFLICT (user_preferences_id) DO NOTHING";
+                "(SELECT user_id FROM users WHERE user_id = ?), (SELECT preferences_id FROM preferences WHERE " +
+                "preferences_id = ?), ?, ?)";
         jdbcTemplate.update(query2, userId, prefId, newPreference.getName(), newPreference.getHomeZip());
     }
 
