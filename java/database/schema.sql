@@ -1,7 +1,7 @@
 BEGIN TRANSACTION;
 
 DROP TABLE IF EXISTS users, restaurants, preferences, user_preferences, user_restaurants CASCADE;
-DROP SEQUENCE IF EXISTS seq_user_id, restaurants_serial, preferences_serial;
+DROP SEQUENCE IF EXISTS seq_user_id, restaurants_serial;
 
 CREATE SEQUENCE seq_user_id
   INCREMENT BY 1
@@ -27,11 +27,9 @@ CREATE TABLE restaurants (
         CONSTRAINT PK_restaurant PRIMARY KEY (yelp_id)
 );
 
-CREATE SEQUENCE preferences_serial;
 CREATE TABLE preferences (
-        preferences_id int NOT NULL DEFAULT nextval('preferences_serial'),
-        preference varchar,
-        CONSTRAINT PK_preferences PRIMARY KEY (preferences_id)
+        preferences_id serial NOT NULL PRIMARY KEY,
+        preference varchar NOT NULL
 );
 
 CREATE TABLE user_preferences (
