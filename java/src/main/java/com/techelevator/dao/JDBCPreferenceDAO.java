@@ -18,7 +18,8 @@ public class JDBCPreferenceDAO implements PreferenceDAO {
     @Override
     public List<Preferences> getPreferencesByUserId(int userId) {
         List<Preferences> preferencesList = new ArrayList<>();
-        String sql = "SELECT name, home_zip, preferences_id, preference FROM preferences JOIN user_preferences USING (preferences_id) " +
+        String sql = "SELECT name, home_zip, preferences_id, preference FROM preferences JOIN user_preferences " +
+                "USING (preferences_id) " +
                 "JOIN users USING (user_id) WHERE user_id = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
         while (results.next()) {
@@ -30,15 +31,13 @@ public class JDBCPreferenceDAO implements PreferenceDAO {
 
     @Override
     public void createPreferences(Preferences newPreferences, int userId) {
-        String query =  "INSERT INTO preferences (preferences_id, preference) " +
-                                "VALUES (?, ?) ON CONFLICT (preferences_id) DO UPDATE " +
-                                "SET preference = excluded.preference " +
-                        "RETURNING preferences_id; ";
-        Integer preferencesId = jdbcTemplate.queryForObject(query, Integer.class, newPreferences.getPreferencesId(),
-                                newPreferences.getPreference());
+        String query =  "INSERT INTO preferences (preference) VALUES (?) RETURNING preferences_id; ";
+        Integer preferencesId = jdbcTemplate.queryForObject(query, Integer.class, newPreferences.getPreference());
         String query2 = "INSERT INTO user_preferences (user_id, preferences_id, name, home_zip) VALUES (" +
-                                "(SELECT user_id FROM users WHERE user_id = ?), " +
-                                "(SELECT preferences_id FROM preferences WHERE preferences_id = ?), ?, ?);";
+                            "(SELECT user_id FROM users WHERE user_id = ?), " +
+                            "(SELECT preferences_id FROM preferences WHERE preferences_id = ?), ?, ?)" +
+                        "ON CONFLICT (name, home_zip) DO UPDATE SET name = excluded.name, " +
+                            "home_zip = excluded.home_zip;";
         jdbcTemplate.update(query2, userId, preferencesId, newPreferences.getName(), newPreferences.getHomeZip());
     }
 
