@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface PreferenceDAO {
 
-     public Preferences getUserPreferences(int preferenceId);
+     public List<Preferences>  getUserPreferences(int userId);
 
      public List<Preferences> getPreferencesByUserId(int userId);
 
