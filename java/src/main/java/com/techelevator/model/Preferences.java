@@ -4,6 +4,8 @@ public class Preferences {
 
     private int preferencesId;
     private String preference;
+    private String name;
+    private String homeZip;
 
     public Preferences(){ }
 
@@ -23,4 +25,19 @@ public class Preferences {
         this.preference = preference;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getHomeZip() {
+        return homeZip;
+    }
+
+    public void setHomeZip(String homeZip) {
+        this.homeZip = homeZip;
+    }
 }

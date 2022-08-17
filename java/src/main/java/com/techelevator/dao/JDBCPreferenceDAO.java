@@ -60,6 +60,10 @@ public class JDBCPreferenceDAO implements PreferenceDAO {
 
         Preferences preferences = new Preferences();
         preferences.setPreferencesId(results.getInt("preferences_id"));
+        preferences.setPreference(results.getString("preference"));
+        preferences.setName(results.getString("name"));
+        preferences.setHomeZip(results.getString("home_zip"));
+
         return preferences;
     }
 
