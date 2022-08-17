@@ -18,7 +18,7 @@ public class JDBCPreferenceDAO implements PreferenceDAO {
     @Override
     public List<Preferences> getUserPreferences(int userId) {
         List<Preferences> preferencesList = new ArrayList<>();
-        String sql = "SELECT name, home_zip, preference_id, preference FROM preferences JOIN user_preferences USING (preferences_id) " +
+        String sql = "SELECT name, home_zip, preferences_id, preference FROM preferences JOIN user_preferences USING (preferences_id) " +
                 "JOIN users USING (user_id) WHERE user_id = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
         while (results.next()) {
