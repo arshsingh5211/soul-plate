@@ -36,7 +36,7 @@ public class JDBCPreferenceDAO implements PreferenceDAO {
                 newPreferences.getHomeZip());
         String query2 = "INSERT INTO user_preferences (user_id, preferences_id, name) VALUES (" +
                             "(SELECT user_id FROM users WHERE user_id = ?), " +
-                            "(SELECT preferences_id FROM preferences WHERE preferences_id = ?), ?, ?)";
+                            "(SELECT preferences_id FROM preferences WHERE preferences_id = ?), ?)";
         jdbcTemplate.update(query2, userId, preferencesId, newPreferences.getName());
     }
 

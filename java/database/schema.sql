@@ -29,7 +29,7 @@ CREATE TABLE restaurants (
 
 CREATE TABLE preferences (
         preferences_id serial NOT NULL PRIMARY KEY,
-        preference varchar UNIQUE NOT NULL,
+        preference varchar NOT NULL,
         home_zip VARCHAR(5),
         CONSTRAINT UQ_preference_home_zip UNIQUE(preference, home_zip)
 );
