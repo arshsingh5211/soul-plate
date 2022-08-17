@@ -26,7 +26,7 @@ public class PreferenceController {
     public List<Preferences> getUserPreference (Principal principal) {
         String user = principal.getName();
         int id = userDao.findIdByUsername(user);
-        return preferenceDAO.getUserPreferences(id);
+        return preferenceDAO.getPreferencesByUserId(id);
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
