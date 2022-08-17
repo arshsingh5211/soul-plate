@@ -31,14 +31,13 @@ public class JDBCPreferenceDAO implements PreferenceDAO {
 
     @Override
     public void createPreferences(Preferences newPreferences, int userId) {
-        String query =  "INSERT INTO preferences (preference) VALUES (?) RETURNING preferences_id; ";
-        Integer preferencesId = jdbcTemplate.queryForObject(query, Integer.class, newPreferences.getPreference());
-        String query2 = "INSERT INTO user_preferences (user_id, preferences_id, name, home_zip) VALUES (" +
+        String query =  "INSERT INTO preferences (preference, home_zip) VALUES (?, ?) RETURNING preferences_id; ";
+        Integer preferencesId = jdbcTemplate.queryForObject(query, Integer.class, newPreferences.getPreference(),
+                newPreferences.getHomeZip());
+        String query2 = "INSERT INTO user_preferences (user_id, preferences_id, name) VALUES (" +
                             "(SELECT user_id FROM users WHERE user_id = ?), " +
-                            "(SELECT preferences_id FROM preferences WHERE preferences_id = ?), ?, ?)" +
-                        "ON CONFLICT (name, home_zip) DO UPDATE SET name = excluded.name, " +
-                            "home_zip = excluded.home_zip;";
-        jdbcTemplate.update(query2, userId, preferencesId, newPreferences.getName(), newPreferences.getHomeZip());
+                            "(SELECT preferences_id FROM preferences WHERE preferences_id = ?), ?, ?)";
+        jdbcTemplate.update(query2, userId, preferencesId, newPreferences.getName());
     }
 
     // allow users to add more preferences not just replace when you choose new pref

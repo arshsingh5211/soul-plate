@@ -29,7 +29,9 @@ CREATE TABLE restaurants (
 
 CREATE TABLE preferences (
         preferences_id serial NOT NULL PRIMARY KEY,
-        preference varchar NOT NULL
+        preference varchar UNIQUE NOT NULL,
+        home_zip VARCHAR(5),
+        CONSTRAINT UQ_preference_home_zip UNIQUE(preference, home_zip)
 );
 
 CREATE TABLE user_preferences (
@@ -37,7 +39,6 @@ CREATE TABLE user_preferences (
         user_id int NOT NULL ,
         preferences_id int NOT NULL,
         name varchar,
-        home_zip VARCHAR(5),
         CONSTRAINT FK_user_id FOREIGN KEY (user_id) REFERENCES users(user_id),
         CONSTRAINT FK_preferences_id FOREIGN KEY (preferences_id) REFERENCES preferences(preferences_id)
 );
