@@ -40,8 +40,6 @@ public class JDBCPreferenceDAO implements PreferenceDAO {
         jdbcTemplate.update(query2, userId, preferencesId, newPreferences.getName());
     }
 
-    // allow users to add more preferences not just replace when you choose new pref
-
     @Override
     public List<Preferences> getAllPreferences() {
         List<Preferences> allPreferences = new ArrayList<>();
