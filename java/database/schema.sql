@@ -42,7 +42,7 @@ CREATE TABLE user_preferences (
         CONSTRAINT FK_user_id FOREIGN KEY (user_id) REFERENCES users(user_id),
         CONSTRAINT FK_preferences_id FOREIGN KEY (preferences_id) REFERENCES preferences(preferences_id)
 );
--- random comment
+
 CREATE TABLE user_restaurants (
         user_restaurants_id serial NOT NULL PRIMARY KEY,
         user_id int NOT NULL , 

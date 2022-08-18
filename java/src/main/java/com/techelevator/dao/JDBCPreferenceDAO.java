@@ -31,7 +31,9 @@ public class JDBCPreferenceDAO implements PreferenceDAO {
 
     @Override
     public void createPreferences(Preferences newPreferences, int userId) {
-        String query =  "INSERT INTO preferences (preference, home_zip) VALUES (?, ?) RETURNING preferences_id; ";
+        String query =  "INSERT INTO preferences (preference, home_zip) VALUES (?, ?) ON CONFLICT (preferences_id) " +
+                "DO UPDATE SET preferences_id = excluded.preferences_id " +
+                "RETURNING preferences_id; ";
         Integer preferencesId = jdbcTemplate.queryForObject(query, Integer.class, newPreferences.getPreference(),
                 newPreferences.getHomeZip());
         String query2 = "INSERT INTO user_preferences (user_id, preferences_id, name) VALUES (" +
