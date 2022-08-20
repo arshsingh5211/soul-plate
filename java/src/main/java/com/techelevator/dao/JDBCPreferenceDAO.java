@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Preferences;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
@@ -13,6 +14,19 @@ public class JDBCPreferenceDAO implements PreferenceDAO {
 
     public JDBCPreferenceDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
+    public Preferences getPreference(int preferencesId, int userPreferencesId) {
+        Preferences preference = null;
+        String sql = "SELECT preferences_id, user_preferences_id, preference, name, home_zip " +
+                "FROM preferences JOIN user_preferences USING preferences_id " +
+                "WHERE preferences_id = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, preferencesId);
+        while (results.next()) {
+            preference = mapRowToUserPreferences(results);
+        }
+        return preference;
     }
 
     @Override
@@ -30,15 +44,21 @@ public class JDBCPreferenceDAO implements PreferenceDAO {
     }
 
     @Override
-    public void createPreferences(Preferences newPreferences, int userId) {
-        String query =  "INSERT INTO preferences (preference, home_zip) VALUES (?, ?) ON CONFLICT (unique_index_pref_home_zip) " +
-                "DO NOTHING " +
-                "RETURNING preferences_id; ";
-        Integer preferencesId = jdbcTemplate.queryForObject(query, Integer.class, newPreferences.getPreference(),
-                newPreferences.getHomeZip());
-        String query2 = "INSERT INTO user_preferences (user_id, preferences_id, name) VALUES (?, ?, ?) " +
-                "ON CONFLICT (user_preferences_id) DO NOTHING";
-        jdbcTemplate.update(query2, userId, preferencesId, newPreferences.getName());
+    public Preferences createPreferences(Preferences newPreferences, int userId) {
+        try {
+            String query = "INSERT INTO preferences (preference, home_zip) VALUES (?, ?) " +
+                    "ON CONFLICT DO NOTHING " +
+                    "RETURNING preferences_id; ";
+            Integer preferencesId = jdbcTemplate.queryForObject(query, Integer.class, newPreferences.getPreference(),
+                    newPreferences.getHomeZip());
+            String query2 = "INSERT INTO user_preferences (user_id, preferences_id, name) VALUES (?, ?, ?) " +
+                    "ON CONFLICT (user_preferences_id) DO NOTHING RETURNING user_preferences_id";
+            Integer userPreferencesId = jdbcTemplate.queryForObject(query2, Integer.class, userId, preferencesId, newPreferences.getName());
+            return getPreference(preferencesId, userPreferencesId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
@@ -57,7 +77,7 @@ public class JDBCPreferenceDAO implements PreferenceDAO {
 
         Preferences preferences = new Preferences();
         preferences.setPreferencesId(results.getInt("preferences_id"));
-        preferences.setPreferencesId(results.getInt("user_preferences_id"));
+        preferences.setUserPreferencesId(results.getInt("user_preferences_id"));
         preferences.setPreference(results.getString("preference"));
         preferences.setName(results.getString("name"));
         preferences.setHomeZip(results.getString("home_zip"));

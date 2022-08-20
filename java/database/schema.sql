@@ -21,7 +21,8 @@ CREATE TABLE users (
 CREATE TABLE preferences (
         preferences_id serial NOT NULL PRIMARY KEY,
         preference varchar NOT NULL,
-        home_zip VARCHAR(5) NOT NULL
+        home_zip VARCHAR(5) NOT NULL,
+        UNIQUE (preference, home_zip)
 );
 
 
