@@ -18,7 +18,7 @@ public class JDBCPreferenceDAO implements PreferenceDAO {
     @Override
     public List<Preferences> getPreferencesByUserId(int userId) {
         List<Preferences> preferencesList = new ArrayList<>();
-        String sql = "SELECT name, home_zip, preferences_id, preference FROM preferences JOIN user_preferences " +
+        String sql = "SELECT name, home_zip, user_preferences_id, preferences_id, preference FROM preferences JOIN user_preferences " +
                 "USING (preferences_id) " +
                 "JOIN users USING (user_id) WHERE user_id = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
@@ -31,14 +31,13 @@ public class JDBCPreferenceDAO implements PreferenceDAO {
 
     @Override
     public void createPreferences(Preferences newPreferences, int userId) {
-        String query =  "INSERT INTO preferences (preference, home_zip) VALUES (?, ?) ON CONFLICT (preferences_id) " +
-                "DO UPDATE SET preferences_id = excluded.preferences_id " +
+        String query =  "INSERT INTO preferences (preference, home_zip) VALUES (?, ?) ON CONFLICT (unique_index_pref_home_zip) " +
+                "DO NOTHING " +
                 "RETURNING preferences_id; ";
         Integer preferencesId = jdbcTemplate.queryForObject(query, Integer.class, newPreferences.getPreference(),
                 newPreferences.getHomeZip());
-        String query2 = "INSERT INTO user_preferences (user_id, preferences_id, name) VALUES (" +
-                            "(SELECT user_id FROM users WHERE user_id = ?), " +
-                            "(SELECT preferences_id FROM preferences WHERE preferences_id = ?), ?)";
+        String query2 = "INSERT INTO user_preferences (user_id, preferences_id, name) VALUES (?, ?, ?) " +
+                "ON CONFLICT (user_preferences_id) DO NOTHING";
         jdbcTemplate.update(query2, userId, preferencesId, newPreferences.getName());
     }
 
@@ -58,6 +57,7 @@ public class JDBCPreferenceDAO implements PreferenceDAO {
 
         Preferences preferences = new Preferences();
         preferences.setPreferencesId(results.getInt("preferences_id"));
+        preferences.setPreferencesId(results.getInt("user_preferences_id"));
         preferences.setPreference(results.getString("preference"));
         preferences.setName(results.getString("name"));
         preferences.setHomeZip(results.getString("home_zip"));
