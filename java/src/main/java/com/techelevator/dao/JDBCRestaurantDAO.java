@@ -1,3 +1,4 @@
+/*
 package com.techelevator.dao;
 
 import com.techelevator.model.Restaurant;
@@ -84,3 +85,4 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
         return restaurant;
     }
 }
+*/
