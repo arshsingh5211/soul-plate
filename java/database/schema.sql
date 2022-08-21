@@ -1,9 +1,21 @@
 BEGIN TRANSACTION;
 
 DROP TABLE IF EXISTS users, preferences, user_preferences CASCADE;
-DROP SEQUENCE IF EXISTS seq_user_id;
+DROP SEQUENCE IF EXISTS seq_user_id, seq_preferences_id, seq_user_preferences_id;
 
 CREATE SEQUENCE seq_user_id
+  INCREMENT BY 1
+  NO MAXVALUE
+  NO MINVALUE
+  CACHE 1;
+
+CREATE SEQUENCE seq_preferences_id
+  INCREMENT BY 1
+  NO MAXVALUE
+  NO MINVALUE
+  CACHE 1;
+
+CREATE SEQUENCE seq_user_preferences_id
   INCREMENT BY 1
   NO MAXVALUE
   NO MINVALUE
@@ -19,18 +31,19 @@ CREATE TABLE users (
 );
 
 CREATE TABLE preferences (
-        preferences_id serial NOT NULL PRIMARY KEY,
+        preferences_id int DEFAULT nextval('seq_preferences_id'::regclass) NOT NULL,
         preference varchar NOT NULL,
         home_zip VARCHAR(5) NOT NULL,
-        UNIQUE (preference, home_zip)
+        CONSTRAINT PK_preferences PRIMARY KEY (preferences_id),
+        CONSTRAINT UQ_preference_home_zip UNIQUE (preference, home_zip)
 );
 
 
 CREATE TABLE user_preferences (
-        user_preferences_id serial NOT NULL PRIMARY KEY,
+        user_preferences_id int DEFAULT nextval('seq_user_preferences_id'::regclass) NOT NULL,
         user_id int NOT NULL ,
         preferences_id int NOT NULL,
-        name varchar,
+        CONSTRAINT PK_user_preferences PRIMARY KEY (user_preferences_id),
         CONSTRAINT FK_user_id FOREIGN KEY (user_id) REFERENCES users(user_id),
         CONSTRAINT FK_preferences_id FOREIGN KEY (preferences_id) REFERENCES preferences(preferences_id),
         CONSTRAINT UQ_preferences_id_user_preferences_id UNIQUE(preferences_id, user_preferences_id)

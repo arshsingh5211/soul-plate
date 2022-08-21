@@ -32,10 +32,10 @@ public class PreferenceController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/preferences", method = RequestMethod.POST)
-    public void createUserPreferences(@RequestBody Preferences newPreferences, Principal principal) {
+    public String createUserPreferences(@RequestBody Preferences newPreferences, Principal principal) {
         String user = principal.getName();
         int id = userDao.findIdByUsername(user);
-        preferenceDAO.createPreferences(newPreferences, id);
+        return preferenceDAO.createPreferences(newPreferences, id);
     }
 
 /*    @PreAuthorize("hasRole('ROLE_USER')")

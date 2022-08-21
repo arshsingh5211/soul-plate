@@ -5,7 +5,6 @@ public class Preferences {
     private int preferencesId;
     private int userPreferencesId;
     private String preference;
-    private String name;
     private String homeZip;
 
 
@@ -33,14 +32,6 @@ public class Preferences {
 
     public void setPreference(String preference) {
         this.preference = preference;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getHomeZip() {
