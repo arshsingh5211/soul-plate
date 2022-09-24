@@ -44,23 +44,46 @@ public class JDBCPreferenceDAO implements PreferenceDAO {
         return preferencesList;
     }
 
+//    @Override
+//    public String createPreferences(Preferences newPreferences, int userId) {
+//        try {
+//            if (!doesPreferenceExistForUser(userId, newPreferences)) {
+//                System.out.println("in if block");
+//                String query = "INSERT INTO preferences (preference, home_zip) VALUES (?, ?) " +
+//                        "ON CONFLICT (preference, home_zip) DO NOTHING " +
+//                        "RETURNING preferences_id; ";
+//                Integer preferencesId = jdbcTemplate.queryForObject(query, Integer.class, newPreferences.getPreference(),
+//                        newPreferences.getHomeZip());
+//                String query2 = "INSERT INTO user_preferences (user_id, preferences_id) VALUES (?, ?)";
+//                jdbcTemplate.update(query2, userId, preferencesId);
+//                System.out.println("IN CREATE PREFERENCES " + preferencesId);
+//                getPreference(preferencesId);
+//            }
+//            System.out.println("outside of if block but in try block");
+//            return "";
+//        } catch (EmptyResultDataAccessException emptyResultDataAccessException) {
+//            return "Sorry, that preference for " + userId + " already exists!";
+//        }
+//    }
+
     @Override
-    public String createPreferences(Preferences newPreferences, int userId) {
+    public void createPreferences(Preferences newPreference, int userId) {
         try {
-            if (doesPreferenceExistForUser(userId, newPreferences)) {
-                String query = "INSERT INTO preferences (preference, home_zip) VALUES (?, ?) " +
-                        "ON CONFLICT (preference, home_zip) DO NOTHING " +
-                        "RETURNING preferences_id; ";
-                Integer preferencesId = jdbcTemplate.queryForObject(query, Integer.class, newPreferences.getPreference(),
-                        newPreferences.getHomeZip());
-                String query2 = "INSERT INTO user_preferences (user_id, preferences_id) VALUES (?, ?)";
-                System.out.println("IN CREATE PREFERENCES " + userId + "\n" + newPreferences);
-                jdbcTemplate.update(query2, userId, preferencesId);
-                getPreference(preferencesId);
+            if (!doesPreferenceExistForUser(userId, newPreference)) {
+                System.out.println("in if block");
+                String query = "INSERT INTO preferences (preference, home_zip) " +
+                        "VALUES (?, ?) ON CONFLICT (preference, home_zip) DO NOTHING " +
+                        "RETURNING preferences_id;";
+                Integer prefId = jdbcTemplate.queryForObject(query, Integer.class, newPreference.getPreference(),
+                        newPreference.getHomeZip());
+                String query2 = "INSERT INTO user_preferences (user_id, preferences_id) VALUES (?, (SELECT preferences_id FROM preferences WHERE " +
+                        "preferences_id = ?)) RETURNING user_preferences_id";
+                jdbcTemplate.queryForObject(query2, Integer.class, userId, prefId);
+                System.out.println("IN CREATE PREFERENCES " + prefId);
             }
-            return "outside of if block but in try block";
+            System.out.println("outside of if block but in try block");
         } catch (EmptyResultDataAccessException emptyResultDataAccessException) {
-            return "Sorry, that preference for " + userId + " already exists!";
+            System.out.println("Sorry, that preference for " + userId + " already exists!");
         }
     }
 

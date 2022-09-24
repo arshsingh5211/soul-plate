@@ -36,8 +36,8 @@ public class PreferenceController {
         String user = principal.getName();
         int id = userDao.findIdByUsername(user);
         System.out.println(user + ": " + id);
-        System.out.println(newPreferences);
         preferenceDAO.createPreferences(newPreferences, id);
+        System.out.println(newPreferences);
         return "does this preference already exist: " +
                 newPreferences.getPreference() + " in " + newPreferences.getHomeZip() +
                 ": " + preferenceDAO.doesPreferenceExistForUser(id, newPreferences);

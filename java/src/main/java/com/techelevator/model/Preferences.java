@@ -43,7 +43,7 @@ public class Preferences {
     }
 
     public String toString() {
-        String id = String.valueOf(preferencesId);
+        String id = String.valueOf(getPreferencesId());
         String userPrefId = String.valueOf(userPreferencesId);
         String pref = preference;
         String zip = homeZip;
