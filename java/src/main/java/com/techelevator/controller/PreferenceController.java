@@ -35,7 +35,10 @@ public class PreferenceController {
     public String createUserPreferences(@RequestBody Preferences newPreferences, Principal principal) {
         String user = principal.getName();
         int id = userDao.findIdByUsername(user);
-        return preferenceDAO.createPreferences(newPreferences, id);
+        preferenceDAO.createPreferences(newPreferences, id);
+        return "does this preference already exist: " +
+                newPreferences.getPreference() + " in " + newPreferences.getHomeZip() +
+                ": " + preferenceDAO.doesPreferenceExistForUser(id, newPreferences);
     }
 
 /*    @PreAuthorize("hasRole('ROLE_USER')")

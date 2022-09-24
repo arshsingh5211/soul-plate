@@ -47,17 +47,20 @@ public class JDBCPreferenceDAO implements PreferenceDAO {
     @Override
     public String createPreferences(Preferences newPreferences, int userId) {
         try {
-            String query = "INSERT INTO preferences (preference, home_zip) VALUES (?, ?) " +
-                    "ON CONFLICT (preference, home_zip) DO NOTHING " +
-                    "RETURNING preferences_id; ";
-            Integer preferencesId = jdbcTemplate.queryForObject(query, Integer.class, newPreferences.getPreference(),
-                    newPreferences.getHomeZip());
-            String query2 = "INSERT INTO user_preferences (user_id, preferences_id) VALUES (?, ?)";
-            jdbcTemplate.update(query2, userId, preferencesId);
-            getPreference(preferencesId);
-            return "Preference successfully created!";
+            if (doesPreferenceExistForUser(userId, newPreferences)) {
+                String query = "INSERT INTO preferences (preference, home_zip) VALUES (?, ?) " +
+                        "ON CONFLICT (preference, home_zip) DO NOTHING " +
+                        "RETURNING preferences_id; ";
+                Integer preferencesId = jdbcTemplate.queryForObject(query, Integer.class, newPreferences.getPreference(),
+                        newPreferences.getHomeZip());
+                String query2 = "INSERT INTO user_preferences (user_id, preferences_id) VALUES (?, ?)";
+                jdbcTemplate.update(query2, userId, preferencesId);
+                getPreference(preferencesId);
+                return "Preference successfully created!";
+            }
+            else return "if else block failed";
         } catch (EmptyResultDataAccessException emptyResultDataAccessException) {
-            return "Preference not created! Maybe due to an existing preference with same zip and type.";
+            return "Sorry, that preference for " + userId + " already exists!";
         }
     }
 
@@ -73,6 +76,20 @@ public class JDBCPreferenceDAO implements PreferenceDAO {
         }
         return allPreferences;
     }
+
+    public boolean doesPreferenceExistForUser(int userId, Preferences preference) {
+        List<Preferences> preferencesList = new ArrayList<>();
+        String query = "SELECT user_id, preference FROM users " +
+                "JOIN user_preferences USING (user_id) JOIN preferences USING (preferences_id) " +
+                "WHERE user_id = ? AND preferences_id = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(query, userId, preference.getPreferencesId());
+        while (results.next()) {
+            Preferences preferences = mapRowToUserPreferences(results);
+            preferencesList.add(preferences);
+        }
+        return preferencesList.size() > 0;
+    }
+
     public Preferences mapRowToUserPreferences(SqlRowSet results) {
 
         Preferences preferences = new Preferences();

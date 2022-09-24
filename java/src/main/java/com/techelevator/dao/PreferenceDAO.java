@@ -9,4 +9,5 @@ public interface PreferenceDAO {
      public List<Preferences> getPreferencesByUserId(int userId);
      public String createPreferences(Preferences newPreferences, int userId);
      public List<Preferences> getAllPreferences();
+     public boolean doesPreferenceExistForUser(int userId, Preferences preferencesId);
 }
