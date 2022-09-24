@@ -41,4 +41,13 @@ public class Preferences {
     public void setHomeZip(String homeZip) {
         this.homeZip = homeZip;
     }
+
+    public String toString() {
+        String id = String.valueOf(preferencesId);
+        String userPrefId = String.valueOf(userPreferencesId);
+        String pref = preference;
+        String zip = homeZip;
+
+        return "User ID: " + id + "\nUser Preferences ID: " + userPrefId + "\nPreference: " + pref + "\nHomeZip: " + zip;
+    }
 }

@@ -54,11 +54,11 @@ public class JDBCPreferenceDAO implements PreferenceDAO {
                 Integer preferencesId = jdbcTemplate.queryForObject(query, Integer.class, newPreferences.getPreference(),
                         newPreferences.getHomeZip());
                 String query2 = "INSERT INTO user_preferences (user_id, preferences_id) VALUES (?, ?)";
+                System.out.println("IN CREATE PREFERENCES " + userId + "\n" + newPreferences);
                 jdbcTemplate.update(query2, userId, preferencesId);
                 getPreference(preferencesId);
-                return "Preference successfully created!";
             }
-            else return "if else block failed";
+            return "outside of if block but in try block";
         } catch (EmptyResultDataAccessException emptyResultDataAccessException) {
             return "Sorry, that preference for " + userId + " already exists!";
         }
