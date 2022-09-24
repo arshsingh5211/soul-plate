@@ -67,25 +67,7 @@ public class JDBCPreferenceDAO implements PreferenceDAO {
 //    }
 
     @Override
-    public void createPreferences(Preferences newPreference, int userId) {
-        try {
-            if (!doesPreferenceExistForUser(userId, newPreference)) {
-                System.out.println("in if block");
-                String query = "INSERT INTO preferences (preference, home_zip) " +
-                        "VALUES (?, ?) ON CONFLICT (preference, home_zip) DO NOTHING " +
-                        "RETURNING preferences_id;";
-                Integer prefId = jdbcTemplate.queryForObject(query, Integer.class, newPreference.getPreference(),
-                        newPreference.getHomeZip());
-                String query2 = "INSERT INTO user_preferences (user_id, preferences_id) VALUES (?, (SELECT preferences_id FROM preferences WHERE " +
-                        "preferences_id = ?)) RETURNING user_preferences_id";
-                jdbcTemplate.queryForObject(query2, Integer.class, userId, prefId);
-                System.out.println("IN CREATE PREFERENCES " + prefId);
-            }
-            System.out.println("outside of if block but in try block");
-        } catch (EmptyResultDataAccessException emptyResultDataAccessException) {
-            System.out.println("Sorry, that preference for " + userId + " already exists!");
-        }
-    }
+    public void createPreferences(Preferences newPreference, int userId) {}
 
     @Override
     public List<Preferences> getAllPreferences() {

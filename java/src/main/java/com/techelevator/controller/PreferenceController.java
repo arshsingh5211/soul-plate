@@ -32,15 +32,7 @@ public class PreferenceController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/preferences", method = RequestMethod.POST)
-    public String createUserPreferences(@RequestBody Preferences newPreferences, Principal principal) {
-        String user = principal.getName();
-        int id = userDao.findIdByUsername(user);
-        System.out.println(user + ": " + id);
-        preferenceDAO.createPreferences(newPreferences, id);
-        System.out.println(newPreferences);
-        return "does this preference already exist: " +
-                newPreferences.getPreference() + " in " + newPreferences.getHomeZip() +
-                ": " + preferenceDAO.doesPreferenceExistForUser(id, newPreferences);
+    public void createUserPreferences(@RequestBody Preferences newPreferences, Principal principal) {
     }
 
 /*    @PreAuthorize("hasRole('ROLE_USER')")
