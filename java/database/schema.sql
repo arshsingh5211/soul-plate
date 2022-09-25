@@ -1,7 +1,7 @@
 BEGIN TRANSACTION;
 
-DROP TABLE IF EXISTS users, preferences, user_preferences CASCADE;
-DROP SEQUENCE IF EXISTS seq_user_id, seq_preferences_id, seq_user_preferences_id;
+DROP TABLE IF EXISTS users, restaurnats, preferences, user_preferences, user_restaurants CASCADE;
+DROP SEQUENCE IF EXISTS seq_user_id, seq_preferences_id, seq_user_preferences_id, seq_user_restaurants_id;
 
 CREATE SEQUENCE seq_user_id
   INCREMENT BY 1
@@ -30,6 +30,14 @@ CREATE TABLE users (
 	CONSTRAINT PK_user PRIMARY KEY (user_id)
 );
 
+CREATE SEQUENCE restaurant_serial;
+CREATE TABLE restaurants (
+        yelp_id varchar(50) UNIQUE,
+        restaurant_name varchar(50),
+        state varchar(2),
+        CONSTRAINT PK_restaurant PRIMARY KEY (yelp_id)
+);
+
 CREATE TABLE preferences (
         preferences_id int DEFAULT nextval('seq_preferences_id'::regclass) NOT NULL,
         preference varchar NOT NULL,
@@ -47,6 +55,15 @@ CREATE TABLE user_preferences (
         CONSTRAINT FK_user_id FOREIGN KEY (user_id) REFERENCES users(user_id),
         CONSTRAINT FK_preferences_id FOREIGN KEY (preferences_id) REFERENCES preferences(preferences_id),
         CONSTRAINT UQ_preferences_id_user_preferences_id UNIQUE(preferences_id, user_id)
+);
+
+CREATE TABLE user_restaurants (
+        user_restaurants_id int DEFAULT nextval('seq_user_restaurants_id'::regclass) NOT NULL,
+        user_id int NOT NULL , 
+        yelp_id varchar NOT NULL ,
+        CONSTRAINT PK_user_restaurants PRIMARY KEY (user_restaurants_id),
+        CONSTRAINT FK_user_id FOREIGN KEY (user_id) REFERENCES users(user_id),
+        CONSTRAINT FK_yelp_id FOREIGN KEY (yelp_id) REFERENCES restaurants(yelp_id)
 );
 
 

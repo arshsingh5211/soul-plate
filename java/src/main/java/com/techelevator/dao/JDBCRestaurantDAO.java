@@ -1,4 +1,3 @@
-/*
 package com.techelevator.dao;
 
 import com.techelevator.model.Restaurant;
@@ -43,7 +42,7 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
 
     @Override
     public void saveLikedRestaurant(Restaurant restaurant, int userId) {
-        String query = "INSERT INTO restaurant (restaurant_name, yelp_id) " +
+        String query = "INSERT INTO restaurantsgi (restaurant_name, yelp_id) " +
                         "VALUES (?, ?) ON CONFLICT (yelp_id) DO UPDATE " +
                             "SET restaurant_name = excluded.restaurant_name " +
                         "RETURNING restaurant_id;";
@@ -85,4 +84,3 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
         return restaurant;
     }
 }
-*/
