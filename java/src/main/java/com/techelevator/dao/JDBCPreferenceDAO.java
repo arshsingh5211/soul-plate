@@ -71,17 +71,17 @@ public class JDBCPreferenceDAO implements PreferenceDAO {
     public void createPreferences(Preferences newPreference, int userId) {
         try {
             String query = "INSERT INTO preferences (preference, home_zip) " +
-                    "VALUES (?, ?) ON CONFLICT (preference, home_zip) DO NOTHING " +
-                    "RETURNING preferences_id;";
-            Integer preferencesId = jdbcTemplate.queryForObject(query, Integer.class,
-                    newPreference.getPreference(), newPreference.getHomeZip());
-            String query2 = "INSERT INTO user_preferences (user_id, preferences_id)" +
-                    "VALUES (?,?);";
-            jdbcTemplate.update(query2, userId, preferencesId);
+                    "VALUES (?, ?) ON CONFLICT (preference, home_zip) DO NOTHING; ";
+            jdbcTemplate.update(query, newPreference.getPreference(), newPreference.getHomeZip());
+            System.out.println("does it get here?");
         } catch (DataAccessException dataAccessException) {
             System.err.println("Exception handling not the best way, queryForObject is generally discouraged " +
                     "because of data coupling to your data access implementation");
         }
+        String query2 = "INSERT INTO user_preferences (user_id, preferences_id)" +
+                "VALUES (?,(SELECT preferences_id FROM preferences WHERE preference = ? AND home_zip = ?));";
+        jdbcTemplate.update(query2, userId, newPreference.getPreference(), newPreference.getHomeZip());
+        System.out.println("what about here?");
     }
 
     @Override
