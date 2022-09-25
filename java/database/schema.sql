@@ -1,6 +1,6 @@
 BEGIN TRANSACTION;
 
-DROP TABLE IF EXISTS users, restaurnats, preferences, user_preferences, user_restaurants CASCADE;
+DROP TABLE IF EXISTS users, restaurants, preferences, user_preferences, user_restaurants CASCADE;
 DROP SEQUENCE IF EXISTS seq_user_id, seq_preferences_id, seq_user_preferences_id, seq_user_restaurants_id;
 
 CREATE SEQUENCE seq_user_id
