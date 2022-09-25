@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Preferences;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -67,7 +68,21 @@ public class JDBCPreferenceDAO implements PreferenceDAO {
 //    }
 
     @Override
-    public void createPreferences(Preferences newPreference, int userId) {}
+    public void createPreferences(Preferences newPreference, int userId) {
+        try {
+            String query = "INSERT INTO preferences (preference, home_zip) " +
+                    "VALUES (?, ?) ON CONFLICT (preference, home_zip) DO NOTHING " +
+                    "RETURNING preferences_id;";
+            Integer preferencesId = jdbcTemplate.queryForObject(query, Integer.class,
+                    newPreference.getPreference(), newPreference.getHomeZip());
+            String query2 = "INSERT INTO user_preferences (user_id, preferences_id)" +
+                    "VALUES (?,?);";
+            jdbcTemplate.update(query2, userId, preferencesId);
+        } catch (DataAccessException dataAccessException) {
+            System.err.println("Exception handling not the best way, queryForObject is generally discouraged " +
+                    "because of data coupling to your data access implementation");
+        }
+    }
 
     @Override
     public List<Preferences> getAllPreferences() {

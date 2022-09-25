@@ -33,6 +33,9 @@ public class PreferenceController {
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/preferences", method = RequestMethod.POST)
     public void createUserPreferences(@RequestBody Preferences newPreferences, Principal principal) {
+        String user = principal.getName();
+        int userId = userDao.findIdByUsername(user);
+        preferenceDAO.createPreferences(newPreferences, userId);
     }
 
 /*    @PreAuthorize("hasRole('ROLE_USER')")

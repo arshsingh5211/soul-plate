@@ -46,7 +46,7 @@ CREATE TABLE user_preferences (
         CONSTRAINT PK_user_preferences PRIMARY KEY (user_preferences_id),
         CONSTRAINT FK_user_id FOREIGN KEY (user_id) REFERENCES users(user_id),
         CONSTRAINT FK_preferences_id FOREIGN KEY (preferences_id) REFERENCES preferences(preferences_id),
-        CONSTRAINT UQ_preferences_id_user_preferences_id UNIQUE(preferences_id, user_preferences_id)
+        CONSTRAINT UQ_preferences_id_user_preferences_id UNIQUE(preferences_id, user_id)
 );
 
 
