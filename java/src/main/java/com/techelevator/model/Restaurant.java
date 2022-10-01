@@ -24,8 +24,14 @@ public class Restaurant {
 
     public Restaurant(){}
 
-    public Restaurant(String name, String address, String city, String state, String zipCode, String rating,
-                      String imgUrl, String yelpId, String categoryName) {
+    public Restaurant(String yelpId, String name, String address, String city, String state, String zipCode, String rating,
+                      String imgUrl) {
+        this.yelpId = yelpId;
+        this.restaurantName = name;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.zipCode = zipCode;
     }
 
     public String getYelpId() {

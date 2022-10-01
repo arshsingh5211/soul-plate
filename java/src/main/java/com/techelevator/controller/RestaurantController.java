@@ -11,6 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 @CrossOrigin
 @RestController
@@ -42,6 +43,14 @@ public class RestaurantController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(path = "/restaurant", method = RequestMethod.GET)
     public Restaurant getRandomRestaurant(@RequestParam String foodPref, @RequestParam String location) {
+        Restaurant restaurant = new Restaurant("test", "test");
+        Restaurant restaurant2 = new Restaurant("test2", "test2");
+        Restaurant restaurant3 = new Restaurant("test3", "test3");
+        List<Restaurant> list = new ArrayList<>();
+        list.add(restaurant);
+        list.add(restaurant2);
+        list.add(restaurant3);
+
         return yelpService.getRandomRestaurant(yelpService.getSearchResults(foodPref, location));
     }
 

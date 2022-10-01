@@ -31,7 +31,7 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
     @Override
     public List<Restaurant> getLikedRestaurants(int userId) {
         List<Restaurant> restaurantList = new ArrayList<>();
-        String query = "SELECT * FROM restaurants JOIN user_restaurants USING (yelp_id) " +
+        String query = "SELECT yelp_id, restaurant_name, city, state, zip_code FROM restaurants JOIN user_restaurants USING (yelp_id) " +
                         "JOIN users USING (user_id) WHERE user_id = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(query, userId);
         while (results.next()) {
