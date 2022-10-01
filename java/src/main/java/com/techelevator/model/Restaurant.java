@@ -1,50 +1,31 @@
 package com.techelevator.model;
 
 public class Restaurant {
-    private int restaurantId;
+    private String yelpId;
     private String restaurantName;
     private String address;
     private String city;
     private String state;
     private String zipCode;
-    private String rating;
-    private String imgUrl;
-    private String yelpId;
-    private String categoryName;
 
-    public Restaurant(String restaurantName, String address, String city, String state, String zipCode,
-                      String rating, String imgUrl, String yelpId, String categoryName) {
+    public Restaurant(String yelpId, String restaurantName, String address, String city, String state, String zipCode) {
+        this.yelpId = yelpId;
         this.restaurantName = restaurantName;
         this.address = address;
         this.city = city;
         this.state = state;
         this.zipCode = zipCode;
-        this.rating = rating;
-        this.imgUrl = imgUrl;
-        this.yelpId = yelpId;
-        this.categoryName = categoryName;
     }
 
-    public Restaurant(int restaurantId, String restaurantName, String yelpId) {
-        this.restaurantId = restaurantId;
+    public Restaurant(String yelpId, String restaurantName) {
+        this.yelpId = yelpId;
         this.restaurantName = restaurantName;
-        this.yelpId = yelpId;
     }
 
-    public Restaurant(){
+    public Restaurant(){}
 
-    }
-
-    public int getRestaurantId() {
-        return restaurantId;
-    }
-
-    public String getRating() {
-        return rating;
-    }
-
-    public void setRating(String rating) {
-        this.rating = rating;
+    public Restaurant(String name, String address, String city, String state, String zipCode, String rating,
+                      String imgUrl, String yelpId, String categoryName) {
     }
 
     public String getYelpId() {
@@ -55,24 +36,12 @@ public class Restaurant {
         this.yelpId = yelpId;
     }
 
-    public void setRestaurantId(int restaurantId) {
-        this.yelpId = yelpId;
-    }
-
     public String getRestaurantName() {
         return restaurantName;
     }
 
     public void setRestaurantName(String restaurantName) {
         this.restaurantName = restaurantName;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String getCity() {
@@ -91,14 +60,6 @@ public class Restaurant {
         this.state = state;
     }
 
-    public String getImgUrl() {
-        return imgUrl;
-    }
-
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
-    }
-
     public String getZipCode() {
         return zipCode;
     }
@@ -106,14 +67,6 @@ public class Restaurant {
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
-
-	public String getCategoryName() {
-		return categoryName;
-	}
-
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
-	}
 
 
 

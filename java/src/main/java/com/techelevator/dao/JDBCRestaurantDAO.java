@@ -42,23 +42,17 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
 
     @Override
     public void saveLikedRestaurant(Restaurant restaurant, int userId) {
-        String query = "INSERT INTO restaurants (restaurant_name, yelp_id) " +
-                        "VALUES (?, ?) ON CONFLICT (yelp_id) DO UPDATE " +
-                            "SET restaurant_name = excluded.restaurant_name " +
-                        "RETURNING restaurant_id;";
-        Integer restId = jdbcTemplate.queryForObject(query, Integer.class, restaurant.getRestaurantName(),
-                restaurant.getYelpId());
+        String query = "INSERT INTO restaurants (yelp_id, restaurant_name, city, state, zip_code) " +
+                        "VALUES (?, ?, ?, ?, ?)";
+        jdbcTemplate.update(query, restaurant.getYelpId(), restaurant.getRestaurantName(),
+                restaurant.getCity(), restaurant.getState(), restaurant.getZipCode());
         String query2 = "INSERT INTO user_restaurants (user_id, yelp_id) " +
                         "VALUES ((SELECT user_id FROM users WHERE user_id = ?), ?) " +
                         "ON CONFLICT (user_restaurants_id) DO NOTHING";
-        jdbcTemplate.update(query2, userId, restId);
+        jdbcTemplate.update(query2, userId, restaurant.getYelpId());
         String query3 = "INSERT INTO categories(category_name) " +
 			        	"VALUES (?) ON CONFLICT (category_name) DO NOTHING " +
 			            "RETURNING category_id;";
-        Integer categoryId = jdbcTemplate.queryForObject(query3, Integer.class, restaurant.getCategoryName());
-        String query4 = "INSERT INTO restaurant_categories (category_id, restaurant_id) " +
-                        "VALUES (?, ?)";
-        jdbcTemplate.update(query4, categoryId, restId);
     }
     
 //    @Override
@@ -78,9 +72,10 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
     private Restaurant mapRowToRestaurants(SqlRowSet results) {
         Restaurant restaurant = new Restaurant();
         restaurant.setYelpId(results.getString("yelp_id"));
-        restaurant.setRestaurantId(results.getInt("restaurant_id"));
         restaurant.setRestaurantName(results.getString("restaurant_name"));
+        restaurant.setCity(results.getString("city"));
         restaurant.setState(results.getString("state"));
+        restaurant.setZipCode(results.getString("zip_code"));
         return restaurant;
     }
 }
