@@ -1,13 +1,13 @@
 package com.techelevator.model;
 
-public class Preference {
-
+public class UserPreferences {
     private int userPreferencesId;
     private int userId;
     private int preferencesId;
     private String name;
-    private String preference;
-    private int homeZip;
+    private String homeZip;
+
+    public UserPreferences(){ }
 
     public int getUserPreferencesId() {
         return userPreferencesId;
@@ -41,24 +41,11 @@ public class Preference {
         this.name = name;
     }
 
-    public String getPreference() {
-        return preference;
-    }
-
-    public void setPreference(String preference) {
-        this.preference = preference;
-    }
-
-    public int getHomeZip() {
+    public String getHomeZip() {
         return homeZip;
     }
 
-    public void setHomeZip(int homeZip) {
+    public void setHomeZip(String homeZip) {
         this.homeZip = homeZip;
     }
-
-    public Preference(){ }
-
-
-
 }

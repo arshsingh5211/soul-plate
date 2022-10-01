@@ -51,13 +51,7 @@ public class YelpService {
                 String imgUrl = root.path(i).path("image_url").asText();
                 String city = root.path(i).path("location").path("city").asText();
                 String yelpId = root.path(i).path("id").asText();
-                String[] catArr = new String[root.path(i).path("categories").size()];
-                for (int j = 0; j < catArr.length; j++) {
-                    catArr[j] = root.path(i).path("categories").get(j).path("title").asText();
-                }
-                String categoryName = Arrays.toString(catArr).replace("[","").replace("]", "");
-
-                Restaurant restaurant = new Restaurant(name, address, city, state, zipCode, rating, imgUrl, yelpId, categoryName);
+                Restaurant restaurant = new Restaurant(yelpId, name, address, city, state, zipCode, rating, imgUrl);
                 restaurantList.add(restaurant);
             }
         } catch (JsonProcessingException e) {
@@ -161,7 +155,4 @@ public class YelpService {
         }
         return reviewsList;
     }
-
-
-
 }
