@@ -102,7 +102,13 @@ public class YelpService {
 
             String price = jsonNode.path("price").asText();
             String imgUrl = jsonNode.path("image_url").asText();
-            String category = jsonNode.path("categories").path("title").asText();
+            List<String> categoryList = new ArrayList<>();
+            for(int j = 0; j < jsonNode.path("categories").size(); j++) {
+                categoryList.add(jsonNode.path("categories").get(j).path("title").asText().toLowerCase());
+            }
+            String category = categoryList.toString().replaceAll("\\[", "").replaceAll("\\]",
+                    "");
+            if (category.charAt(category.length()-1) == ',') category = (category.substring(0, category.length()-1));
             //weekly hours
             //String address = jsonNode.path("location").path("display_address").asText();
             boolean isOpenNow = jsonNode.path("hours").path("is_open_now").asBoolean();

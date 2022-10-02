@@ -32,8 +32,6 @@ public class RestaurantController {
         return yelpService.getSearchResults(foodPref, location);
     }
 
-    // todo : restaurant_id is always 0, category_name is no longer needed
-
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(path="/restaurants/{id}", method = RequestMethod.GET)
     public RestaurantDetails getRestaurantDetails(@PathVariable String id) {
