@@ -5,12 +5,12 @@ import java.util.List;
 public class Restaurant {
     private String yelpId;
     private String restaurantName;
+    private double rating;
     private String address;
     private String city;
     private String state;
     private String zipCode;
     private String phoneNumber;
-    private String rating;
     private List<String> pictureURLs;
     private List<String> transactions;
     private String price;
@@ -19,9 +19,10 @@ public class Restaurant {
     private boolean isOpenNow;
 
 
-    public Restaurant(String yelpId, String restaurantName, String address, String city, String state, String zipCode) {
+    public Restaurant(String yelpId, String restaurantName, double rating, String address, String city, String state, String zipCode) {
         this.yelpId = yelpId;
         this.restaurantName = restaurantName;
+        this.rating = rating;
         this.address = address;
         this.city = city;
         this.state = state;
@@ -54,7 +55,7 @@ public class Restaurant {
         this.isOpenNow = isOpenNow;
     }*/
 
-    public Restaurant(String yelpId, String name, String address, String city, String state, String zipCode, String rating,
+    public Restaurant(String yelpId, String name, String address, String city, String state, String zipCode, double rating,
                       String imgUrl) {
         this.yelpId = yelpId;
         this.restaurantName = name;
@@ -120,11 +121,11 @@ public class Restaurant {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(String rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
 

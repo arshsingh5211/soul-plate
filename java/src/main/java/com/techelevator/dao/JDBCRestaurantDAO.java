@@ -31,7 +31,7 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
     @Override
     public List<Restaurant> getLikedRestaurants(int userId) {
         List<Restaurant> restaurantList = new ArrayList<>();
-        String query = "SELECT yelp_id, restaurant_name, city, state, zip_code FROM restaurants JOIN user_restaurants USING (yelp_id) " +
+        String query = "SELECT yelp_id, restaurant_name, rating, address, city, state, zip_code FROM restaurants JOIN user_restaurants USING (yelp_id) " +
                         "JOIN users USING (user_id) WHERE user_id = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(query, userId);
         while (results.next()) {
@@ -42,10 +42,10 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
 
     @Override
     public void saveLikedRestaurant(Restaurant restaurant, int userId) {
-        String query = "INSERT INTO restaurants (yelp_id, restaurant_name, city, state, zip_code) " +
-                        "VALUES (?, ?, ?, ?, ?)";
-        jdbcTemplate.update(query, restaurant.getYelpId(), restaurant.getRestaurantName(),
-                restaurant.getCity(), restaurant.getState(), restaurant.getZipCode());
+        String query = "INSERT INTO restaurants (yelp_id, restaurant_name, rating, address, city, state, zip_code) " +
+                        "VALUES (?, ?, ?, ?, ?, ?, ?)";
+        jdbcTemplate.update(query, restaurant.getYelpId(), restaurant.getRestaurantName(), restaurant.getRating(),
+                restaurant.getAddress(), restaurant.getCity(), restaurant.getState(), restaurant.getZipCode());
         String query2 = "INSERT INTO user_restaurants (user_id, yelp_id) " +
                         "VALUES ((SELECT user_id FROM users WHERE user_id = ?), ?) " +
                         "ON CONFLICT (user_restaurants_id) DO NOTHING";
@@ -73,6 +73,8 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
         Restaurant restaurant = new Restaurant();
         restaurant.setYelpId(results.getString("yelp_id"));
         restaurant.setRestaurantName(results.getString("restaurant_name"));
+        restaurant.setAddress(results.getString("address"));
+        restaurant.setRating(results.getDouble("rating"));
         restaurant.setCity(results.getString("city"));
         restaurant.setState(results.getString("state"));
         restaurant.setZipCode(results.getString("zip_code"));

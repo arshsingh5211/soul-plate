@@ -40,9 +40,11 @@ CREATE SEQUENCE restaurant_serial;
 CREATE TABLE restaurants (
         yelp_id varchar(50) UNIQUE,
         restaurant_name varchar(50) NOT NULL,
-        city varchar(16),
-        state varchar(2),
-        zip_code varchar(5),
+        rating DECIMAL (2, 1),
+        address varchar(50) NOT NULL,
+        city varchar(16) NOT NULL,
+        state varchar(2) NOT NULL,
+        zip_code varchar(5) NOT NULL,
         CONSTRAINT PK_restaurant PRIMARY KEY (yelp_id)
 );
 
