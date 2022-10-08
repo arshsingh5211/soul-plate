@@ -47,9 +47,10 @@ public class RestaurantController {
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(path = "/liked", method = RequestMethod.POST)
-    public void addLikedRestaurant(@RequestBody Restaurant restaurant, Principal principal) {
+    public void addLikedRestaurant(@RequestBody String yelpId, Principal principal) {
         String user = principal.getName();
         int id = userDao.findIdByUsername(user);
+        Restaurant restaurant = yelpService.getRestaurantInfo(yelpId);
         restaurantDAO.saveLikedRestaurant(restaurant, id);
     }
 

@@ -67,9 +67,15 @@ public class YelpService {
     }
 
     // TODO: 10/8/22
-    /*public Restaurant getRestaurantInfo(String id) {
-        fill out restaurant info for db using yelp api here
-    }*/
+    public Restaurant getRestaurantInfo(String id) {
+        RestaurantDetails restaurantDetails = getRestaurantDetails(id);
+        double ratingAsDouble = Double.parseDouble(restaurantDetails.getRating());
+        return new Restaurant(restaurantDetails.getYelpId(), restaurantDetails.getRestaurantName(),
+                ratingAsDouble, restaurantDetails.getAddress(), restaurantDetails.getCity(), restaurantDetails.getState(),
+                restaurantDetails.getZipCode());
+        //fill out restaurant info for db using yelp api here
+        // String yelpId, String restaurantName, double rating, String address, String city, String state, String zipCode
+    }   // String yelpId, String restaurantName, double ratingAsDouble, String city, String state, String zipCode
 
     public RestaurantDetails getRestaurantDetails(String id) {
         String url = detailsURL + id;
