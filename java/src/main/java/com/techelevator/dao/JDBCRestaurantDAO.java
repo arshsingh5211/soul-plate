@@ -42,10 +42,12 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
 
     @Override
     public void saveLikedRestaurant(Restaurant restaurant, int userId) {
-        String query = "INSERT INTO restaurants (yelp_id, restaurant_name, rating, address, city, state, zip_code) " +
-                        "VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO restaurants (yelp_id, restaurant_name, rating, address, city, state, " +
+                            "zip_code, phone_number) " +
+                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(query, restaurant.getYelpId(), restaurant.getRestaurantName(), restaurant.getRating(),
-                restaurant.getAddress(), restaurant.getCity(), restaurant.getState(), restaurant.getZipCode());
+                restaurant.getAddress(), restaurant.getCity(), restaurant.getState(), restaurant.getZipCode(),
+                restaurant.getPhoneNumber());
         String query2 = "INSERT INTO user_restaurants (user_id, yelp_id) " +
                         "VALUES ((SELECT user_id FROM users WHERE user_id = ?), ?) " +
                         "ON CONFLICT (user_restaurants_id) DO NOTHING";
@@ -78,6 +80,7 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
         restaurant.setCity(results.getString("city"));
         restaurant.setState(results.getString("state"));
         restaurant.setZipCode(results.getString("zip_code"));
+        restaurant.setPhoneNumber(results.getString("phone_number"));
         return restaurant;
     }
 }

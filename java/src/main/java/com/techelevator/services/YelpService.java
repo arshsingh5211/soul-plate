@@ -51,7 +51,8 @@ public class YelpService {
                 String imgUrl = root.path(i).path("image_url").asText();
                 String city = root.path(i).path("location").path("city").asText();
                 String yelpId = root.path(i).path("id").asText();
-                Restaurant restaurant = new Restaurant(yelpId, name, rating, address, city, state, zipCode);
+                String phoneNumber = root.path(i).path("display_phone").asText();
+                Restaurant restaurant = new Restaurant(yelpId, name, rating, address, city, state, zipCode, phoneNumber);
                 restaurantList.add(restaurant);
             }
             //String yelpId, String restaurantName, double rating, String address, String city, String state, String zipCode
@@ -72,7 +73,7 @@ public class YelpService {
         double ratingAsDouble = Double.parseDouble(restaurantDetails.getRating());
         return new Restaurant(restaurantDetails.getYelpId(), restaurantDetails.getRestaurantName(),
                 ratingAsDouble, restaurantDetails.getAddress(), restaurantDetails.getCity(), restaurantDetails.getState(),
-                restaurantDetails.getZipCode());
+                restaurantDetails.getZipCode(), restaurantDetails.getPhoneNumber());
         //fill out restaurant info for db using yelp api here
         // String yelpId, String restaurantName, double rating, String address, String city, String state, String zipCode
     }   // String yelpId, String restaurantName, double ratingAsDouble, String city, String state, String zipCode

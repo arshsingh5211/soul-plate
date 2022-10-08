@@ -45,6 +45,7 @@ CREATE TABLE restaurants (
         city varchar(16) NOT NULL,
         state varchar(2) NOT NULL,
         zip_code varchar(5) NOT NULL,
+        phone_number varchar(12),
         CONSTRAINT PK_restaurant PRIMARY KEY (yelp_id)
 );
 
