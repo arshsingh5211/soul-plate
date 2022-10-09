@@ -44,16 +44,18 @@ public class YelpService {
             JsonNode root = jsonNode.path("businesses");
             for (int i = 0; i < root.size(); i++) {
                 String name = root.path(i).path("name").asText();
-                String rating = root.path(i).path("rating").asText();
+                double rating = root.path(i).path("rating").asDouble();
                 String address = root.path(i).path("location").path("address1").asText();
                 String state = root.path(i).path("location").path("state").asText();
                 String zipCode = root.path(i).path("location").path("zip_code").asText();
                 String imgUrl = root.path(i).path("image_url").asText();
                 String city = root.path(i).path("location").path("city").asText();
                 String yelpId = root.path(i).path("id").asText();
-                Restaurant restaurant = new Restaurant(yelpId, name, address, city, state, zipCode, rating, imgUrl);
+                String phoneNumber = root.path(i).path("display_phone").asText();
+                Restaurant restaurant = new Restaurant(yelpId, name, rating, address, city, state, zipCode, phoneNumber);
                 restaurantList.add(restaurant);
             }
+            //String yelpId, String restaurantName, double rating, String address, String city, String state, String zipCode
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
@@ -64,6 +66,17 @@ public class YelpService {
         Random random = new Random();
         return restaurantList.get(random.nextInt(restaurantList.size()));
     }
+
+    // TODO: 10/8/22
+    public Restaurant getRestaurantInfo(String id) {
+        RestaurantDetails restaurantDetails = getRestaurantDetails(id);
+        double ratingAsDouble = Double.parseDouble(restaurantDetails.getRating());
+        return new Restaurant(restaurantDetails.getYelpId(), restaurantDetails.getRestaurantName(),
+                ratingAsDouble, restaurantDetails.getAddress(), restaurantDetails.getCity(), restaurantDetails.getState(),
+                restaurantDetails.getZipCode(), restaurantDetails.getPhoneNumber());
+        //fill out restaurant info for db using yelp api here
+        // String yelpId, String restaurantName, double rating, String address, String city, String state, String zipCode
+    }   // String yelpId, String restaurantName, double ratingAsDouble, String city, String state, String zipCode
 
     public RestaurantDetails getRestaurantDetails(String id) {
         String url = detailsURL + id;
@@ -102,7 +115,13 @@ public class YelpService {
 
             String price = jsonNode.path("price").asText();
             String imgUrl = jsonNode.path("image_url").asText();
-            String category = jsonNode.path("categories").path("title").asText();
+            List<String> categoryList = new ArrayList<>();
+            for(int j = 0; j < jsonNode.path("categories").size(); j++) {
+                categoryList.add(jsonNode.path("categories").get(j).path("title").asText().toLowerCase());
+            }
+            String category = categoryList.toString().replaceAll("\\[", "").replaceAll("\\]",
+                    "");
+            //if (category.charAt(category.length()-1) == ',') category = (category.substring(0, category.length()-1));
             //weekly hours
             //String address = jsonNode.path("location").path("display_address").asText();
             boolean isOpenNow = jsonNode.path("hours").path("is_open_now").asBoolean();

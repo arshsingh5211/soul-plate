@@ -32,8 +32,6 @@ public class RestaurantController {
         return yelpService.getSearchResults(foodPref, location);
     }
 
-    // todo : restaurant_id is always 0, category_name is no longer needed
-
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(path="/restaurants/{id}", method = RequestMethod.GET)
     public RestaurantDetails getRestaurantDetails(@PathVariable String id) {
@@ -48,10 +46,11 @@ public class RestaurantController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasRole('ROLE_USER')")
-    @RequestMapping(path = "/liked", method = RequestMethod.POST)
-    public void addLikedRestaurant(@RequestBody Restaurant restaurant, Principal principal) {
+    @RequestMapping(value = "/liked/{yelpId}", method = RequestMethod.POST)
+    public void addLikedRestaurant(@PathVariable String yelpId, Principal principal) {
         String user = principal.getName();
         int id = userDao.findIdByUsername(user);
+        Restaurant restaurant = yelpService.getRestaurantInfo(yelpId);
         restaurantDAO.saveLikedRestaurant(restaurant, id);
     }
 
